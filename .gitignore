@@ -1,0 +1,5 @@
+*.*.swp
+.fonts_registered.txt
+.snakemake/
+Rplots.pdf
+figures/

@@ -1,0 +1,20 @@
+---
+
+fonts_path: /n/groups/winston/jc459/spn1/paper_figures/fonts
+theme_path: scripts/spn1_2020_theme.R
+
+spn1_depletion_metagene:
+    data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.tsv.gz
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5"
+    panel_letter: C
+
+spn1_depletion_figure:
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5 * 2"
+
+spn1_depletion_chipseq_barplot:
+    data: ../chipseq-spn1/qual_ctrl/spikein/Spn1-chipseq_spikein-counts.tsv
+    fig_width: 3.5
+    fig_height: 4
+    panel_letter: X
