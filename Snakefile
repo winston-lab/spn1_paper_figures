@@ -11,6 +11,7 @@ rule target:
         "figures/rnaseq_maplot.pdf",
         "figures/rpb1_metagenes.pdf",
         "figures/rnaseq_vs_rpb1.pdf",
+        "figures/figure_rnaseq_rpb1.pdf",
         "figures/histone_metagenes.pdf",
 
 rule register_fonts:
@@ -140,6 +141,22 @@ rule rnaseq_vs_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/rnaseq_vs_rpb1.R"
+
+rule assemble_figure_rnaseq_rpb1:
+    input:
+        fonts = ".fonts_registered.txt",
+        rnaseq_maplot = "figures/rnaseq_maplot.Rdata",
+        rpb1_metagenes = "figures/rpb1_metagenes.Rdata",
+        rnaseq_vs_rpb1 = "figures/rnaseq_vs_rpb1.Rdata",
+    output:
+        pdf = "figures/figure_rnaseq_rpb1.pdf"
+    params:
+        fig_width = eval(str(config["rnaseq_rpb1_figure"]["fig_width"])),
+        fig_height = eval(str(config["rnaseq_rpb1_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_rnaseq_rpb1.R"
 
 rule histone_metagenes:
     input:

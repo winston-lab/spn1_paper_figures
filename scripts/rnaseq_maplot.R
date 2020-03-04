@@ -31,7 +31,7 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
               axis.text=element_blank(),
               axis.ticks=element_blank(),
               panel.grid=element_blank(),
-              plot.margin=margin(l=-11, r=11, unit="pt"))
+              plot.margin=margin(l=-11/2, r=11/2, unit="pt"))
 
     maplot = ggplot(data=df,
            aes(x=control_expr,
