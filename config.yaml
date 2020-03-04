@@ -19,6 +19,12 @@ spn1_depletion_chipseq_barplot:
     fig_height: 4
     panel_letter: b
 
+spn1_depletion_viability:
+    data: ../spn1-small-data/spn1_depletion_viability/viability_total_col_per_mL_rel_T0.txt
+    fig_width: 6
+    fig_height: "9 / 16 * 6"
+    panel_letter: x
+
 rnaseq_maplot:
     data: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     fig_width: 8.5

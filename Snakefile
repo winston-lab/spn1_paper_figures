@@ -5,8 +5,9 @@ configfile: "config.yaml"
 rule target:
     input:
         "figures/spn1_depletion_metagene.pdf",
-        "figures/figure_spn1_depletion.pdf",
         "figures/spn1_depletion_chipseq_barplot.pdf",
+        "figures/figure_spn1_depletion.pdf",
+        "figures/spn1_depletion_viability.pdf",
         "figures/rnaseq_maplot.pdf",
         "figures/rpb1_metagenes.pdf",
         "figures/rnaseq_vs_rpb1.pdf",
@@ -70,6 +71,23 @@ rule assemble_figure_spn1_depletion:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_spn1_depletion.R"
+
+rule spn1_depletion_viability:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["spn1_depletion_viability"]["data"],
+    output:
+        pdf = "figures/spn1_depletion_viability.pdf",
+        grob = "figures/spn1_depletion_viability.Rdata",
+    params:
+        fig_height = eval(str(config["spn1_depletion_viability"]["fig_height"])),
+        fig_width = eval(str(config["spn1_depletion_viability"]["fig_width"])),
+        panel_letter = config["spn1_depletion_viability"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/spn1_depletion_viability.R"
 
 rule rnaseq_maplot:
     input:
