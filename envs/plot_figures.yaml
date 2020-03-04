@@ -7,4 +7,5 @@ dependencies:
     # - r-ggthemes=4.2.0
     - r-hexbin=1.28.1
     - r-gridextra=2.3
+    - r-cowplot=1.0.0
 

@@ -7,6 +7,8 @@ rule target:
         "figures/spn1_depletion_metagene.pdf",
         "figures/figure_spn1_depletion.pdf",
         "figures/spn1_depletion_chipseq_barplot.pdf",
+        "figures/rnaseq_maplot.pdf",
+        "figures/histone_metagenes.pdf",
 
 rule register_fonts:
     input:
@@ -35,20 +37,6 @@ rule spn1_depletion_metagene:
     script:
         "scripts/spn1_depletion_metagene.R"
 
-rule assemble_figure_spn1_depletion:
-    input:
-        fonts = ".fonts_registered.txt",
-        spn1_depletion_metagene = "figures/spn1_depletion_metagene.Rdata",
-    output:
-        pdf = "figures/figure_spn1_depletion.pdf"
-    params:
-        fig_width = eval(str(config["spn1_depletion_figure"]["fig_width"])),
-        fig_height = eval(str(config["spn1_depletion_figure"]["fig_height"])),
-    conda:
-        "envs/plot_figures.yaml"
-    script:
-        "scripts/assemble_figure_spn1_depletion.R"
-
 rule spn1_depletion_chipseq_barplot:
     input:
         fonts = ".fonts_registered.txt",
@@ -66,6 +54,52 @@ rule spn1_depletion_chipseq_barplot:
     script:
         "scripts/spn1_depletion_chipseq_barplot.R"
 
+rule assemble_figure_spn1_depletion:
+    input:
+        fonts = ".fonts_registered.txt",
+        spn1_depletion_chipseq_barplot = "figures/spn1_depletion_chipseq_barplot.Rdata",
+        spn1_depletion_metagene = "figures/spn1_depletion_metagene.Rdata",
+    output:
+        pdf = "figures/figure_spn1_depletion.pdf"
+    params:
+        fig_width = eval(str(config["spn1_depletion_figure"]["fig_width"])),
+        fig_height = eval(str(config["spn1_depletion_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_spn1_depletion.R"
 
+rule rnaseq_maplot:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["rnaseq_maplot"]["data"]
+    output:
+        pdf = "figures/rnaseq_maplot.pdf",
+        grob = "figures/rnaseq_maplot.Rdata",
+    params:
+        fig_height = eval(str(config["rnaseq_maplot"]["fig_height"])),
+        fig_width = eval(str(config["rnaseq_maplot"]["fig_width"])),
+        panel_letter = config["rnaseq_maplot"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_maplot.R"
 
+rule histone_metagenes:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["histone_metagenes"]["data"],
+    output:
+        pdf = "figures/histone_metagenes.pdf",
+        grob = "figures/histone_metagenes.Rdata",
+    params:
+        fig_height = eval(str(config["histone_metagenes"]["fig_height"])),
+        fig_width = eval(str(config["histone_metagenes"]["fig_width"])),
+        panel_letter = config["histone_metagenes"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/histone_metagenes.R"
 

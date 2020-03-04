@@ -4,7 +4,7 @@ library(extrafont)
 # library(ggthemes)
 
 theme_default = theme_light() +
-    theme(text=element_text(size=9,
+    theme(text=element_text(size=8,
                             color="black",
                             family="FreeSans"),
           axis.text=element_text(size=7,
@@ -15,7 +15,7 @@ theme_default = theme_light() +
                                     margin=margin(1, 0, 0, 0, "pt")),
           axis.title.y=element_text(size=7,
                                     margin=margin(0, 1, 0, 0, "pt")),
-          plot.title=element_text(size=9,
+          plot.title=element_text(size=8,
                                   margin=margin(0, 0, 0.5, 0, "pt")),
           plot.subtitle=element_text(size=7,
                                      margin=margin(0, 0, -2, 0, "pt")),
@@ -25,4 +25,6 @@ theme_default = theme_light() +
           legend.box.margin=margin(0, 0, 0, 0, "pt"),
           legend.margin=margin(0, 0, 0, 0, "pt"),
           strip.background=element_blank(),
-          strip.text=element_text(color="black"))
+          strip.text=element_text(color="black"),
+          plot.tag=element_text(size=8,
+                                face="bold"))

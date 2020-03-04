@@ -49,7 +49,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                     aes(x=group,
                         y=scaled_abundance),
                     width=0.2,
-                    size=1,
+                    size=0.7,
                     alpha=0.8) +
         geom_text(data=df_summary,
                   aes(x=group,
@@ -59,7 +59,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                   round(sd_scaled_abundance, 2))),
                   parse=TRUE,
                   nudge_y=0.05,
-                  size=6/72*25.4,
+                  size=5/72*25.4,
                   family="FreeSans") +
         scale_x_discrete(name=NULL,
                          expand=c(0,0.5)) +
@@ -68,10 +68,11 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         df[["scaled_abundance"]]) + 0.05) * 1.05),
                            expand=c(0,0),
                            breaks=c(0,1),
-                           name="relative abundance") +
+                           name="total signal") +
         scale_fill_viridis_d(end=0.6,
                              guide=FALSE) +
-        labs(tag=panel_letter) +
+        labs(tag=panel_letter,
+             title="Spn1 ChIP-seq") +
         theme_default +
         theme(panel.grid.major.x=element_blank(),
               panel.border=element_blank(),
