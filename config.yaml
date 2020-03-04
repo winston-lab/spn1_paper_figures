@@ -41,6 +41,6 @@ histone_metagenes:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
     fig_width: 8.5
-    fig_height: 8
-    panel_letter: A
+    fig_height: 12
+    panel_letter: x
 

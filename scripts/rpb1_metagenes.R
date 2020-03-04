@@ -9,13 +9,13 @@ import = function(df,
                          "index",
                          "position",
                          "signal"))
-    
+
     df_mean_sd = df_temp %>%
         filter(group == control_group) %>%
         group_by(index) %>%
         summarize(control_mean = mean(signal, na.rm=TRUE),
                   control_sd  = sd(signal, na.rm=TRUE))
-    
+
     df_temp %>%
         group_by(group, assay, index, position) %>%
         summarize(signal=mean(signal, na.rm=TRUE)) %>%
@@ -28,7 +28,6 @@ import = function(df,
                   high=quantile(standard_score, 0.75, na.rm=TRUE)) %>%
         bind_rows(df, .) %>%
         return()
-        
 }
 
 main = function(theme_path = "spn1_2020_theme.R",
@@ -41,8 +40,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 fig_width=8.5,
                 fig_height=8){
     source(theme_path)
-    
-    
+
     df = tibble()
     for (path in data_paths){
         df %<>% import(path, control_group="non-depleted")

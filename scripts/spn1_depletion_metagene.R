@@ -10,11 +10,20 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
 
     df = read_tsv(data_path,
                   col_names=c("group", "sample", "annotation", "assay",
-                              "index", "position", "signal")) %>%
+                              "index", "position", "signal"))
+
+    df_mean_sd = df %>%
+        filter(group == "non-depleted") %>%
+        group_by(index) %>%
+        summarize(control_mean = mean(signal, na.rm=TRUE),
+                  control_sd  = sd(signal, na.rm=TRUE))
+
+    df %<>%
         group_by(group, index, position) %>%
         summarize(signal = mean(signal, na.rm=TRUE)) %>%
-        group_by(index) %>%
-        mutate(standard_score = (signal - mean(signal, na.rm=TRUE)) / sd(signal, na.rm=TRUE)) %>%
+        left_join(df_mean_sd,
+                  by="index") %>%
+        mutate(standard_score = (signal - control_mean) / control_sd) %>%
         group_by(group, position) %>%
         summarize(low=quantile(standard_score, 0.25, na.rm=TRUE),
                   mid=median(standard_score, na.rm=TRUE),
@@ -42,7 +51,7 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
                   size=0.5) +
         annotate(geom="text",
                  x=2.9,
-                 y=c(0.66, -0.14),
+                 y=c(-0.3, -1.4),
                  label=c("non-depleted",
                          "Spn1-depleted"),
                  hjust=1,
