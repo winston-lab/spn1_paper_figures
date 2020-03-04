@@ -8,6 +8,7 @@ rule target:
         "figures/figure_spn1_depletion.pdf",
         "figures/spn1_depletion_chipseq_barplot.pdf",
         "figures/rnaseq_maplot.pdf",
+        "figures/rpb1_metagenes.pdf",
         "figures/histone_metagenes.pdf",
 
 rule register_fonts:
@@ -85,6 +86,23 @@ rule rnaseq_maplot:
         "envs/plot_figures.yaml"
     script:
         "scripts/rnaseq_maplot.R"
+
+rule rpb1_metagenes:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["rpb1_metagenes"]["data"],
+    output:
+        pdf = "figures/rpb1_metagenes.pdf",
+        grob = "figures/rpb1_metagenes.Rdata",
+    params:
+        fig_height = eval(str(config["rpb1_metagenes"]["fig_height"])),
+        fig_width = eval(str(config["rpb1_metagenes"]["fig_width"])),
+        panel_letter = config["rpb1_metagenes"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rpb1_metagenes.R"
 
 rule histone_metagenes:
     input:
