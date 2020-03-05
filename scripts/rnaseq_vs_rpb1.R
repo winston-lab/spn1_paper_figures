@@ -53,7 +53,7 @@ main = function(rnaseq_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
                  hjust=0,
                  size=5/72*25.4,
                  family="FreeSans") +
-        scale_color_viridis_c(option="inferno") +
+        scale_color_viridis_c(option="cividis") +
         scale_x_continuous(breaks=scales::pretty_breaks(4),
                            name=expression("Rpb1 ChIP-seq enrichment: log"[2] ~
                                            textstyle(frac("Spn1-depleted",

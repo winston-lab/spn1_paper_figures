@@ -4,6 +4,7 @@ configfile: "config.yaml"
 
 rule target:
     input:
+        "figures/spn1_depletion_western.pdf",
         "figures/spn1_depletion_metagene.pdf",
         "figures/spn1_depletion_chipseq_barplot.pdf",
         "figures/figure_spn1_depletion.pdf",
@@ -23,6 +24,25 @@ rule register_fonts:
         "envs/plot_figures.yaml"
     script:
         "scripts/register_fonts.R"
+
+rule spn1_depletion_western:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        spn1_blot = config["spn1_depletion_western"]["spn1_blot"],
+        pgk1_blot = config["spn1_depletion_western"]["pgk1_blot"],
+        # quant_data = config["spn1_depletion_western"]["quant_data"],
+    output:
+        pdf = "figures/spn1_depletion_western.pdf",
+        grob = "figures/spn1_depletion_western.Rdata",
+    params:
+        fig_height = eval(str(config["spn1_depletion_western"]["fig_height"])),
+        fig_width = eval(str(config["spn1_depletion_western"]["fig_width"])),
+        panel_letter = config["spn1_depletion_western"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/spn1_depletion_western.R"
 
 rule spn1_depletion_metagene:
     input:
@@ -61,6 +81,7 @@ rule spn1_depletion_chipseq_barplot:
 rule assemble_figure_spn1_depletion:
     input:
         fonts = ".fonts_registered.txt",
+        spn1_depletion_western = "figures/spn1_depletion_western.Rdata",
         spn1_depletion_chipseq_barplot = "figures/spn1_depletion_chipseq_barplot.Rdata",
         spn1_depletion_metagene = "figures/spn1_depletion_metagene.Rdata",
     output:

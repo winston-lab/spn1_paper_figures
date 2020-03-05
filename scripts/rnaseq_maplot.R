@@ -59,7 +59,7 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                                                 "log"[2] ~
                                                     textstyle(frac("Spn1-depleted",
                                                                    "non-depleted"))))) +
-        scale_color_viridis_c(option="inferno") +
+        scale_color_viridis_c(option="cividis") +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),

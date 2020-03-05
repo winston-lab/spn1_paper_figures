@@ -8,4 +8,6 @@ dependencies:
     - r-hexbin=1.28.1
     - r-gridextra=2.3
     - r-cowplot=1.0.0
+    - r-tiff=0.1_5
+    - r-ggplotify=0.0.4
 
