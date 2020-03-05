@@ -4,16 +4,16 @@ configfile: "config.yaml"
 
 rule target:
     input:
-        "figures/spn1_depletion_western.pdf",
-        "figures/spn1_depletion_metagene.pdf",
-        "figures/spn1_depletion_chipseq_barplot.pdf",
+        "panels/spn1_depletion_western.pdf",
+        "panels/spn1_depletion_metagene.pdf",
+        "panels/spn1_depletion_chipseq_barplot.pdf",
         "figures/figure_spn1_depletion.pdf",
-        "figures/spn1_depletion_viability.pdf",
-        "figures/rnaseq_maplot.pdf",
-        "figures/rpb1_metagenes.pdf",
-        "figures/rnaseq_vs_rpb1.pdf",
+        "panels/spn1_depletion_viability.pdf",
+        "panels/rnaseq_maplot.pdf",
+        "panels/rpb1_metagenes.pdf",
+        "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
-        "figures/histone_metagenes.pdf",
+        "panels/histone_metagenes.pdf",
 
 rule register_fonts:
     input:
@@ -33,8 +33,8 @@ rule spn1_depletion_western:
         pgk1_blot = config["spn1_depletion_western"]["pgk1_blot"],
         # quant_data = config["spn1_depletion_western"]["quant_data"],
     output:
-        pdf = "figures/spn1_depletion_western.pdf",
-        grob = "figures/spn1_depletion_western.Rdata",
+        pdf = "panels/spn1_depletion_western.pdf",
+        grob = "panels/spn1_depletion_western.Rdata",
     params:
         fig_height = eval(str(config["spn1_depletion_western"]["fig_height"])),
         fig_width = eval(str(config["spn1_depletion_western"]["fig_width"])),
@@ -50,8 +50,8 @@ rule spn1_depletion_metagene:
         theme = config["theme_path"],
         data = config["spn1_depletion_metagene"]["data"],
     output:
-        pdf = "figures/spn1_depletion_metagene.pdf",
-        grob = "figures/spn1_depletion_metagene.Rdata",
+        pdf = "panels/spn1_depletion_metagene.pdf",
+        grob = "panels/spn1_depletion_metagene.Rdata",
     params:
         fig_height = eval(str(config["spn1_depletion_metagene"]["fig_height"])),
         fig_width = eval(str(config["spn1_depletion_metagene"]["fig_width"])),
@@ -67,8 +67,8 @@ rule spn1_depletion_chipseq_barplot:
         theme = config["theme_path"],
         data = config["spn1_depletion_chipseq_barplot"]["data"],
     output:
-        pdf = "figures/spn1_depletion_chipseq_barplot.pdf",
-        grob = "figures/spn1_depletion_chipseq_barplot.Rdata",
+        pdf = "panels/spn1_depletion_chipseq_barplot.pdf",
+        grob = "panels/spn1_depletion_chipseq_barplot.Rdata",
     params:
         fig_height = eval(str(config["spn1_depletion_chipseq_barplot"]["fig_height"])),
         fig_width = eval(str(config["spn1_depletion_chipseq_barplot"]["fig_width"])),
@@ -81,9 +81,9 @@ rule spn1_depletion_chipseq_barplot:
 rule assemble_figure_spn1_depletion:
     input:
         fonts = ".fonts_registered.txt",
-        spn1_depletion_western = "figures/spn1_depletion_western.Rdata",
-        spn1_depletion_chipseq_barplot = "figures/spn1_depletion_chipseq_barplot.Rdata",
-        spn1_depletion_metagene = "figures/spn1_depletion_metagene.Rdata",
+        spn1_depletion_western = "panels/spn1_depletion_western.Rdata",
+        spn1_depletion_chipseq_barplot = "panels/spn1_depletion_chipseq_barplot.Rdata",
+        spn1_depletion_metagene = "panels/spn1_depletion_metagene.Rdata",
     output:
         pdf = "figures/figure_spn1_depletion.pdf"
     params:
@@ -100,8 +100,8 @@ rule spn1_depletion_viability:
         theme = config["theme_path"],
         data = config["spn1_depletion_viability"]["data"],
     output:
-        pdf = "figures/spn1_depletion_viability.pdf",
-        grob = "figures/spn1_depletion_viability.Rdata",
+        pdf = "panels/spn1_depletion_viability.pdf",
+        grob = "panels/spn1_depletion_viability.Rdata",
     params:
         fig_height = eval(str(config["spn1_depletion_viability"]["fig_height"])),
         fig_width = eval(str(config["spn1_depletion_viability"]["fig_width"])),
@@ -117,8 +117,8 @@ rule rnaseq_maplot:
         theme = config["theme_path"],
         data = config["rnaseq_maplot"]["data"]
     output:
-        pdf = "figures/rnaseq_maplot.pdf",
-        grob = "figures/rnaseq_maplot.Rdata",
+        pdf = "panels/rnaseq_maplot.pdf",
+        grob = "panels/rnaseq_maplot.Rdata",
     params:
         fig_height = eval(str(config["rnaseq_maplot"]["fig_height"])),
         fig_width = eval(str(config["rnaseq_maplot"]["fig_width"])),
@@ -134,8 +134,8 @@ rule rpb1_metagenes:
         theme = config["theme_path"],
         data = config["rpb1_metagenes"]["data"],
     output:
-        pdf = "figures/rpb1_metagenes.pdf",
-        grob = "figures/rpb1_metagenes.Rdata",
+        pdf = "panels/rpb1_metagenes.pdf",
+        grob = "panels/rpb1_metagenes.Rdata",
     params:
         fig_height = eval(str(config["rpb1_metagenes"]["fig_height"])),
         fig_width = eval(str(config["rpb1_metagenes"]["fig_width"])),
@@ -152,8 +152,8 @@ rule rnaseq_vs_rpb1:
         rnaseq_path = config["rnaseq_vs_rpb1"]["rnaseq"],
         rpb1_path = config["rnaseq_vs_rpb1"]["rpb1"]
     output:
-        pdf = "figures/rnaseq_vs_rpb1.pdf",
-        grob = "figures/rnaseq_vs_rpb1.Rdata",
+        pdf = "panels/rnaseq_vs_rpb1.pdf",
+        grob = "panels/rnaseq_vs_rpb1.Rdata",
     params:
         fig_height = eval(str(config["rnaseq_vs_rpb1"]["fig_height"])),
         fig_width = eval(str(config["rnaseq_vs_rpb1"]["fig_width"])),
@@ -166,9 +166,9 @@ rule rnaseq_vs_rpb1:
 rule assemble_figure_rnaseq_rpb1:
     input:
         fonts = ".fonts_registered.txt",
-        rnaseq_maplot = "figures/rnaseq_maplot.Rdata",
-        rpb1_metagenes = "figures/rpb1_metagenes.Rdata",
-        rnaseq_vs_rpb1 = "figures/rnaseq_vs_rpb1.Rdata",
+        rnaseq_maplot = "panels/rnaseq_maplot.Rdata",
+        rpb1_metagenes = "panels/rpb1_metagenes.Rdata",
+        rnaseq_vs_rpb1 = "panels/rnaseq_vs_rpb1.Rdata",
     output:
         pdf = "figures/figure_rnaseq_rpb1.pdf"
     params:
@@ -185,8 +185,8 @@ rule histone_metagenes:
         theme = config["theme_path"],
         data = config["histone_metagenes"]["data"],
     output:
-        pdf = "figures/histone_metagenes.pdf",
-        grob = "figures/histone_metagenes.Rdata",
+        pdf = "panels/histone_metagenes.pdf",
+        grob = "panels/histone_metagenes.Rdata",
     params:
         fig_height = eval(str(config["histone_metagenes"]["fig_height"])),
         fig_width = eval(str(config["histone_metagenes"]["fig_width"])),

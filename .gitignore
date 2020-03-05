@@ -2,4 +2,5 @@
 .fonts_registered.txt
 .snakemake/
 Rplots.pdf
+panels/
 figures/
