@@ -61,6 +61,17 @@ rnaseq_rpb1_figure:
     fig_width: 17.4
     fig_height: 12
 
+promoter_swap_rtqpcr:
+    data: ../spn1-small-data/promoter_swap_rtqpcr/promoter_swap_rtqpcr_data.txt
+    rnaseq: ../rna-seq/diff_exp/transcripts/Spn1-IAA-v-Spn1-DMSO/spikenorm/genic/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-transcripts-diffexp-results-genic-all.tsv
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5"
+    panel_letter: b
+
+promoter_swap_figure:
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5 * 2"
+
 histone_metagenes:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz

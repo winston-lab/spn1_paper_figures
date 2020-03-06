@@ -10,4 +10,5 @@ dependencies:
     - r-cowplot=1.0.0
     - r-tiff=0.1_5
     - r-ggplotify=0.0.4
+    - r-mratios=1.4.0
 

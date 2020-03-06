@@ -13,6 +13,8 @@ rule target:
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
+        "panels/promoter_swap_rtqpcr.pdf",
+        "figures/figure_promoter_swap.pdf",
         "panels/histone_metagenes.pdf",
 
 rule register_fonts:
@@ -178,6 +180,43 @@ rule assemble_figure_rnaseq_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_rnaseq_rpb1.R"
+
+
+
+
+rule promoter_swap_rtqpcr:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["promoter_swap_rtqpcr"]["data"],
+        rnaseq = config["promoter_swap_rtqpcr"]["rnaseq"]
+    output:
+        pdf = "panels/promoter_swap_rtqpcr.pdf",
+        grob = "panels/promoter_swap_rtqpcr.Rdata",
+    params:
+        fig_height = eval(str(config["promoter_swap_rtqpcr"]["fig_height"])),
+        fig_width = eval(str(config["promoter_swap_rtqpcr"]["fig_width"])),
+        panel_letter = config["promoter_swap_rtqpcr"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/promoter_swap_rtqpcr.R"
+
+
+rule assemble_figure_promoter_swap:
+    input:
+        fonts = ".fonts_registered.txt",
+        promoter_swap_rtqpcr = "panels/promoter_swap_rtqpcr.Rdata",
+    output:
+        pdf = "figures/figure_promoter_swap.pdf"
+    params:
+        fig_width = eval(str(config["promoter_swap_figure"]["fig_width"])),
+        fig_height = eval(str(config["promoter_swap_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_promoter_swap.R"
+
 
 rule histone_metagenes:
     input:
