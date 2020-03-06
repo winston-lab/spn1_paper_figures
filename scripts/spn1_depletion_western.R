@@ -107,13 +107,14 @@ main = function(theme_path = "spn1_2020_theme.R",
                                 vjust=-0.2)
     quantification_labels = textGrob(x=lane_centers,
                                      y=min(antigen_labels_y - outline_height / 2 - 0.02),
-                                     label=c(expression(textstyle(atop("0.00",
-                                                                       phantom(.) %+-% "0.00" ~
-                                                                           phantom(.)))),
-                                             expression(textstyle(atop("0.00",
-                                                                       phantom(.) %+-% "0.00" ~
-                                                                           phantom(.))))),
-                                     gp=gpar(fontsize=6,
+                                     label=c("0.00\n±0.00",
+                                             "0.00\n±0.00"),
+                                     #                                   phantom(.) %+-% "0.00" ~
+                                     #                                       phantom(.)))),
+                                     #         expression(textstyle(atop("0.00",
+                                     #                                   phantom(.) %+-% "0.00" ~
+                                     #                                       phantom(.))))),
+                                     gp=gpar(fontsize=5,
                                              fontfamily="FreeSans"),
                                      hjust=0.5,
                                      vjust=1)

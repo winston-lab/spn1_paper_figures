@@ -67,7 +67,7 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
                               guide=FALSE) +
         scale_fill_viridis_d(end=0.6,
                              guide=FALSE) +
-        ggtitle(label="Spn1 ChIP-seq enrichment",
+        ggtitle(label="Spn1 ChIP-seq",
                 subtitle="3087 non-overlapping coding genes") +
         labs(tag=panel_letter) +
         theme_default +

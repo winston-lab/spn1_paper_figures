@@ -1,6 +1,6 @@
 
 main = function(theme_path = "spn1_2020_theme.R",
-                data_path = "Set2-chipseq_spikein-counts.tsv",
+                data_path = "Spn1-chipseq_spikein-counts.tsv",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata",
                 fig_width=4,
@@ -30,14 +30,18 @@ main = function(theme_path = "spn1_2020_theme.R",
     df_summary = df %>%
         group_by(group) %>%
         summarize(mean_scaled_abundance = mean(scaled_abundance),
-               sd_scaled_abundance = sd(scaled_abundance))
+               sd_scaled_abundance = sd(scaled_abundance)) %>%
+        mutate(label_direction = if_else(mean_scaled_abundance > 0.5,
+                                         -1,
+                                         1))
 
     chipseq_abundance_barplot = ggplot() +
         geom_col(data=df_summary,
                  aes(x=group,
                      y=mean_scaled_abundance,
                      fill=group),
-                 alpha=0.5) +
+                 alpha=0.5,
+                 width=0.8) +
         geom_errorbar(data=df_summary,
                       aes(x=group,
                           ymin=mean_scaled_abundance - sd_scaled_abundance,
@@ -49,16 +53,15 @@ main = function(theme_path = "spn1_2020_theme.R",
                     aes(x=group,
                         y=scaled_abundance),
                     width=0.2,
+                    shape=16,
                     size=0.7,
                     alpha=0.8) +
         geom_text(data=df_summary,
                   aes(x=group,
-                      y=mean_scaled_abundance + sd_scaled_abundance,
-                      label=paste(round(mean_scaled_abundance, 2),
-                                  "%+-%",
-                                  round(sd_scaled_abundance, 2))),
-                  parse=TRUE,
-                  nudge_y=0.05,
+                      y=mean_scaled_abundance + (sd_scaled_abundance + 0.18) * label_direction,
+                      label=paste0(sprintf("%.2f", mean_scaled_abundance),
+                                   "\n±",
+                                  sprintf("%.2f", sd_scaled_abundance))),
                   size=5/72*25.4,
                   family="FreeSans") +
         scale_x_discrete(name=NULL,
@@ -76,8 +79,8 @@ main = function(theme_path = "spn1_2020_theme.R",
         theme_default +
         theme(panel.grid.major.x=element_blank(),
               panel.border=element_blank(),
-              axis.text.x=element_text(angle=15,
-                                       hjust=0.7),
+              axis.text.x=element_text(angle=20,
+                                       hjust=0.9),
               axis.ticks=element_blank())
 
     ggsave(pdf_out,
