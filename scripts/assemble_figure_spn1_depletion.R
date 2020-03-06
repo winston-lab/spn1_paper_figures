@@ -25,8 +25,8 @@ main = function(spn1_depletion_western_rdata,
 
     load(spn1_depletion_western_rdata)
     load(spn1_depletion_chipseq_barplot_rdata)
+    spn1_depletion_chipseq_barplot = chipseq_abundance_barplot
     load(spn1_depletion_metagene_rdata)
-
 
     figure_spn1_depletion = arrangeGrob(spn1_depletion_western,
                                         spn1_depletion_chipseq_barplot,

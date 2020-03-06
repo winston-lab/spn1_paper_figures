@@ -15,6 +15,11 @@ rule target:
         "figures/figure_rnaseq_rpb1.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
+        "panels/set2_metagene.pdf",
+        "panels/spt6_metagene.pdf",
+        "panels/set2_abundance_chipseq_barplot.pdf",
+        "panels/spt6_abundance_chipseq_barplot.pdf",
+        "figures/figure_set2_spt6.pdf",
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "figures/figure_h3_and_mods.pdf"
@@ -76,11 +81,12 @@ rule spn1_depletion_chipseq_barplot:
     params:
         fig_height = eval(str(config["spn1_depletion_chipseq_barplot"]["fig_height"])),
         fig_width = eval(str(config["spn1_depletion_chipseq_barplot"]["fig_width"])),
-        panel_letter = config["spn1_depletion_chipseq_barplot"]["panel_letter"]
+        panel_letter = config["spn1_depletion_chipseq_barplot"]["panel_letter"],
+        plot_title = "Spn1 ChIP-seq"
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/spn1_depletion_chipseq_barplot.R"
+        "scripts/chipseq_abundance_barplot.R"
 
 rule assemble_figure_spn1_depletion:
     input:
@@ -136,7 +142,8 @@ rule rpb1_metagenes:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        data = config["rpb1_metagenes"]["data"],
+        rpb1 = config["rpb1_metagenes"]["rpb1"],
+        modifications = config["rpb1_metagenes"]["modifications"],
     output:
         pdf = "panels/rpb1_metagenes.pdf",
         grob = "panels/rpb1_metagenes.Rdata",
@@ -218,6 +225,101 @@ rule assemble_figure_promoter_swap:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_promoter_swap.R"
+
+
+rule set2_metagene:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["set2_metagene"]["data"],
+    output:
+        pdf = "panels/set2_metagene.pdf",
+        grob = "panels/set2_metagene.Rdata",
+    params:
+        fig_height = eval(str(config["set2_metagene"]["fig_height"])),
+        fig_width = eval(str(config["set2_metagene"]["fig_width"])),
+        panel_letter = config["set2_metagene"]["panel_letter"],
+        plot_title = "Set2 ChIP-seq",
+        plot_subtitle = "3087 non-overlapping coding genes",
+        legend_position = [0.6, 0.3]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/single_factor_standardized_metagene.R"
+
+rule spt6_metagene:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["spt6_metagene"]["data"],
+    output:
+        pdf = "panels/spt6_metagene.pdf",
+        grob = "panels/spt6_metagene.Rdata",
+    params:
+        fig_height = eval(str(config["spt6_metagene"]["fig_height"])),
+        fig_width = eval(str(config["spt6_metagene"]["fig_width"])),
+        panel_letter = config["spt6_metagene"]["panel_letter"],
+        plot_title = "Spt6 ChIP-seq",
+        plot_subtitle = "3087 non-overlapping coding genes",
+        legend_position = [0.6, 0.3]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/single_factor_standardized_metagene.R"
+
+rule set2_abundance_chipseq_barplot:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["set2_abundance_chipseq_barplot"]["data"],
+    output:
+        pdf = "panels/set2_abundance_chipseq_barplot.pdf",
+        grob = "panels/set2_abundance_chipseq_barplot.Rdata",
+    params:
+        fig_height = eval(str(config["set2_abundance_chipseq_barplot"]["fig_height"])),
+        fig_width = eval(str(config["set2_abundance_chipseq_barplot"]["fig_width"])),
+        panel_letter = config["set2_abundance_chipseq_barplot"]["panel_letter"],
+        plot_title = "Set2 ChIP-seq"
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chipseq_abundance_barplot.R"
+
+rule spt6_abundance_chipseq_barplot:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["spt6_abundance_chipseq_barplot"]["data"],
+    output:
+        pdf = "panels/spt6_abundance_chipseq_barplot.pdf",
+        grob = "panels/spt6_abundance_chipseq_barplot.Rdata",
+    params:
+        fig_height = eval(str(config["spt6_abundance_chipseq_barplot"]["fig_height"])),
+        fig_width = eval(str(config["spt6_abundance_chipseq_barplot"]["fig_width"])),
+        panel_letter = config["spt6_abundance_chipseq_barplot"]["panel_letter"],
+        plot_title = "Spt6 ChIP-seq"
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chipseq_abundance_barplot.R"
+
+rule assemble_figure_set2_spt6:
+    input:
+        fonts = ".fonts_registered.txt",
+        set2_metagene = "panels/set2_metagene.Rdata",
+        spt6_metagene = "panels/spt6_metagene.Rdata",
+        set2_abundance_chipseq_barplot = "panels/set2_abundance_chipseq_barplot.Rdata",
+        spt6_abundance_chipseq_barplot = "panels/spt6_abundance_chipseq_barplot.Rdata",
+    output:
+        pdf = "figures/figure_set2_spt6.pdf"
+    params:
+        fig_width = eval(str(config["set2_spt6_figure"]["fig_width"])),
+        fig_height = eval(str(config["set2_spt6_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_set2_spt6.R"
+
 
 
 rule h3_metagene:

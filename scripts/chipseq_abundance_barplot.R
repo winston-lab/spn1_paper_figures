@@ -1,12 +1,12 @@
 
 main = function(theme_path = "spn1_2020_theme.R",
-                data_path = "Spn1-chipseq_spikein-counts.tsv",
+                data_path = "Set2-chipseq_spikein-counts.tsv",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata",
                 fig_width=4,
                 fig_height=6,
                 panel_letter="X",
-                units="cm"){
+                plot_title="Spn1 ChIP-seq"){
     source(theme_path)
 
     df = read_tsv(data_path) %>%
@@ -32,7 +32,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         summarize(mean_scaled_abundance = mean(scaled_abundance),
                sd_scaled_abundance = sd(scaled_abundance))
 
-    spn1_depletion_chipseq_barplot = ggplot() +
+    chipseq_abundance_barplot = ggplot() +
         geom_col(data=df_summary,
                  aes(x=group,
                      y=mean_scaled_abundance,
@@ -72,7 +72,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_fill_viridis_d(end=0.6,
                              guide=FALSE) +
         labs(tag=panel_letter,
-             title="Spn1 ChIP-seq") +
+             title=plot_title) +
         theme_default +
         theme(panel.grid.major.x=element_blank(),
               panel.border=element_blank(),
@@ -81,12 +81,12 @@ main = function(theme_path = "spn1_2020_theme.R",
               axis.ticks=element_blank())
 
     ggsave(pdf_out,
-           plot=spn1_depletion_chipseq_barplot,
+           plot=chipseq_abundance_barplot,
            width=fig_width,
            height=fig_height,
            units="cm",
            device=cairo_pdf)
-    save(spn1_depletion_chipseq_barplot,
+    save(chipseq_abundance_barplot,
          file=grob_out)
 }
 
@@ -96,5 +96,6 @@ main(theme_path=snakemake@input[["theme"]],
      grob_out=snakemake@output[["grob"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]],
-     panel_letter=snakemake@params[["panel_letter"]])
+     panel_letter=snakemake@params[["panel_letter"]],
+     plot_title=snakemake@params[["plot_title"]])
 
