@@ -72,13 +72,24 @@ promoter_swap_figure:
     fig_width: 8.5
     fig_height: "9 / 16 * 8.5 * 2"
 
-histone_metagenes:
+
+h3_metagene:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz
+    fig_width: "17.4 / 2"
+    fig_height: "17.4 / 2 * 9 / 16"
+    panel_letter: a
+
+h3_modification_datavis:
+    data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
-    fig_width: 8.5
+    annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping.bed
+    fig_width: 17.4
     fig_height: 12
-    panel_letter: x
+    panel_letter: c
 
+h3_and_mods_figure:
+    fig_width: 17.4
+    fig_height: 14

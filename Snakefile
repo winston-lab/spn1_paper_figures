@@ -15,7 +15,9 @@ rule target:
         "figures/figure_rnaseq_rpb1.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
-        "panels/histone_metagenes.pdf",
+        "panels/h3_metagene.pdf",
+        "panels/h3_modification_datavis.pdf",
+        "figures/figure_h3_and_mods.pdf"
 
 rule register_fonts:
     input:
@@ -218,20 +220,56 @@ rule assemble_figure_promoter_swap:
         "scripts/assemble_figure_promoter_swap.R"
 
 
-rule histone_metagenes:
+rule h3_metagene:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        data = config["histone_metagenes"]["data"],
+        data = config["h3_metagene"]["data"],
     output:
-        pdf = "panels/histone_metagenes.pdf",
-        grob = "panels/histone_metagenes.Rdata",
+        pdf = "panels/h3_metagene.pdf",
+        grob = "panels/h3_metagene.Rdata",
     params:
-        fig_height = eval(str(config["histone_metagenes"]["fig_height"])),
-        fig_width = eval(str(config["histone_metagenes"]["fig_width"])),
-        panel_letter = config["histone_metagenes"]["panel_letter"]
+        fig_height = eval(str(config["h3_metagene"]["fig_height"])),
+        fig_width = eval(str(config["h3_metagene"]["fig_width"])),
+        panel_letter = config["h3_metagene"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/histone_metagenes.R"
+        "scripts/h3_metagene.R"
+
+
+rule h3_modification_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["h3_modification_datavis"]["data"],
+        annotation = config["h3_modification_datavis"]["annotation"],
+    output:
+        pdf = "panels/h3_modification_datavis.pdf",
+        grob = "panels/h3_modification_datavis.Rdata",
+    params:
+        fig_height = eval(str(config["h3_modification_datavis"]["fig_height"])),
+        fig_width = eval(str(config["h3_modification_datavis"]["fig_width"])),
+        panel_letter = config["h3_modification_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_modification_datavis.R"
+
+rule assemble_figure_h3_and_mods:
+    input:
+        fonts = ".fonts_registered.txt",
+        h3_metagene = "panels/h3_metagene.Rdata",
+        h3_modification_datavis = "panels/h3_modification_datavis.Rdata",
+    output:
+        pdf = "figures/figure_h3_and_mods.pdf"
+    params:
+        fig_width = eval(str(config["h3_and_mods_figure"]["fig_width"])),
+        fig_height = eval(str(config["h3_and_mods_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_h3_and_mods.R"
+
+
 
