@@ -11,6 +11,7 @@ rule target:
         "panels/spn1_depletion_viability.pdf",
         "figures/figure_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
+        "panels/rnaseq_single_locus_datavis.pdf",
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
@@ -154,6 +155,26 @@ rule rnaseq_maplot:
     script:
         "scripts/rnaseq_maplot.R"
 
+rule rnaseq_single_locus_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["rnaseq_single_locus_datavis"]["data"].values()),
+        transcript_annotations = config["rnaseq_single_locus_datavis"]["transcript_annotation"],
+        orf_annotations = config["rnaseq_single_locus_datavis"]["orf_annotation"]
+    output:
+        pdf = "panels/rnaseq_single_locus_datavis.pdf",
+        grob = "panels/rnaseq_single_locus_datavis.Rdata",
+    params:
+        targets = list(config["rnaseq_single_locus_datavis"]["data"].keys()),
+        fig_height = eval(str(config["rnaseq_single_locus_datavis"]["fig_height"])),
+        fig_width = eval(str(config["rnaseq_single_locus_datavis"]["fig_width"])),
+        panel_letter = config["rnaseq_single_locus_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_single_locus_datavis.R"
+
 rule rpb1_metagenes:
     input:
         fonts = ".fonts_registered.txt",
@@ -193,7 +214,7 @@ rule rnaseq_vs_rpb1:
 rule assemble_figure_rnaseq_rpb1:
     input:
         fonts = ".fonts_registered.txt",
-        rnaseq_maplot = "panels/rnaseq_maplot.Rdata",
+        rnaseq_maplot = "panels/rnaseq_maplot.Rdata", rnaseq_single_locus_datavis = "panels/rnaseq_single_locus_datavis.Rdata",
         rpb1_metagenes = "panels/rpb1_metagenes.Rdata",
         rnaseq_vs_rpb1 = "panels/rnaseq_vs_rpb1.Rdata",
     output:
@@ -205,8 +226,6 @@ rule assemble_figure_rnaseq_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_rnaseq_rpb1.R"
-
-
 
 
 rule promoter_swap_rtqpcr:

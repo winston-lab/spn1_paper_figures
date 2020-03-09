@@ -42,6 +42,17 @@ rnaseq_maplot:
     fig_height: "9 / 16 * 8.5"
     panel_letter: a
 
+rnaseq_single_locus_datavis:
+    data:
+        SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
+        UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
+        GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
+    transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
+    orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
+    fig_width: "17.4 / 2"
+    fig_height: "7 / 12 * 12"
+    panel_letter: b
+
 rpb1_metagenes:
     rpb1: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Rpb1.tsv.gz
     modifications:
