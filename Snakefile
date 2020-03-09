@@ -15,6 +15,7 @@ rule target:
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
+        "panels/promoter_swap_diagram.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
         "panels/set2_metagene.pdf",
@@ -228,6 +229,23 @@ rule assemble_figure_rnaseq_rpb1:
         "scripts/assemble_figure_rnaseq_rpb1.R"
 
 
+rule promoter_swap_diagram:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["promoter_swap_diagram"]["data"],
+    output:
+        pdf = "panels/promoter_swap_diagram.pdf",
+        grob = "panels/promoter_swap_diagram.Rdata",
+    params:
+        fig_height = eval(str(config["promoter_swap_diagram"]["fig_height"])),
+        fig_width = eval(str(config["promoter_swap_diagram"]["fig_width"])),
+        panel_letter = config["promoter_swap_diagram"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/promoter_swap_diagram.R"
+
 rule promoter_swap_rtqpcr:
     input:
         fonts = ".fonts_registered.txt",
@@ -250,6 +268,7 @@ rule promoter_swap_rtqpcr:
 rule assemble_figure_promoter_swap:
     input:
         fonts = ".fonts_registered.txt",
+        promoter_swap_diagram = "panels/promoter_swap_diagram.Rdata",
         promoter_swap_rtqpcr = "panels/promoter_swap_rtqpcr.Rdata",
     output:
         pdf = "figures/figure_promoter_swap.pdf"
