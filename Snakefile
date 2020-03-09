@@ -9,6 +9,7 @@ rule target:
         "panels/spn1_depletion_chipseq_barplot.pdf",
         "figures/figure_spn1_depletion.pdf",
         "panels/spn1_depletion_viability.pdf",
+        "figures/figure_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
@@ -120,6 +121,21 @@ rule spn1_depletion_viability:
         "envs/plot_figures.yaml"
     script:
         "scripts/spn1_depletion_viability.R"
+
+rule assemble_figure_spn1_depletion_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        spn1_depletion_viability = "panels/spn1_depletion_viability.Rdata",
+    output:
+        pdf = "figures/figure_spn1_depletion_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["spn1_depletion_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["spn1_depletion_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_spn1_depletion_supp.R"
+
 
 rule rnaseq_maplot:
     input:
