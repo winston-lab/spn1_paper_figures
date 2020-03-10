@@ -28,7 +28,6 @@ main = function(theme_path = "spn1_2020_theme.R",
                cfu_per_od_unit = `CFU/mL_normal` / OD600) %>%
         filter(condition != "T0")
 
-
     df_summary = df %>%
         group_by(strain, condition) %>%
         summarize(mean = mean(cfu_per_od_unit, na.rm=TRUE),

@@ -161,6 +161,9 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
 
 
     rnaseq_single_locus_datavis = ggplot() +
+        geom_hline(yintercept=0,
+                   size=0.2,
+                   color="gray70") +
         geom_line(data=df,
                   aes(x=position,
                       y=sense,

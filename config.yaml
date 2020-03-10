@@ -73,6 +73,30 @@ rnaseq_rpb1_figure:
     fig_width: 17.4
     fig_height: 12
 
+antisense_single_locus_datavis:
+    data:
+        RRP1: ../spn1-data-integration/browser-shots/RRP1/RRP1_all-assays.tsv.gz
+        MET10: ../spn1-data-integration/browser-shots/MET10/MET10_all-assays.tsv.gz
+        ARO80: ../spn1-data-integration/browser-shots/ARO80/ARO80_all-assays.tsv.gz
+        MAF1: ../spn1-data-integration/browser-shots/MAF1/MAF1_all-assays.tsv.gz
+    transcript_annotation: ../custom_differential_expression/merged_transcripts/custom_diffexp_experimental-merged-transcripts-annotated.bed
+    orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
+    fig_width: "17.4 / 2"
+    fig_height: 9
+    panel_letter: a
+
+splicing:
+    data: ../custom_figures/figures/intron_retention/Spn1-IAA-v-all-controls_intron_retention_results.tsv
+    aliases: /n/groups/winston/jc459/intragenic/genome/Scer-sys-to-common-name.tsv
+    rp_genes: ../genome/annotations/gene_lists/Scer_RPgene_transcripts.bed
+    fig_width: "17.4/2"
+    fig_height: 9
+    panel_letter: b
+
+rnaseq_rpb1_supplemental:
+    fig_width: 17.4
+    fig_height: 9
+
 promoter_swap_diagram:
     data: ../spn1-small-data/promoter_swap_rtqpcr/promoter_swap_diagram.tsv
     fig_width: 8.5

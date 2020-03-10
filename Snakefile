@@ -15,6 +15,9 @@ rule target:
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
+        "panels/antisense_single_locus_datavis.pdf",
+        "panels/splicing.pdf",
+        "figures/figure_rnaseq_rpb1_supplemental.pdf",
         "panels/promoter_swap_diagram.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
@@ -227,6 +230,60 @@ rule assemble_figure_rnaseq_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_rnaseq_rpb1.R"
+
+rule antisense_single_locus_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["antisense_single_locus_datavis"]["data"].values()),
+        transcript_annotations = config["antisense_single_locus_datavis"]["transcript_annotation"],
+        orf_annotations = config["antisense_single_locus_datavis"]["orf_annotation"]
+    output:
+        pdf = "panels/antisense_single_locus_datavis.pdf",
+        grob = "panels/antisense_single_locus_datavis.Rdata",
+    params:
+        targets = list(config["antisense_single_locus_datavis"]["data"].keys()),
+        fig_height = eval(str(config["antisense_single_locus_datavis"]["fig_height"])),
+        fig_width = eval(str(config["antisense_single_locus_datavis"]["fig_width"])),
+        panel_letter = config["antisense_single_locus_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_single_locus_datavis.R"
+
+rule splicing:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["splicing"]["data"],
+        aliases = config["splicing"]["aliases"],
+        rp_genes = config["splicing"]["rp_genes"],
+    output:
+        pdf = "panels/splicing.pdf",
+        grob = "panels/splicing.Rdata",
+    params:
+        fig_height = eval(str(config["splicing"]["fig_height"])),
+        fig_width = eval(str(config["splicing"]["fig_width"])),
+        panel_letter = config["splicing"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/splicing.R"
+
+rule assemble_figure_rnaseq_rpb1_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
+        splicing = "panels/splicing.Rdata",
+    output:
+        pdf = "figures/figure_rnaseq_rpb1_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["rnaseq_rpb1_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["rnaseq_rpb1_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_rnaseq_rpb1_supp.R"
 
 
 rule promoter_swap_diagram:
