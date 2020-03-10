@@ -47,10 +47,10 @@ main = function(set2_metagene_rdata,
               plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
 
     figure_set2_spt6 = arrangeGrob(temp_panel,
-                                   set2_metagene,
-                                   set2_abundance_chipseq_barplot,
                                    spt6_metagene,
                                    spt6_abundance_chipseq_barplot,
+                                   set2_metagene,
+                                   set2_abundance_chipseq_barplot,
                                    layout_matrix=layout)
 
     ggsave(pdf_out,
