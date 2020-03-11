@@ -49,7 +49,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                        y=signal),
                    position=position_jitterdodge(dodge.width=0.8),
                    shape=16,
-                   size=0.5,
+                   size=0.7,
                    alpha=0.8) +
         scale_color_manual(values=c("#DDAA33",
                                     "#BB5566"),
