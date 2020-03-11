@@ -4,7 +4,8 @@ library(grid)
 library(gridExtra)
 library(extrafont)
 
-main = function(set2_metagene_rdata,
+main = function(coip_western_rdata,
+                set2_metagene_rdata,
                 spt6_metagene_rdata,
                 set2_abundance_chipseq_barplot_rdata,
                 spt6_abundance_chipseq_barplot_rdata,
@@ -15,15 +16,16 @@ main = function(set2_metagene_rdata,
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(2,2,2,2,2,2,2,2,3,3,3,3),
-                   c(2,2,2,2,2,2,2,2,3,3,3,3),
-                   c(2,2,2,2,2,2,2,2,3,3,3,3),
-                   c(2,2,2,2,2,2,2,2,3,3,3,3),
-                   c(4,4,4,4,4,4,4,4,5,5,5,5),
-                   c(4,4,4,4,4,4,4,4,5,5,5,5),
-                   c(4,4,4,4,4,4,4,4,5,5,5,5),
-                   c(4,4,4,4,4,4,4,4,5,5,5,5))
+                   c(2,2,2,2,2,2,2,2,2,3,3,3),
+                   c(2,2,2,2,2,2,2,2,2,3,3,3),
+                   c(2,2,2,2,2,2,2,2,2,3,3,3),
+                   c(2,2,2,2,2,2,2,2,2,3,3,3),
+                   c(4,4,4,4,4,4,4,4,4,5,5,5),
+                   c(4,4,4,4,4,4,4,4,4,5,5,5),
+                   c(4,4,4,4,4,4,4,4,4,5,5,5),
+                   c(4,4,4,4,4,4,4,4,4,5,5,5))
 
+    load(coip_western_rdata)
     load(set2_metagene_rdata)
     set2_metagene = metagene
     load(spt6_metagene_rdata)
@@ -33,20 +35,7 @@ main = function(set2_metagene_rdata,
     load(spt6_abundance_chipseq_barplot_rdata)
     spt6_abundance_chipseq_barplot = chipseq_abundance_barplot
 
-    temp_panel = ggplot() +
-        annotate(geom="text",
-                 x=0,
-                 y=0,
-                 label="Co-IP",
-                 size=2) +
-        labs(tag="a") +
-        theme_void() +
-        theme(plot.tag=element_text(size=9,
-                                    face="bold",
-                                    family="FreeSans"),
-              plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
-
-    figure_set2_spt6 = arrangeGrob(temp_panel,
+    figure_set2_spt6 = arrangeGrob(coip_western,
                                    spt6_metagene,
                                    spt6_abundance_chipseq_barplot,
                                    set2_metagene,
@@ -61,7 +50,8 @@ main = function(set2_metagene_rdata,
            device=cairo_pdf)
 }
 
-main(set2_metagene_rdata = snakemake@input[["set2_metagene"]],
+main(coip_western = snakemake@input[["coip_western"]],
+     set2_metagene_rdata = snakemake@input[["set2_metagene"]],
      spt6_metagene_rdata = snakemake@input[["spt6_metagene"]],
      set2_abundance_chipseq_barplot_rdata = snakemake@input[["set2_abundance_chipseq_barplot"]],
      spt6_abundance_chipseq_barplot_rdata = snakemake@input[["spt6_abundance_chipseq_barplot"]],

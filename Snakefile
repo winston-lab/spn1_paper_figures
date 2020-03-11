@@ -21,6 +21,7 @@ rule target:
         "panels/promoter_swap_diagram.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
+        "panels/coip_western.pdf",
         "panels/set2_metagene.pdf",
         "panels/spt6_metagene.pdf",
         "panels/set2_abundance_chipseq_barplot.pdf",
@@ -338,6 +339,32 @@ rule assemble_figure_promoter_swap:
         "scripts/assemble_figure_promoter_swap.R"
 
 
+
+rule coip_western:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        input_rpb3_blot = config["coip_western"]["input_rpb3_blot"],
+        input_spt6_blot = config["coip_western"]["input_spt6_blot"],
+        input_spn1_blot = config["coip_western"]["input_spn1_blot"],
+        input_set2_blot = config["coip_western"]["input_set2_blot"],
+        ip_rpb3_blot = config["coip_western"]["ip_rpb3_blot"],
+        ip_spt6_blot = config["coip_western"]["ip_spt6_blot"],
+        ip_spn1_blot = config["coip_western"]["ip_spn1_blot"],
+        ip_set2_blot = config["coip_western"]["ip_set2_blot"],
+    output:
+        pdf = "panels/coip_western.pdf",
+        grob = "panels/coip_western.Rdata",
+    params:
+        fig_height = eval(str(config["coip_western"]["fig_height"])),
+        fig_width = eval(str(config["coip_western"]["fig_width"])),
+        panel_letter = config["coip_western"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/coip_western.R"
+
+
 rule set2_metagene:
     input:
         fonts = ".fonts_registered.txt",
@@ -417,6 +444,7 @@ rule spt6_abundance_chipseq_barplot:
 rule assemble_figure_set2_spt6:
     input:
         fonts = ".fonts_registered.txt",
+        coip_western = "panels/coip_western.Rdata",
         set2_metagene = "panels/set2_metagene.Rdata",
         spt6_metagene = "panels/spt6_metagene.Rdata",
         set2_abundance_chipseq_barplot = "panels/set2_abundance_chipseq_barplot.Rdata",
@@ -430,7 +458,6 @@ rule assemble_figure_set2_spt6:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_set2_spt6.R"
-
 
 
 rule h3_metagene:
@@ -449,7 +476,6 @@ rule h3_metagene:
         "envs/plot_figures.yaml"
     script:
         "scripts/h3_metagene.R"
-
 
 rule h3_modification_datavis:
     input:
