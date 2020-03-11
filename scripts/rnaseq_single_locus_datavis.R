@@ -159,23 +159,24 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
                target=ordered(target,
                               levels=targets))
 
-
     rnaseq_single_locus_datavis = ggplot() +
+        geom_ribbon(data=df,
+                    aes(x=position,
+                        ymin=0,
+                        ymax=sense,
+                        fill=group),
+                    linetype="blank",
+                    alpha=0.35) +
+        geom_ribbon(data=df,
+                    aes(x=position,
+                        ymin=-antisense,
+                        ymax=0,
+                        fill=group),
+                    linetype="blank",
+                    alpha=0.35) +
         geom_hline(yintercept=0,
                    size=0.2,
                    color="gray70") +
-        geom_line(data=df,
-                  aes(x=position,
-                      y=sense,
-                      color=group),
-                  size=0.4,
-                  alpha=0.8) +
-        geom_line(data=df,
-                  aes(x=position,
-                      y=-antisense,
-                      color=group),
-                  size=0.4,
-                  alpha=0.8) +
         geom_segment(data=transcript_annotations,
                      aes(x=transcript_start,
                          xend=transcript_end,
@@ -203,7 +204,7 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
                   fontface="italic") +
         facet_wrap(~target,
                    scales="free",
-                   ncol=1)  +
+                   ncol=2)  +
         scale_x_continuous(expand=c(0,0),
                            name=NULL,
                            breaks=scales::pretty_breaks(3),
@@ -212,17 +213,20 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
         scale_y_continuous(breaks=scales::pretty_breaks(3),
                            labels=function(x) abs(x),
                            name="normalized counts") +
-        scale_color_viridis_d(end=0.6,
+        # scale_color_viridis_d(end=0.6,
+        #                       name=NULL,
+        #                       guide=guide_legend(keywidth=unit(10, "pt"),
+        #                                          keyheight=unit(8, "pt"))) +
+        scale_fill_viridis_d(end=0.6,
                               name=NULL,
                               guide=guide_legend(keywidth=unit(10, "pt"),
-                                                 keyheight=unit(8, "pt"),
-                                                 override.aes=list(alpha=1,
-                                                                   size=0.6))) +
+                                                 keyheight=unit(8, "pt"))) +
         labs(tag=panel_letter,
              title="RNA-seq") +
         theme_default +
         theme(strip.text=element_blank(),
               panel.spacing.y=unit(2, "pt"),
+              panel.spacing.x=unit(3, "pt"),
               panel.grid=element_blank(),
               legend.position=c(0.01, 0.99),
               legend.justification = c(0, 1),
