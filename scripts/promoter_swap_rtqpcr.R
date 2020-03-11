@@ -18,11 +18,6 @@ main = function(theme_path = "spn1_2020_theme.R",
                                        "pUBI4",
                                        "pGCV3-1",
                                        "pGCV3-2"),
-                              # labels=c("\"pYLR454W\"",
-                              #          "\"NatMX::pYLR454W\"",
-                              #          "\"NatMX::pUBI4\"",
-                              #          "\"NatMX::pGCV3\"[\"[-232, -1]\"]",
-                              #          "\"NatMX::pGCV3\"[\"[-232, +90]\"]")),
                               labels=c("\"wild type\"[\"unmarked\"]",
                                        "\"wild type\"[\"marked\"]",
                                        "\"pUBI4\"",
@@ -49,7 +44,11 @@ main = function(theme_path = "spn1_2020_theme.R",
         left_join(read_tsv(rnaseq_path),
                   by=c("gene"="name")) %>%
         mutate(conf_low_rnaseq = log2_foldchange + qnorm(0.025) * lfc_SE,
-               conf_high_rnaseq = log2_foldchange + qnorm(0.975) * lfc_SE) %>%
+               conf_high_rnaseq = log2_foldchange + qnorm(0.975) * lfc_SE,
+               gene = ordered(gene,
+                              levels=c("GCV3",
+                                       "FMP27",
+                                       "UBI4"))) %>%
         group_by(gene) %>%
         arrange(mean_ratio) %>%
         mutate(label_hjust = if_else(n() == 1,
@@ -110,6 +109,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                 displaystyle(atop("log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                           "non-depleted") ~ ","),
                                                                   "promoter swap"))))) +
+        scale_color_brewer(palette="Set1") +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),

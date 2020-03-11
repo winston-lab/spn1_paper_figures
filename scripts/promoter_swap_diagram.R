@@ -35,7 +35,11 @@ main = function(theme_path = "spn1_2020_theme.R",
                              labels="YLR454W"),
                orf_label_x = if_else(orf_end > x_limits[2],
                                      (orf_start + x_limits[2]) / 2,
-                                     (orf_start + orf_end) / 2))
+                                     (orf_start + orf_end) / 2),
+               promoter_gene = ordered(promoter_gene,
+                                       levels=c("GCV3",
+                                                "FMP27",
+                                                "UBI4")))
 
     df_natmx = df %>%
         filter(! is.na(natmx_start)) %>%
@@ -72,7 +76,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                          y=natmx_y,
                          group=strain),
                      fill="gray80") +
-        geom_text(aes(x=(natmx_start + natmx_end) / 2,
+        geom_text(aes(x=(x_limits[1] + 0.85 * natmx_end + 0.15 * natmx_start) / 2,
                       y=0),
                   label="natMX6",
                   size=6/72*25.4,
@@ -105,13 +109,14 @@ main = function(theme_path = "spn1_2020_theme.R",
                   family="FreeSans") +
         geom_vline(xintercept=x_limits,
                    size=0.2,
-                   color="gray70") +
+                   color="gray50") +
         facet_grid(strain~.,
                    switch="y",
                    labeller=label_parsed) +
         scale_x_continuous(expand=c(0,0),
                            limits=x_limits) +
         scale_y_continuous(limits=c(-1.5,1.5)) +
+        scale_color_brewer(palette="Set1") +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
