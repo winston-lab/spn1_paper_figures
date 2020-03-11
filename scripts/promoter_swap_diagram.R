@@ -39,7 +39,8 @@ main = function(theme_path = "spn1_2020_theme.R",
                promoter_gene = ordered(promoter_gene,
                                        levels=c("GCV3",
                                                 "FMP27",
-                                                "UBI4")))
+                                                "UBI4")),
+               natmx_label_x = (x_limits[1] + 0.85 * natmx_end + 0.15 * natmx_start) / 2)
 
     df_natmx = df %>%
         filter(! is.na(natmx_start)) %>%
@@ -76,7 +77,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                          y=natmx_y,
                          group=strain),
                      fill="gray80") +
-        geom_text(aes(x=(x_limits[1] + 0.85 * natmx_end + 0.15 * natmx_start) / 2,
+        geom_text(aes(x=natmx_label_x,
                       y=0),
                   label="natMX6",
                   size=6/72*25.4,
