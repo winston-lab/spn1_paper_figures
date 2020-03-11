@@ -17,8 +17,10 @@ rule target:
         "figures/figure_rnaseq_rpb1.pdf",
         "panels/differential_expression_rtqpcr.pdf",
         "panels/antisense_single_locus_datavis.pdf",
-        "panels/splicing.pdf",
         "figures/figure_rnaseq_rpb1_supplemental.pdf",
+        "panels/splicing.pdf",
+        "panels/splicing_rtqpcr.pdf",
+        "figures/figure_splicing.pdf",
         "panels/promoter_swap_diagram.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
         "figures/figure_promoter_swap.pdf",
@@ -273,6 +275,21 @@ rule antisense_single_locus_datavis:
     script:
         "scripts/rnaseq_single_locus_datavis.R"
 
+rule assemble_figure_rnaseq_rpb1_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        differential_expression_rtqpcr = "panels/differential_expression_rtqpcr.Rdata",
+        antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
+    output:
+        pdf = "figures/figure_rnaseq_rpb1_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["rnaseq_rpb1_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["rnaseq_rpb1_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_rnaseq_rpb1_supp.R"
+
 rule splicing:
     input:
         fonts = ".fonts_registered.txt",
@@ -292,21 +309,40 @@ rule splicing:
     script:
         "scripts/splicing.R"
 
-rule assemble_figure_rnaseq_rpb1_supp:
+rule splicing_rtqpcr:
     input:
         fonts = ".fonts_registered.txt",
-        differential_expression_rtqpcr = "panels/differential_expression_rtqpcr.Rdata",
-        antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
-        splicing = "panels/splicing.Rdata",
+        theme = config["theme_path"],
+        data = config["splicing_rtqpcr"]["data"],
     output:
-        pdf = "figures/figure_rnaseq_rpb1_supplemental.pdf"
+        pdf = "panels/splicing_rtqpcr.pdf",
+        grob = "panels/splicing_rtqpcr.Rdata",
     params:
-        fig_width = eval(str(config["rnaseq_rpb1_supplemental"]["fig_width"])),
-        fig_height = eval(str(config["rnaseq_rpb1_supplemental"]["fig_height"])),
+        fig_height = eval(str(config["splicing_rtqpcr"]["fig_height"])),
+        fig_width = eval(str(config["splicing_rtqpcr"]["fig_width"])),
+        panel_letter = config["splicing_rtqpcr"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/assemble_figure_rnaseq_rpb1_supp.R"
+        "scripts/splicing_rtqpcr.R"
+
+
+
+rule assemble_figure_splicing:
+    input:
+        fonts = ".fonts_registered.txt",
+        splicing = "panels/splicing.Rdata",
+        splicing_rtqpcr = "panels/splicing_rtqpcr.Rdata",
+    output:
+        pdf = "figures/figure_splicing.pdf"
+    params:
+        fig_width = eval(str(config["splicing_figure"]["fig_width"])),
+        fig_height = eval(str(config["splicing_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_splicing.R"
+
 
 
 rule promoter_swap_diagram:
