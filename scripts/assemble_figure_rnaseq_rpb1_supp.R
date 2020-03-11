@@ -4,29 +4,32 @@ library(grid)
 library(gridExtra)
 library(extrafont)
 
-main = function(antisense_single_locus_datavis_rdata,
+main = function(differential_expression_rtqpcr_rdata,
+                antisense_single_locus_datavis_rdata,
                 splicing_rdata,
                 fig_width=8.5,
                 fig_height=9/16 * 8.5 * 2,
                 pdf_out="test.pdf"){
-    layout = rbind(c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2))
+    layout = rbind(c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,3,3,3,3,3,3))
 
+    load(differential_expression_rtqpcr_rdata)
     load(antisense_single_locus_datavis_rdata)
     load(splicing_rdata)
 
-    figure_rnaseq_rpb1_supp = arrangeGrob(rnaseq_single_locus_datavis,
+    figure_rnaseq_rpb1_supp = arrangeGrob(diffexp_rtqpcr_scatter,
                                           splicing_volcano,
+                                          rnaseq_single_locus_datavis,
                                           layout_matrix=layout)
 
     ggsave(pdf_out,
@@ -37,7 +40,8 @@ main = function(antisense_single_locus_datavis_rdata,
            device=cairo_pdf)
 }
 
-main(antisense_single_locus_datavis_rdata = snakemake@input[["antisense_single_locus_datavis"]],
+main(differential_expression_rtqpcr_rdata = snakemake@input[["differential_expression_rtqpcr"]],
+     antisense_single_locus_datavis_rdata = snakemake@input[["antisense_single_locus_datavis"]],
      splicing_rdata = snakemake@input[["splicing"]],
      fig_width = snakemake@params[["fig_width"]],
      fig_height = snakemake@params[["fig_height"]],
