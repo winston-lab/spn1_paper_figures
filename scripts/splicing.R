@@ -29,17 +29,26 @@ main = function(data_path="Spn1-IAA-v-all-controls_intron_retention_results.tsv"
                                     "other genes"),
                gene_class = ordered(gene_class,
                                     levels=c("ribosomal protein genes",
-                                             "other genes")))
+                                             "other genes")),
+               x=ir_est_condition - ir_est_controls)
+
+    df %<>%
+        mutate(y=ifelse(x >= 0,
+                        ifelse(qvalue_increase==0,
+                               -log10(df %>%
+                                          filter(qvalue_increase != 0) %>%
+                                          pull(qvalue_increase) %>%
+                                          min()) * 1.1,
+                               -log10(qvalue_increase)),
+                        -log10(qvalue_decrease)))
 
     splicing_volcano = ggplot() +
         geom_vline(xintercept=0,
                    color="grey70",
                    size=0.2) +
         geom_text_repel(data=df,
-                        aes(x=ir_est_condition - ir_est_controls,
-                            y=ifelse(ir_est_condition >= ir_est_controls,
-                                     -log10(qvalue_increase),
-                                     -log10(qvalue_decrease)),
+                        aes(x=x,
+                            y=y,
                             label=if_else(name %in% c("RPS27A",
                                                       "RPL34A",
                                                       "RPL14B",
@@ -52,32 +61,30 @@ main = function(data_path="Spn1-IAA-v-all-controls_intron_retention_results.tsv"
                         family="FreeSans",
                         fontface="italic",
                         force=0.5,
-                        box.padding=unit(3, "pt"),
-                        point.padding=unit(1, "pt"),
+                        box.padding=unit(2.9, "pt"),
+                        point.padding=unit(1.4, "pt"),
                         min.segment.length=unit(0, "pt"),
                         segment.size=0.3,
                         segment.color="gray50",
                         hjust=0.90) +
         geom_point(data=df,
-                   aes(x=ir_est_condition - ir_est_controls,
-                       y=ifelse(ir_est_condition >= ir_est_controls,
-                                -log10(qvalue_increase),
-                                -log10(qvalue_decrease)),
+                   aes(x=x,
+                       y=y,
                        color=gene_class,
                        alpha=(category=="not significant")),
                    shape=16,
-                   size=0.8) +
+                   size=0.7) +
         xlab(expression("(intron retention)"["Spn1-depleted"] -
                             "(intron retention)"["controls"])) +
         scale_y_continuous(name = expression("-log"[10]("FDR")),
-                           limits = function(x) c(0, x[2] * 1.05),
+                           limits = function(x) c(0, x[2] * 1.01),
                            expand=c(0,0)) +
-        scale_alpha_manual(values=c(1, 0.55),
+        scale_alpha_manual(values=c(0.8, 0.55),
                            guide=FALSE) +
         scale_color_brewer(palette="Set2",
                            name=NULL,
                            guide=guide_legend(override.aes=list(alpha=1),
-                                              keywidth=unit(8, "pt"),
+                                              keywidth=unit(3, "pt"),
                                               label.vjust=0.67)) +
         labs(tag=panel_letter) +
         theme_default +
@@ -85,8 +92,8 @@ main = function(data_path="Spn1-IAA-v-all-controls_intron_retention_results.tsv"
               axis.title.y=element_text(angle=0,
                                         vjust=0.5),
               legend.justification=c(0,1),
-              legend.position=c(0.003,0.99),
-              legend.spacing.x=unit(-1, "pt"),
+              legend.position=c(0.015,1.02),
+              legend.spacing.x=unit(0.8, "pt"),
               legend.background=element_blank(),
               legend.text=element_text(size=5.5))
 
