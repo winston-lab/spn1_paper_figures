@@ -9,18 +9,18 @@ main = function(h3_metagene_rdata,
                 fig_width=8.5,
                 fig_height=9/16 * 8.5 * 2,
                 pdf_out="test.pdf"){
-    layout = rbind(c(1,1,1,1,1,1,2,2,2,2,2,2),
+    layout = rbind(c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,2,2,2,2,2,2),
                    c(1,1,1,1,1,1,2,2,2,2,2,2),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3))
+                   c(1,1,1,1,1,1,2,2,2,2,2,2))
 
     load(h3_metagene_rdata)
     load(h3_modification_datavis_rdata)
@@ -31,7 +31,7 @@ main = function(h3_metagene_rdata,
                  y=0,
                  label="H3 shift vs Spt6",
                  size=2) +
-        labs(tag="b") +
+        labs(tag="c") +
         theme_void() +
         theme(plot.tag=element_text(size=9,
                                     face="bold",
@@ -39,9 +39,9 @@ main = function(h3_metagene_rdata,
               plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
 
     figure_h3_and_mods = arrangeGrob(h3_metagene,
-                                       temp_panel,
-                                       h3_modification_datavis,
-                                       layout_matrix=layout)
+                                     temp_panel,
+                                     h3_modification_datavis,
+                                     layout_matrix=layout)
 
     ggsave(pdf_out,
            plot=figure_h3_and_mods,

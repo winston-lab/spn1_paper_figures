@@ -74,12 +74,14 @@ plot_heatmap = function(df,
                                               color="gray85"),
               panel.border=element_blank(),
               legend.position="top",
-              legend.margin=margin(b=-8, unit="pt"),
+              legend.margin=margin(b=-10, unit="pt"),
               legend.title=element_text(margin=margin(b=-4, unit="pt")),
+              legend.text=element_text(margin=margin(t=-1.5, unit="pt")),
               strip.text=element_blank(),
               panel.spacing.y=unit(2, "pt"),
               axis.ticks.length.y=unit(1, "pt"),
-              plot.margin=margin(11/2, 6, 0, -3, "pt"))
+              # plot.margin=margin(11/2, 6, 0, -3, "pt"))
+              plot.margin=margin(0, 6, 0, -3, "pt"))
 
     return(heatmap)
 
@@ -142,7 +144,8 @@ plot_metagene = function(df_metagene,
                                                      "black",
                                                      "white"),
                                         margin=margin(l=0, r=-3, unit="pt")),
-              plot.margin=margin(11/2, 6, 11/2, -3, "pt"),
+              # plot.margin=margin(11/2, 6, 11/2, -3, "pt"),
+              plot.margin=margin(0, 6, 11/2, -3, "pt"),
               plot.title=element_text(hjust=0.5))
 
     return(metagene)
@@ -150,9 +153,9 @@ plot_metagene = function(df_metagene,
 
 
 main = function(theme_path = "spn1_2020_theme.R",
-                data_paths = c("verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz",
+                data_paths = c("verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz",
                                "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz",
-                               "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz"),
+                               "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz"),
                 annotation_path = "Scer_transcripts_w_verifiedORFs-nonoverlapping.bed",
                 panel_letter="c",
                 pdf_out = "test.pdf",
@@ -183,12 +186,12 @@ main = function(theme_path = "spn1_2020_theme.R",
                              labels=c("non-depleted",
                                       "Spn1-depleted")),
                assay=ordered(assay,
-                             levels=c("ChIPseq-H3K4me3-H3norm",
+                             levels=c("ChIPseq-H3K36me3-H3norm",
                                       "ChIPseq-H3K36me2-H3norm",
-                                      "ChIPseq-H3K36me3-H3norm"),
-                             labels=c("textstyle(frac(\"H3K4me3\",\"H3\"))",
+                                      "ChIPseq-H3K4me3-H3norm"),
+                             labels=c("textstyle(frac(\"H3K36me3\",\"H3\"))",
                                       "textstyle(frac(\"H3K36me2\",\"H3\"))",
-                                      "textstyle(frac(\"H3K36me3\",\"H3\"))"))) %>%
+                                      "textstyle(frac(\"H3K4me3\",\"H3\"))"))) %>%
         left_join(annotation,
                   by="index")
 
@@ -203,30 +206,19 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     plots = list(plot_metagene(df=df_metagene,
                                filter_assay=assays[1],
-                               # yaxis_label=expression("log"[2] ~ textstyle(frac("H3K4me3",
-                               #                                                  "H3"))),
-                               # plot_title=expression(textstyle(frac("H3K4me3",
-                               #                                      "H3"))),
-                               plot_title="H3K4me3 / H3",
-                               # legend_position=c(0.99, 0.99),
+                               plot_title="H3K36me3 / H3",
                                leftmost=TRUE),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[2],
-                               # yaxis_label=expression("log"[2] ~ textstyle(frac("H3K36me2", "H3")))),
-                               # plot_title=expression(textstyle(frac("H3K36me2",
-                               #                                      "H3")))),
                                plot_title="H3K36me2 / H3"),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[3],
-                               # yaxis_label=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3")))))
-                               # plot_title=expression(textstyle(frac("H3K36me3",
-                               #                                      "H3")))),
-                               plot_title="H3K36me3 / H3"),
+                               plot_title="H3K4me3 / H3"),
                  plot_heatmap(df=df,
                               filter_assay=assays[1],
                               quantile_low=0.10,
                               quantile_high=0.90,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K4me3", "H3")))),
+                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3")))),
                  plot_heatmap(df=df,
                               filter_assay=assays[2],
                               quantile_low=0.10,
@@ -237,7 +229,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                               filter_assay=assays[3],
                               quantile_low=0.10,
                               quantile_high=0.90,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3"))),
+                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K4me3", "H3"))),
                               leftmost=FALSE))
 
     h3_modification_datavis = plot_grid(plotlist=plots,
