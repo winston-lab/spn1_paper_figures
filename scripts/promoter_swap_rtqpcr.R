@@ -1,7 +1,7 @@
 
 main = function(theme_path = "spn1_2020_theme.R",
                 data_path = "promoter_swap_rtqpcr_data.txt",
-                rnaseq_path,
+                rnaseq_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-transcripts-diffexp-results-genic-all.tsv",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata",
                 fig_width=8.5,
@@ -20,9 +20,9 @@ main = function(theme_path = "spn1_2020_theme.R",
                                        "pGCV3-2"),
                               labels=c("\"wild type\"[\"unmarked\"]",
                                        "\"wild type\"[\"marked\"]",
-                                       "\"pUBI4\"",
-                                       "\"pGCV3\"[\"[-232, -1]\"]",
-                                       "\"pGCV3\"[\"[-232, +90]\"]")),
+                                       "\"p\" * italic(\"UBI4\")",
+                                       "\"p\" * italic(\"GCV3\")[\"[-232, -1]\"]",
+                                       "\"p\" * italic(\"GCV3\")[\"[-232, +90]\"]")),
                condition=fct_inorder(condition,
                                      ordered=TRUE))
 
@@ -76,6 +76,18 @@ main = function(theme_path = "spn1_2020_theme.R",
                          color=gene),
                      size=0.2,
                      alpha=0.5) +
+        geom_label(aes(x=log2_foldchange + x_jitter * 3 - if_else(x_jitter==0, 0.05, 0),
+                       y=log2(mean_ratio) - x_jitter * 3,
+                       label=strain,
+                       hjust=(1 - label_hjust),
+                       vjust=scales::rescale(label_hjust, to=c(0.15, 1.10))),
+                   size=5/72*25.4,
+                   label.size=NA,
+                   label.r=unit(0, "pt"),
+                   label.padding=unit(0, "pt"),
+                   alpha=0.8,
+                   parse=TRUE,
+                   family="FreeSans") +
         geom_segment(aes(x=conf_low_rnaseq + x_jitter,
                          xend=conf_high_rnaseq + x_jitter,
                          y=log2(mean_ratio),
@@ -87,19 +99,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                        y=log2(mean_ratio),
                        color=gene),
                    size=0.5) +
-        geom_label(aes(x=log2_foldchange + x_jitter * 5 - if_else(x_jitter==0, 0.05, 0),
-                       y=log2(mean_ratio) - x_jitter * 5,
-                       label=strain,
-                       hjust=(1 - label_hjust),
-                       vjust=label_hjust),
-                   size=5/72*25.4,
-                   label.size=NA,
-                   label.r=unit(0, "pt"),
-                   label.padding=unit(0.5, "pt"),
-                   alpha=0.8,
-                   parse=TRUE,
-                   family="FreeSans") +
-        scale_x_continuous(limits=c(-4.1, NA),
+        scale_x_continuous(limits=c(-4.15, NA),
                            name=expression("RNA-seq: log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                               "non-depleted")) ~
                                                ", native genes"),
@@ -108,7 +108,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                            name=expression(atop("RT-qPCR:",
                                                 displaystyle(atop("log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                           "non-depleted") ~ ","),
-                                                                  "promoter swap"))))) +
+                                                                  "promoter replacement"))))) +
         scale_color_brewer(palette="Set1") +
         labs(tag=panel_letter) +
         theme_default +
@@ -125,61 +125,6 @@ main = function(theme_path = "spn1_2020_theme.R",
            device=cairo_pdf)
     save(promoter_swap_scatter,
          file=grob_out)
-
-    # df_summary = df %>%
-    #     group_by(strain, condition) %>%
-    #     summarize(mean=mean(signal),
-    #               sd=sd(signal),
-    #               n=n(),
-    #               sem=sd / sqrt(n))
-    #
-    # ggplot() +
-    #     geom_col(data=df_summary,
-    #              aes(x=strain,
-    #                  group=condition,
-    #                  y=mean),
-    #              position=position_dodge(width=0.6),
-    #              width=0.6,
-    #              fill="gray80",
-    #              alpha=0.7,
-    #              color="black",
-    #              size=0.2) +
-    #     geom_errorbar(data=df_summary,
-    #                   aes(x=strain,
-    #                       group=condition,
-    #                       ymin=mean-sd,
-    #                       ymax=mean+sd),
-    #                   position=position_dodge(width=0.6),
-    #                   width=0.2,
-    #                   size=0.3,
-    #                   alpha=0.8) +
-    #     geom_point(data=df,
-    #                aes(x=strain,
-    #                    color=condition,
-    #                    y=signal),
-    #                position=position_jitterdodge(dodge.width=0.6),
-    #                shape=16,
-    #                size=0.7,
-    #                alpha=0.8) +
-    #     scale_color_brewer(palette="Set1",
-    #                        direction=-1,
-    #                        name=NULL,
-    #                        guide=guide_legend(keywidth=unit(4, "pt"),
-    #                                           override.aes=list(size=1.5))) +
-    #     scale_x_discrete(name=NULL,
-    #                      labels=scales::parse_format()) +
-    #     scale_y_continuous(limits=c(0,
-    #                                 max(c(df_summary[["mean"]] + df_summary[["sd"]],
-    #                                       df[["signal"]])) * 1.05),
-    #                        expand=c(0,0),
-    #                        name="relative transcript abundance") +
-    #     theme_default +
-    #     theme(panel.grid=element_blank(),
-    #           legend.spacing.x=unit(2, "pt"),
-    #           legend.background=element_blank(),
-    #           legend.box.background=element_blank(),
-    #           legend.margin=margin(l=-6, unit="pt"))
-
 }
 
 main(theme_path=snakemake@input[["theme"]],
