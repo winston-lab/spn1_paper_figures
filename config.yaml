@@ -94,9 +94,18 @@ antisense_single_locus_datavis:
     fig_height: 9
     panel_letter: b
 
+chipseq_abundance_barplots_rpb1:
+    data:
+        Rpb1: ../chipseq-rpb1/qual_ctrl/spikein/Rpb1-chipseq_spikein-counts.tsv
+        Rpb1-Ser5P: ../chipseq-ser5p/qual_ctrl/spikein/Ser5P-chipseq_spikein-counts.tsv
+        Rpb1-Ser2P: ../chipseq-ser2p/qual_ctrl/spikein/Ser2P-chipseq_spikein-counts.tsv
+    fig_width: "17.4 * 5 / 12"
+    fig_height: 5
+    panel_letter: c
+
 rnaseq_rpb1_supplemental:
     fig_width: 17.4
-    fig_height: 7
+    fig_height: 8
 
 
 splicing:

@@ -17,6 +17,7 @@ rule target:
         "figures/figure_rnaseq_rpb1.pdf",
         "panels/differential_expression_rtqpcr.pdf",
         "panels/antisense_single_locus_datavis.pdf",
+        "panels/chipseq_abundance_barplots_rpb1.pdf",
         "figures/figure_rnaseq_rpb1_supplemental.pdf",
         "panels/splicing.pdf",
         "panels/splicing_rtqpcr.pdf",
@@ -275,11 +276,30 @@ rule antisense_single_locus_datavis:
     script:
         "scripts/rnaseq_single_locus_datavis.R"
 
+rule chipseq_abundance_barplots_rpb1:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = list(config["chipseq_abundance_barplots_rpb1"]["data"].values()),
+    output:
+        pdf = "panels/chipseq_abundance_barplots_rpb1.pdf",
+        grob = "panels/chipseq_abundance_barplots_rpb1.Rdata",
+    params:
+        factor_ids = list(config["chipseq_abundance_barplots_rpb1"]["data"].keys()),
+        fig_height = eval(str(config["chipseq_abundance_barplots_rpb1"]["fig_height"])),
+        fig_width = eval(str(config["chipseq_abundance_barplots_rpb1"]["fig_width"])),
+        panel_letter = config["chipseq_abundance_barplots_rpb1"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chipseq_abundance_barplots_rpb1.R"
+
 rule assemble_figure_rnaseq_rpb1_supp:
     input:
         fonts = ".fonts_registered.txt",
         differential_expression_rtqpcr = "panels/differential_expression_rtqpcr.Rdata",
         antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
+        chipseq_abundance_barplots_rpb1 = "panels/chipseq_abundance_barplots_rpb1.Rdata",
     output:
         pdf = "figures/figure_rnaseq_rpb1_supplemental.pdf"
     params:
