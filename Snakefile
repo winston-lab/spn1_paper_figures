@@ -50,7 +50,7 @@ rule spn1_depletion_western:
         theme = config["theme_path"],
         spn1_blot = config["spn1_depletion_western"]["spn1_blot"],
         pgk1_blot = config["spn1_depletion_western"]["pgk1_blot"],
-        # quant_data = config["spn1_depletion_western"]["quant_data"],
+        quant_data = config["spn1_depletion_western"]["quant_data"],
     output:
         pdf = "panels/spn1_depletion_western.pdf",
         grob = "panels/spn1_depletion_western.Rdata",
