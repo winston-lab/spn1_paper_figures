@@ -43,6 +43,9 @@ main = function(theme_path = "spn1_2020_theme.R",
             import(data_path=data_paths[i],
                    factor_id=factor_ids[i])
     }
+    df %<>%
+        mutate(factor=fct_inorder(factor,
+                                  ordered=TRUE))
 
     df_summary = df %>%
         group_by(factor, group) %>%
@@ -104,7 +107,7 @@ main = function(theme_path = "spn1_2020_theme.R",
               legend.position="bottom",
               legend.text=element_text(margin=margin(b=-3, unit="pt")),
               legend.margin=margin(t=-10, unit="pt"),
-              strip.text.x=element_text(margin=margin(b=0, unit="pt")))
+              strip.text.x=element_text(margin=margin(b=2, unit="pt")))
 
     ggsave(pdf_out,
            plot=chipseq_abundance_barplot,

@@ -52,7 +52,7 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                       labels=c(expression(10^1),
                                expression(10^3),
                                expression(10^5)),
-                      name="non-depleted transcript levels") +
+                      name="non-depleted transcript abundance") +
         scale_y_continuous(limits=range(df[["log2_foldchange"]]),
                            breaks=seq(-4,4,2),
                            name=expression(atop("RNA-seq:",

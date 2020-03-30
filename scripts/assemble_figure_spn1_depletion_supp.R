@@ -23,21 +23,8 @@ main = function(spn1_depletion_viability_rdata,
 
     load(spn1_depletion_viability_rdata)
 
-    temp_panel = ggplot() +
-        annotate(geom="text",
-                 x=0,
-                 y=0,
-                 label="Spn1 depletion timecourse?",
-                 size=2) +
-        labs(tag="a") +
-        theme_void() +
-        theme(plot.tag=element_text(size=9,
-                                    face="bold",
-                                    family="FreeSans"),
-              plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
-
-    figure_spn1_depletion_supp = arrangeGrob(temp_panel,
-                                             viability_barplot,
+    figure_spn1_depletion_supp = arrangeGrob(viability_barplot,
+                                             nullGrob(),
                                              layout_matrix=layout)
 
     ggsave(pdf_out,
