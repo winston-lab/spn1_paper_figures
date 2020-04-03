@@ -32,6 +32,7 @@ rule target:
         "panels/spt6_abundance_chipseq_barplot.pdf",
         "figures/figure_set2_spt6.pdf",
         "panels/h3_vs_rpb1_ma.pdf",
+        "panels/reduced_h3_h3_metagene.pdf",
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "figures/figure_h3_and_mods.pdf"
@@ -555,6 +556,24 @@ rule h3_vs_rpb1_ma:
         "envs/plot_figures.yaml"
     script:
         "scripts/h3_vs_rpb1_ma_paper.R"
+
+rule reduced_h3_h3_metagene:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["reduced_h3_h3_metagene"]["data"],
+    output:
+        pdf = "panels/reduced_h3_h3_metagene.pdf",
+        grob = "panels/reduced_h3_h3_metagene.Rdata",
+    params:
+        fig_height = eval(str(config["reduced_h3_h3_metagene"]["fig_height"])),
+        fig_width = eval(str(config["reduced_h3_h3_metagene"]["fig_width"])),
+        panel_letter = config["reduced_h3_h3_metagene"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/reduced_h3_h3_metagene.R"
+
 
 rule h3_metagene:
     input:

@@ -191,6 +191,12 @@ h3_vs_rpb1_ma:
     fig_height: "9 / 16 * 8.5"
     panel_letter: a
 
+reduced_h3_h3_metagene:
+    data:
+        - ../spn1-data-integration/datavis/plmin-reduced-H3/plmin-reduced-H3_ChIPseq-H3.tsv.gz
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5"
+    panel_letter: b
 
 h3_metagene:
     data:
