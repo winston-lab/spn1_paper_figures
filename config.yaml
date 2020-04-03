@@ -229,6 +229,6 @@ h3_modification_datavis:
     fig_height: 12
     panel_letter: a
 
-h3_and_mods_figure:
+h3_mods_figure:
     fig_width: 17.4
-    fig_height: 14
+    fig_height: 11
