@@ -1,10 +1,15 @@
 Figure 1: Spn1 depletion
 
-a: Western blot showing levels of Spn1 protein in the Spn1 depletion strain after 90 minutes of treatment with DMSO (non-depleted) or 25 $\mu$M IAA (Spn1-depleted). Pgk1 is shown as a loading control. The values below the blots indicate the mean $\pm$ standard deviation of normalized Spn1 abundance quantified from two biological replicates.
+a: Western blot showing levels of Spn1 protein in the Spn1 depletion strain after 90 minutes of treatment with DMSO (non-depleted) or 25 $\mu$M IAA (Spn1-depleted).
+Pgk1 is shown as a loading control.
+The values below the blots indicate the mean $\pm$ standard deviation of normalized Spn1 abundance quantified from two biological replicates.
 
-b: Average Spn1 ChIP enrichment over 3087 non-overlapping verified coding genes, in non-depleted and Spn1-depleted conditions. For each gene, the spike-in normalized ratio of IP over input signal is standardized to the mean and standard deviation of the non-depleted signal over the region, resulting in standard scores that allow genes with varied expression levels to be compared on the same scale. The solid line and shading are the median and interquartile range of the mean standard score over two replicates.
+b: Average Spn1 ChIP enrichment over 3087 non-overlapping verified coding genes, in non-depleted and Spn1-depleted conditions.
+For each gene, the spike-in normalized ratio of IP over input signal is standardized to the mean and standard deviation of the non-depleted signal over the region, resulting in standard scores that allow genes with varied expression levels to be compared on the same scale.
+The solid line and shading are the median and interquartile range of the mean standard score over two replicates.
 
-c: Total levels of Spn1 on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized Spn1 ChIP-seq IP and input library sizes (see Methods). The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
+c: Total levels of Spn1 on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized Spn1 ChIP-seq IP and input library sizes (see Methods).
+The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
 
 Supplemental 1: Spn1 depletion
 
@@ -13,51 +18,74 @@ a: Viability of a wild-type strain, a strain lacking the degron tag on Spn1 (Spn
 
 Figure 2: RNA-seq and Rpb1 ChIP
 
-a: Scatterplot showing change in transcript abundance upon Spn1 depletion versus non-depleted transcript abundance, for 5091 verified coding transcripts. The relative density of fold-change values is shown in the right panel.
+a: Scatterplot showing change in transcript abundance upon Spn1 depletion versus non-depleted transcript abundance, for 5091 verified coding transcripts.
+The relative density of fold-change values is shown in the right panel.
 
-b: RNA-seq coverage over four genes that are differentially expressed upon Spn1 depletion. Values are spike-in normalized, with sense and antisense strand signal plotted above and below the x-axis, respectively.
+b: RNA-seq coverage over four genes that are differentially expressed upon Spn1 depletion.
+Values are spike-in normalized, with sense and antisense strand signal plotted above and below the x-axis, respectively.
 
-c: Uppermost panel: Average Rpb1 ChIP enrichment in non-depleted and Spn1-depleted conditions, over 3087 non-overlapping verified coding genes. Standard scores are calculated as in Figure 1b. The solid line and shading are the median and interquartile range of the mean standard score over four replicates. Lowermost two panels: Average Rpb1-normalized Rpb1-Ser5P and Rpb1-Ser2P ChIP enrichment in non-deleted and Spn1-depleted conditions, for the same genes. The solid line and shading are the median and interquartile range of the mean ratio over two replicates.
+c: Uppermost panel: Average Rpb1 ChIP enrichment in non-depleted and Spn1-depleted conditions, over 3087 non-overlapping verified coding genes.
+Standard scores are calculated as in Figure 1b.
+The solid line and shading are the median and interquartile range of the mean standard score over four replicates.
+Lowermost two panels: Average Rpb1-normalized Rpb1-Ser5P and Rpb1-Ser2P ChIP enrichment in non-deleted and Spn1-depleted conditions, for the same genes.
+The solid line and shading are the median and interquartile range of the mean ratio over two replicates.
 
-d: Scatterplot showing change in transcript abundance upon Spn1 depletion versus change in Rpb1 enrichment upon Spn1 depletion, for 5091 verified coding genes. The Pearson correlation coefficient is shown.
+d: Change in transcript abundance upon Spn1 depletion versus change in Rpb1 enrichment upon Spn1 depletion, for 5091 verified coding genes. The Pearson correlation coefficient is shown.
 
 Supplemental 2:
 
-a: Scatterplot comparing changes in transcript abundance upon Spn1 depletion as measured by RNA-seq versus RT-qPCR. Errorbars indicate 95% confidence intervals.
+a: Changes in transcript abundance upon Spn1 depletion as measured by RNA-seq versus RT-qPCR. Errorbars indicate 95% confidence intervals.
 
-b: RNA-seq coverage over four genes with antisense transcripts that are differentially expressed upon Spn1 depletion. Values are spike-in normalized, with sense and antisense strand signal plotted above and below the x-axis, respectively. Unlabeled horizontal lines indicate the boundaries of transcripts called by StringTie.
+b: RNA-seq coverage over four genes with antisense transcripts that are differentially expressed upon Spn1 depletion.
+Values are spike-in normalized, with sense and antisense strand signal plotted above and below the x-axis, respectively.
+Unlabeled horizontal lines indicate the boundaries of transcripts called by StringTie.
 
-c: Total levels of Rpb1, Rpb1-Ser5P, and Rpb1-Ser2P on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized ChIP-seq IP and input library sizes (see Methods). The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
+c: Total levels of Rpb1, Rpb1-Ser5P, and Rpb1-Ser2P on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized ChIP-seq IP and input library sizes (see Methods).
+The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
 
 
 Figure 3: Promoter replacement
 
 a: Schematic of \textit{YLR454} promoter replacement strains.
 
-b: Scatterplot summarizing results of the promoter replacement experiment. The y-axis shows RT-qPCR measurements of the change in \textit{YLR454} transcript abundance upon Spn1 depletion in the promoter replacement strains. The x-axis shows RNA-seq measurements of the change in transcript abundance upon Spn1 depletion for the native gene whose promoter was used to drive \textit{YLR454} expression in the promoter replacement strain. Errorbars indicate 95% confidence intervals, and points corresponding to the same native gene are slightly jittered along the x axis for clarity.
+b: Scatterplot summarizing results of the promoter replacement experiment.
+The y-axis shows RT-qPCR measurements of the change in \textit{YLR454} transcript abundance upon Spn1 depletion in the promoter replacement strains.
+The x-axis shows RNA-seq measurements of the change in transcript abundance upon Spn1 depletion for the native gene whose promoter was used to drive \textit{YLR454} expression in the promoter replacement strain.
+Errorbars indicate 95% confidence intervals, and points corresponding to the same native gene are slightly jittered along the x axis for clarity.
 
 
 Figure 4: Spt6 and Set2
 
-a: Representative western blots showing the results of co-immunoprecipitation experiments to analyze the effects of Spn1 or Spt6 depletion on the binding of Spn1, Spt6, and Set2 to Rpb3-FLAG. Spn1 or Spt6 depletion strains (Spn1-AID or Spt6-AID) were treated for 90 minutes with DMSO (lanes marked 'D') or 25 $\mu$M IAA (lanes marked 'I'), after which Rpb3-FLAG was immunoprecipitated and co-immunoprecipitation of Spn1, Spt6, and Set2 was assayed by western blots using native antibodies. Rpb3-FLAG levels were measured using $\alpha$-FLAG antibody, and an Rpb3-FLAG strain lacking the degron tag on Spn1 and Spt6 was included as an additional non-depleted control.
+a: Representative western blots showing the results of co-immunoprecipitation experiments to analyze the effects of Spn1 or Spt6 depletion on the binding of Spn1, Spt6, and Set2 to Rpb3-FLAG.
+Spn1 or Spt6 depletion strains (Spn1-AID or Spt6-AID) were treated for 90 minutes with DMSO (lanes marked 'D') or 25 $\mu$M IAA (lanes marked 'I'), after which Rpb3-FLAG was immunoprecipitated and co-immunoprecipitation of Spn1, Spt6, and Set2 was assayed by western blots using native antibodies.
+Rpb3-FLAG levels were measured using $\alpha$-FLAG antibody, and an Rpb3-FLAG strain lacking the degron tag on Spn1 and Spt6 was included as an additional non-depleted control.
 
-b: Average Spt6 ChIP enrichment over 3087 non-overlapping verified coding genes, in non-depleted and Spn1-depleted conditions. Standard scores are calculated as in Figure 1b. The solid line and shading are the median and interquartile range of the mean standard score over two replicates.
+b: Average Spt6 ChIP enrichment over 3087 non-overlapping verified coding genes, in non-depleted and Spn1-depleted conditions.
+Standard scores are calculated as in Figure 1b.
+The solid line and shading are the median and interquartile range of the mean standard score over two replicates.
 
-c: Barplot showing total levels of Spt6 on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized Spt6 ChIP-seq IP and input library sizes (see Methods). The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
+c: Total levels of Spt6 on chromatin in non-depleted and Spn1-depleted conditions, estimated from spike-in normalized Spt6 ChIP-seq IP and input library sizes (see Methods).
+The values and errorbars for each condition indicate the mean $\pm$ standard deviation of two replicates.
 
 d: As in b, but for Set2.
 
 e: As in c, but for Set2.
 
 
-Figure 5: H3 and histone mods
+Figure 5: H3
+
+a: Change in H3 enrichment upon Spn1 depletion, versus non-depleted Rpb1 enrichment, for 5091 verified coding genes.
+Genes with significant decreases in H3 enrichment are colored red, and a cubic regression spline is shown in blue.
+
+b: Average H3 ChIP enrichment in non-depleted and Spn1-depleted conditions, for the 77 genes with significant decreases in H3 enrichment upon Spn1 depletion.
+The solid line and shading are the median and interquartile range of the mean ChIP enrichment over four replicates.
+
+c: H3 ChIP enrichment in non-depleted and Spn1-depleted conditions, for two genes with significant decreases in H3 enrichment upon Spn1 depletion.
+Lines are the mean ChIP enrichment over four replicates.
+
+Figure 5: H3 mods
 
 a: Top: Average H3-normalized H3K36me3, H3K36me2, and H3K4me3 ChIP enrichment in non-depleted and Spn1-depleted conditions, for 3087 non-overlapping verified coding genes. The solid line and shading are the median and interquartile range of the mean ratio over two replicates. Bottom: Heatmaps of H3-normalized H3K36me3, H3K36me2, and H3K4me3 ChIP enrichment in non-depleted and Spn1-depleted conditions, for the same 3087 non-overlapping coding genes aligned by TSS and arranged by gene length. Values more extreme than the 10^{th} and 90^{th} percentiles are respectively set to the 10^{th} and 90^{th} percentiles for visualization.
-
-b: Subject to change
-
-c: Subject to change
-
 
 Figure 6: splicing
 
