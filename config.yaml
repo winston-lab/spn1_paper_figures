@@ -198,6 +198,10 @@ reduced_h3_h3_metagene:
     fig_height: "9 / 16 * 8.5"
     panel_letter: b
 
+h3_figure:
+    fig_width: 8.5
+    fig_height: 12
+
 h3_metagene:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz

@@ -33,6 +33,7 @@ rule target:
         "figures/figure_set2_spt6.pdf",
         "panels/h3_vs_rpb1_ma.pdf",
         "panels/reduced_h3_h3_metagene.pdf",
+        "figures/figure_h3.pdf",
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "figures/figure_h3_and_mods.pdf"
@@ -573,6 +574,22 @@ rule reduced_h3_h3_metagene:
         "envs/plot_figures.yaml"
     script:
         "scripts/reduced_h3_h3_metagene.R"
+
+rule assemble_figure_h3:
+    input:
+        fonts = ".fonts_registered.txt",
+        h3_vs_rpb1_ma = "panels/h3_vs_rpb1_ma.Rdata",
+        reduced_h3_h3_metagene = "panels/reduced_h3_h3_metagene.Rdata",
+    output:
+        pdf = "figures/figure_h3.pdf"
+    params:
+        fig_width = eval(str(config["h3_figure"]["fig_width"])),
+        fig_height = eval(str(config["h3_figure"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_h3.R"
+
 
 
 rule h3_metagene:
