@@ -198,6 +198,16 @@ reduced_h3_h3_metagene:
     fig_height: "9 / 16 * 8.5"
     panel_letter: b
 
+h3_single_locus_datavis:
+    data:
+        GLY1: ../spn1-data-integration/browser-shots/GLY1/GLY1_all-assays.tsv.gz
+        RPL28: ../spn1-data-integration/browser-shots/RPL28/RPL28_all-assays.tsv.gz
+    transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs.bed
+    orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5"
+    panel_letter: c
+
 h3_figure:
     fig_width: 8.5
     fig_height: 12

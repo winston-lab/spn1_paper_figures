@@ -33,6 +33,7 @@ rule target:
         "figures/figure_set2_spt6.pdf",
         "panels/h3_vs_rpb1_ma.pdf",
         "panels/reduced_h3_h3_metagene.pdf",
+        "panels/h3_single_locus_datavis.pdf",
         "figures/figure_h3.pdf",
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
@@ -349,8 +350,6 @@ rule splicing_rtqpcr:
     script:
         "scripts/splicing_rtqpcr.R"
 
-
-
 rule assemble_figure_splicing:
     input:
         fonts = ".fonts_registered.txt",
@@ -365,7 +364,6 @@ rule assemble_figure_splicing:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_splicing.R"
-
 
 
 rule promoter_swap_diagram:
@@ -403,7 +401,6 @@ rule promoter_swap_rtqpcr:
     script:
         "scripts/promoter_swap_rtqpcr.R"
 
-
 rule assemble_figure_promoter_swap:
     input:
         fonts = ".fonts_registered.txt",
@@ -418,7 +415,6 @@ rule assemble_figure_promoter_swap:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_promoter_swap.R"
-
 
 
 rule coip_western:
@@ -444,7 +440,6 @@ rule coip_western:
         "envs/plot_figures.yaml"
     script:
         "scripts/coip_western.R"
-
 
 rule set2_metagene:
     input:
@@ -540,6 +535,7 @@ rule assemble_figure_set2_spt6:
     script:
         "scripts/assemble_figure_set2_spt6.R"
 
+
 rule h3_vs_rpb1_ma:
     input:
         fonts = ".fonts_registered.txt",
@@ -575,11 +571,32 @@ rule reduced_h3_h3_metagene:
     script:
         "scripts/reduced_h3_h3_metagene.R"
 
+rule h3_single_locus_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["h3_single_locus_datavis"]["data"].values()),
+        transcript_annotations = config["h3_single_locus_datavis"]["transcript_annotation"],
+        orf_annotations = config["h3_single_locus_datavis"]["orf_annotation"]
+    output:
+        pdf = "panels/h3_single_locus_datavis.pdf",
+        grob = "panels/h3_single_locus_datavis.Rdata",
+    params:
+        targets = list(config["h3_single_locus_datavis"]["data"].keys()),
+        fig_height = eval(str(config["h3_single_locus_datavis"]["fig_height"])),
+        fig_width = eval(str(config["h3_single_locus_datavis"]["fig_width"])),
+        panel_letter = config["h3_single_locus_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_single_locus_datavis_paper.R"
+
 rule assemble_figure_h3:
     input:
         fonts = ".fonts_registered.txt",
         h3_vs_rpb1_ma = "panels/h3_vs_rpb1_ma.Rdata",
         reduced_h3_h3_metagene = "panels/reduced_h3_h3_metagene.Rdata",
+        h3_single_locus_datavis = "panels/h3_single_locus_datavis.Rdata",
     output:
         pdf = "figures/figure_h3.pdf"
     params:
@@ -589,8 +606,6 @@ rule assemble_figure_h3:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_h3.R"
-
-
 
 rule h3_metagene:
     input:
