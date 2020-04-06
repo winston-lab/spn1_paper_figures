@@ -11,6 +11,12 @@ spn1_depletion_western:
     fig_height: "9 / 16 * 11.4 * 8 / 12"
     panel_letter: a
 
+spn1_depletion_scatter:
+    data: ../chipseq-spn1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spn1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+    fig_width: 8.5
+    fig_height: "9 / 16 * 8.5"
+    panel_letter: x
+
 spn1_depletion_chipseq_barplot:
     data: ../chipseq-spn1/qual_ctrl/spikein/Spn1-chipseq_spikein-counts.tsv
     fig_width: 3.5

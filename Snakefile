@@ -5,6 +5,7 @@ configfile: "config.yaml"
 rule target:
     input:
         "panels/spn1_depletion_western.pdf",
+        "panels/spn1_depletion_scatter.pdf",
         "panels/spn1_depletion_metagene.pdf",
         "panels/spn1_depletion_chipseq_barplot.pdf",
         "figures/figure_spn1_depletion.pdf",
@@ -67,6 +68,24 @@ rule spn1_depletion_western:
         "envs/plot_figures.yaml"
     script:
         "scripts/spn1_depletion_western.R"
+
+rule spn1_depletion_scatter:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["spn1_depletion_scatter"]["data"],
+    output:
+        pdf = "panels/spn1_depletion_scatter.pdf",
+        grob = "panels/spn1_depletion_scatter.Rdata",
+    params:
+        fig_height = eval(str(config["spn1_depletion_scatter"]["fig_height"])),
+        fig_width = eval(str(config["spn1_depletion_scatter"]["fig_width"])),
+        panel_letter = config["spn1_depletion_scatter"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/spn1_depletion_scatter.R"
+
 
 rule spn1_depletion_metagene:
     input:
