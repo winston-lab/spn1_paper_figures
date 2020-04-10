@@ -96,7 +96,7 @@ rnaseq_rpb1_figure:
     fig_height: 12
 
 differential_expression_rtqpcr:
-    data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data.txt
+    data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data_2.txt
     rnaseq: ../rna-seq/diff_exp/transcripts/Spn1-IAA-v-Spn1-DMSO/spikenorm/genic/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-transcripts-diffexp-results-genic-all.tsv
     fig_width: 8.5
     fig_height: "9 / 16 * 8.5"

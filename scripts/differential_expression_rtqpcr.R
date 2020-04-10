@@ -33,21 +33,23 @@ main = function(theme_path = "spn1_2020_theme.R",
                conf_high_rnaseq = log2_foldchange + qnorm(0.975) * lfc_SE,
                h_just=if_else(gene %in% c("GCV3",
                                          "HSP82",
-                                         "SER3"),
+                                         "SER3",
+                                         "GTR2"),
                              1, 0),
                nudge_y=case_when(gene=="GCV3" ~ -1.4,
                                  gene=="KAP120" ~ -0.8,
                                  gene=="SRB4" ~ 0.65,
                                  gene=="HSP82" ~ 0.65,
                                  gene=="UBI4" ~ -0.75,
-                                 gene=="SER3" ~ 0.6),
+                                 gene=="SER3" ~ 0.6,
+                                 gene=="GTR2" ~ 0.65),
                nudge_x=case_when(gene=="GCV3" ~ -0.01,
                                  gene=="KAP120" ~ 0.32,
                                  gene=="SRB4" ~ 0.05,
                                  gene=="HSP82" ~ -0.05,
                                  gene=="UBI4" ~ 0.02,
-                                 gene=="SER3" ~ -0.07))
-
+                                 gene=="SER3" ~ -0.07,
+                                 gene=="GTR2" ~ -0.01))
 
     diffexp_rtqpcr_scatter = ggplot(data=df_ratio) +
         geom_hline(yintercept=0,
