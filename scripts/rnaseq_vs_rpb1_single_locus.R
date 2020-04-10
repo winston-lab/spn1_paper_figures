@@ -301,7 +301,7 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
               align="v",
               axis="lr",
               ncol=1,
-              rel_heights=c(0.17, 1, 1))
+              rel_heights=c(0.33, 1, 1))
 
     rnaseq_vs_rpb1_single_locus = rnaseq_vs_rpb1_single_locus +
         labs(tag=panel_letter) +

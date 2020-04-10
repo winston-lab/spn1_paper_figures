@@ -77,15 +77,20 @@ rnaseq_single_locus_datavis:
 
 rnaseq_vs_rpb1_single_locus:
     data:
-        # SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
         GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
         UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
+        # PHS1: ../spn1-data-integration/browser-shots/PHS1/PHS1_all-assays.tsv.gz
+        # HXT1: ../spn1-data-integration/browser-shots/HXT1/HXT1_all-assays.tsv.gz
+        # SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
         # KAP120: ../spn1-data-integration/browser-shots/KAP120/KAP120_all-assays.tsv.gz
+        # HSP82: ../spn1-data-integration/browser-shots/HSP82/HSP82_all-assays.tsv.gz
+        # SRB4: ../spn1-data-integration/browser-shots/SRB4/SRB4_all-assays.tsv.gz
+        # GTR2: ../spn1-data-integration/browser-shots/GTR2/GTR2_all-assays.tsv.gz
     transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
     fig_width: "17.4 / 2"
     fig_height: "7 / 12 * 12"
-    panel_letter: b
+    panel_letter: d
 
 rpb1_metagenes:
     rpb1: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Rpb1.tsv.gz
@@ -94,14 +99,14 @@ rpb1_metagenes:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Ser2P-Rpb1norm.tsv.gz
     fig_width: 8.5
     fig_height: 8
-    panel_letter: c
+    panel_letter: b
 
 rnaseq_vs_rpb1:
     rnaseq: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     fig_width: 8.5
     fig_height: "9 / 16 * 8.5"
-    panel_letter: d
+    panel_letter: c
 
 rnaseq_rpb1_figure:
     fig_width: 17.4
@@ -145,6 +150,14 @@ chipseq_abundance_barplots_rpb1:
     fig_width: "17.4 * 5 / 12"
     fig_height: 5
     panel_letter: c
+
+slow_growth_signature:
+    oduibhir: ../other-datasets/oduibhir2014/data/oduibhir2014_supp_data_4.txt
+    rnaseq: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
+    sys_to_common: ../other-datasets/oduibhir2014/data/Scer-sys-to-common-name.tsv
+    fig_width: 8.5
+    fig_height: "8.5 * 9 / 16"
+    panel_letter: x
 
 rnaseq_rpb1_supplemental:
     fig_width: 17.4

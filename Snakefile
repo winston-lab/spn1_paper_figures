@@ -23,6 +23,7 @@ rule target:
         "panels/differential_expression_rtqpcr.pdf",
         "panels/antisense_single_locus_datavis.pdf",
         "panels/chipseq_abundance_barplots_rpb1.pdf",
+        "panels/slow_growth_signature.pdf",
         "figures/figure_rnaseq_rpb1_supplemental.pdf",
         "panels/splicing.pdf",
         "panels/splicing_rtqpcr.pdf",
@@ -269,8 +270,6 @@ rule rnaseq_vs_rpb1_single_locus:
     script:
         "scripts/rnaseq_vs_rpb1_single_locus.R"
 
-
-
 rule rpb1_metagenes:
     input:
         fonts = ".fonts_registered.txt",
@@ -310,7 +309,9 @@ rule rnaseq_vs_rpb1:
 rule assemble_figure_rnaseq_rpb1:
     input:
         fonts = ".fonts_registered.txt",
-        rnaseq_maplot = "panels/rnaseq_maplot.Rdata", rnaseq_single_locus_datavis = "panels/rnaseq_single_locus_datavis.Rdata",
+        rnaseq_maplot = "panels/rnaseq_maplot.Rdata",
+        # rnaseq_single_locus_datavis = "panels/rnaseq_single_locus_datavis.Rdata",
+        rnaseq_vs_rpb1_single_locus = "panels/rnaseq_vs_rpb1_single_locus.Rdata",
         rpb1_metagenes = "panels/rpb1_metagenes.Rdata",
         rnaseq_vs_rpb1 = "panels/rnaseq_vs_rpb1.Rdata",
     output:
@@ -399,6 +400,25 @@ rule chipseq_abundance_barplots_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/chipseq_abundance_barplots_rpb1.R"
+
+rule slow_growth_signature:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        oduibhir_supp4 = config["slow_growth_signature"]["oduibhir"],
+        rnaseq_results = config["slow_growth_signature"]["rnaseq"],
+        sys_to_common = config["slow_growth_signature"]["sys_to_common"]
+    output:
+        pdf = "panels/slow_growth_signature.pdf",
+        grob = "panels/slow_growth_signature.Rdata",
+    params:
+        fig_height = eval(str(config["slow_growth_signature"]["fig_height"])),
+        fig_width = eval(str(config["slow_growth_signature"]["fig_width"])),
+        panel_letter = config["slow_growth_signature"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/slow_growth_signature.R"
 
 rule assemble_figure_rnaseq_rpb1_supp:
     input:
