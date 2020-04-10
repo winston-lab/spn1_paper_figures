@@ -240,6 +240,14 @@ set2_spt6_figure:
     fig_width: 11.4
     fig_height: 13
 
+set2_spt6_v_rpb1:
+    spt6: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+    set2: ../chipseq-set2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+    rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
+    fig_width: 17.4/2
+    fig_height: 7
+    panel_letter: a
+
 h3_vs_rpb1_ma:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv

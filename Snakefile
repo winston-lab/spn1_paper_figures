@@ -37,6 +37,7 @@ rule target:
         "panels/set2_abundance_chipseq_barplot.pdf",
         "panels/spt6_abundance_chipseq_barplot.pdf",
         "figures/figure_set2_spt6.pdf",
+        "panels/set2_spt6_v_rpb1.pdf",
         "panels/h3_vs_rpb1_ma.pdf",
         "panels/reduced_h3_h3_metagene.pdf",
         "panels/h3_single_locus_datavis.pdf",
@@ -656,6 +657,25 @@ rule assemble_figure_set2_spt6:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_set2_spt6.R"
+
+rule set2_spt6_v_rpb1:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        spt6 = config["set2_spt6_v_rpb1"]["spt6"],
+        set2 = config["set2_spt6_v_rpb1"]["set2"],
+        rpb1 = config["set2_spt6_v_rpb1"]["rpb1"],
+    output:
+        pdf = "panels/set2_spt6_v_rpb1.pdf",
+        grob = "panels/set2_spt6_v_rpb1.Rdata",
+    params:
+        fig_height = eval(str(config["set2_spt6_v_rpb1"]["fig_height"])),
+        fig_width = eval(str(config["set2_spt6_v_rpb1"]["fig_width"])),
+        panel_letter = config["set2_spt6_v_rpb1"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/set2_spt6_v_rpb1.R"
 
 
 rule h3_vs_rpb1_ma:
