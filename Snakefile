@@ -15,6 +15,7 @@ rule target:
         "figures/figure_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
         "panels/rnaseq_single_locus_datavis.pdf",
+        "panels/rnaseq_vs_rpb1_single_locus.pdf",
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
@@ -247,6 +248,28 @@ rule rnaseq_single_locus_datavis:
         "envs/plot_figures.yaml"
     script:
         "scripts/rnaseq_single_locus_datavis.R"
+
+rule rnaseq_vs_rpb1_single_locus:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["rnaseq_vs_rpb1_single_locus"]["data"].values()),
+        transcript_annotations = config["rnaseq_vs_rpb1_single_locus"]["transcript_annotation"],
+        orf_annotations = config["rnaseq_vs_rpb1_single_locus"]["orf_annotation"]
+    output:
+        pdf = "panels/rnaseq_vs_rpb1_single_locus.pdf",
+        grob = "panels/rnaseq_vs_rpb1_single_locus.Rdata",
+    params:
+        targets = list(config["rnaseq_vs_rpb1_single_locus"]["data"].keys()),
+        fig_height = eval(str(config["rnaseq_vs_rpb1_single_locus"]["fig_height"])),
+        fig_width = eval(str(config["rnaseq_vs_rpb1_single_locus"]["fig_width"])),
+        panel_letter = config["rnaseq_vs_rpb1_single_locus"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_vs_rpb1_single_locus.R"
+
+
 
 rule rpb1_metagenes:
     input:
