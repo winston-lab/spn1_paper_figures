@@ -128,7 +128,7 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     spn1_depletion_western= as.ggplot(western) +
         labs(tag=panel_letter) +
-        theme(plot.margin=margin(11/2, 0, 0, 0, "pt"),
+        theme(plot.margin=margin(11/2, 0, 0, 11/2, "pt"),
               plot.tag=element_text(family="FreeSans",
                                     size=9,
                                     face="bold"))

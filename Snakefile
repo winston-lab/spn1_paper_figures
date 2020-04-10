@@ -16,6 +16,7 @@ rule target:
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
         "figures/figure_rnaseq_rpb1.pdf",
+        "panels/rnaseq_single_locus_datavis_supp.pdf",
         "panels/differential_expression_rtqpcr.pdf",
         "panels/antisense_single_locus_datavis.pdf",
         "panels/chipseq_abundance_barplots_rpb1.pdf",
@@ -128,6 +129,7 @@ rule assemble_figure_spn1_depletion:
         spn1_depletion_western = "panels/spn1_depletion_western.Rdata",
         spn1_depletion_chipseq_barplot = "panels/spn1_depletion_chipseq_barplot.Rdata",
         spn1_depletion_metagene = "panels/spn1_depletion_metagene.Rdata",
+        spn1_depletion_scatter = "panels/spn1_depletion_scatter.Rdata",
     output:
         pdf = "figures/figure_spn1_depletion.pdf"
     params:
@@ -259,6 +261,25 @@ rule assemble_figure_rnaseq_rpb1:
     script:
         "scripts/assemble_figure_rnaseq_rpb1.R"
 
+rule rnaseq_single_locus_datavis_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["rnaseq_single_locus_datavis_supp"]["data"].values()),
+        transcript_annotations = config["rnaseq_single_locus_datavis_supp"]["transcript_annotation"],
+        orf_annotations = config["rnaseq_single_locus_datavis_supp"]["orf_annotation"]
+    output:
+        pdf = "panels/rnaseq_single_locus_datavis_supp.pdf",
+        grob = "panels/rnaseq_single_locus_datavis_supp.Rdata",
+    params:
+        targets = list(config["rnaseq_single_locus_datavis_supp"]["data"].keys()),
+        fig_height = eval(str(config["rnaseq_single_locus_datavis_supp"]["fig_height"])),
+        fig_width = eval(str(config["rnaseq_single_locus_datavis_supp"]["fig_width"])),
+        panel_letter = config["rnaseq_single_locus_datavis_supp"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_single_locus_datavis.R"
 
 rule differential_expression_rtqpcr:
     input:

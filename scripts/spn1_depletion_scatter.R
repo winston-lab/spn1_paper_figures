@@ -39,8 +39,8 @@ main = function(data_path="depleted-v-non-depleted_Spn1-chipseq-spikenorm-verifi
         theme_default +
         theme(panel.grid=element_blank(),
               legend.position="none",
-              axis.title.y=element_text(angle=0,
-                                        vjust=0.5),
+              # axis.title.y=element_text(angle=0,
+              #                           vjust=0.5),
               axis.text=element_text(size=5))
 
     ggsave(pdf_out,
