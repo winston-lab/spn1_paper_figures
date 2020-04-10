@@ -26,7 +26,7 @@ plot_ma = function(df,
                    stroke=0.1) +
         geom_smooth(size=0.2,
                     # color=viridisLite::viridis(2, end=0.8)[2]) +
-                    color="#377eb8") +
+                    color="#feb24c") +
         scale_x_continuous(breaks=scales::pretty_breaks(4),
                            name=expression("non-depleted Rpb1 enrichment")) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
