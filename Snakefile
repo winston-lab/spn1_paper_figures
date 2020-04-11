@@ -599,13 +599,16 @@ rule set2_metagene:
         fig_height = eval(str(config["set2_metagene"]["fig_height"])),
         fig_width = eval(str(config["set2_metagene"]["fig_width"])),
         panel_letter = config["set2_metagene"]["panel_letter"],
-        plot_title = "Set2 ChIP-seq",
-        plot_subtitle = "3087 non-overlapping coding genes",
-        legend_position = [0.6, 0.3]
+        numerator_factor = "Set2",
+        denominator_factor = "Rpb1",
+        # plot_title = "Set2 ChIP-seq",
+        # plot_subtitle = "3087 non-overlapping coding genes",
+        legend_position = [0.6, 0.15]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/single_factor_standardized_metagene.R"
+        "scripts/single_factor_ratio_metagene.R"
+        # "scripts/single_factor_standardized_metagene.R"
 
 rule spt6_metagene:
     input:
@@ -619,13 +622,16 @@ rule spt6_metagene:
         fig_height = eval(str(config["spt6_metagene"]["fig_height"])),
         fig_width = eval(str(config["spt6_metagene"]["fig_width"])),
         panel_letter = config["spt6_metagene"]["panel_letter"],
-        plot_title = "Spt6 ChIP-seq",
-        plot_subtitle = "3087 non-overlapping coding genes",
-        legend_position = [0.6, 0.3]
+        numerator_factor = "Spt6",
+        denominator_factor = "Rpb1",
+        # plot_title = "Spt6 ChIP-seq",
+        # plot_subtitle = "3087 non-overlapping coding genes",
+        legend_position = [0.6, 0.25]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/single_factor_standardized_metagene.R"
+        "scripts/single_factor_ratio_metagene.R"
+        # "scripts/single_factor_standardized_metagene.R"
 
 rule set2_abundance_chipseq_barplot:
     input:

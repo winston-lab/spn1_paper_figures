@@ -1,8 +1,11 @@
-main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.tsv.gz",
+main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-Rpb1norm.tsv.gz",
                 theme_path = "spn1_2020_theme.R",
-                panel_letter = "C",
+                panel_letter = "b",
                 fig_width=8.5,
                 fig_height=9/16*8.5,
+                numerator_factor="Spt6",
+                denominator_factor="Rpb1",
+                legend_position=c(0.6, 0.4),
                 pdf_out="test.pdf",
                 grob_out="test.Rdata"){
 
@@ -10,24 +13,13 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
 
     df = read_tsv(data_path,
                   col_names=c("group", "sample", "annotation", "assay",
-                              "index", "position", "signal"))
-
-    df_mean_sd = df %>%
-        filter(group == "non-depleted") %>%
-        group_by(index) %>%
-        summarize(control_mean = mean(signal, na.rm=TRUE),
-                  control_sd  = sd(signal, na.rm=TRUE))
-
-    df %<>%
+                              "index", "position", "signal")) %>%
         group_by(group, index, position) %>%
         summarize(signal = mean(signal, na.rm=TRUE)) %>%
-        left_join(df_mean_sd,
-                  by="index") %>%
-        mutate(standard_score = (signal - control_mean) / control_sd) %>%
         group_by(group, position) %>%
-        summarize(low=quantile(standard_score, 0.25, na.rm=TRUE),
-                  mid=median(standard_score, na.rm=TRUE),
-                  high=quantile(standard_score, 0.75, na.rm=TRUE)) %>%
+        summarize(low=quantile(signal, 0.25, na.rm=TRUE),
+                  mid=median(signal, na.rm=TRUE),
+                  high=quantile(signal, 0.75, na.rm=TRUE)) %>%
         ungroup() %>%
         mutate(group=ordered(group,
                              levels=c("non-depleted",
@@ -35,7 +27,7 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
                              labels=c("non-depleted",
                                       "Spn1-depleted")))
 
-    spn1_depletion_metagene = ggplot(data=df,
+    metagene = ggplot(data=df,
            aes(x=position,
                y=mid,
                ymin=low,
@@ -49,39 +41,36 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
                     alpha=0.15) +
         geom_line(alpha=0.9,
                   size=0.5) +
-        annotate(geom="text",
-                 x=2.9,
-                 y=c(-0.3, -1.4),
-                 label=c("non-depleted",
-                         "Spn1-depleted"),
-                 hjust=1,
-                 family="FreeSans",
-                 size=7/72*25.4) +
         scale_x_continuous(expand=c(0,0),
                            labels=function(x){case_when(x==0 ~ "TSS",
                                                         x==3 ~ paste(x, "kb"),
                                                         TRUE ~ as.character(x))},
                            name=NULL) +
-        scale_y_continuous(name="standard score") +
-        scale_color_viridis_d(end=0.6,
-                              guide=FALSE) +
-        scale_fill_viridis_d(end=0.6,
-                             guide=FALSE) +
-        ggtitle(label="Spn1 ChIP-seq",
-                subtitle="3087 non-overlapping coding genes") +
+        # scale_y_continuous(name=bquote("log"[2] ~ textstyle(frac(.(numerator_factor),
+        #                                                         .(denominator_factor))))) +
+        scale_y_continuous(name=bquote("log"[2] ~ frac(.(numerator_factor),
+                                                       .(denominator_factor)))) +
+        scale_color_viridis_d(end=0.6) +
+        scale_fill_viridis_d(end=0.6) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
-              plot.title=element_text(size=8,
-                                      margin=margin(0, 0, 0, 0, "pt")))
+              legend.title=element_blank(),
+              legend.justification=c(0.5,0.5),
+              legend.position=legend_position,
+              legend.background=element_blank(),
+              legend.spacing.x=unit(1, "pt"),
+              axis.text.y=element_text(size=5),
+              axis.title.y=element_text(angle=0,
+                                        vjust=0.5))
 
     ggsave(pdf_out,
-           spn1_depletion_metagene,
+           metagene,
            width=fig_width,
            height=fig_height,
            units="cm",
            device=cairo_pdf)
-    save(spn1_depletion_metagene,
+    save(metagene,
          file=grob_out)
 }
 
@@ -90,6 +79,9 @@ main(data_path=snakemake@input[["data"]],
      panel_letter=snakemake@params[["panel_letter"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]],
+     numerator_factor=snakemake@params[["numerator_factor"]],
+     denominator_factor=snakemake@params[["denominator_factor"]],
+     legend_position=snakemake@params[["legend_position"]],
      pdf_out=snakemake@output[["pdf"]],
      grob_out=snakemake@output[["grob"]])
 

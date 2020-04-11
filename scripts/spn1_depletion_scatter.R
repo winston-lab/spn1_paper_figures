@@ -41,7 +41,9 @@ main = function(data_path="depleted-v-non-depleted_Spn1-chipseq-spikenorm-verifi
               legend.position="none",
               # axis.title.y=element_text(angle=0,
               #                           vjust=0.5),
-              axis.text=element_text(size=5))
+              axis.text=element_text(size=5),
+              plot.title=element_text(size=8,
+                                      margin=margin(0, 0, 0, 0, "pt")))
 
     ggsave(pdf_out,
            spn1_depletion_scatter,

@@ -41,7 +41,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                      y=mean_scaled_abundance,
                      fill=group),
                  alpha=0.5,
-                 width=0.8) +
+                 width=0.65) +
         geom_errorbar(data=df_summary,
                       aes(x=group,
                           ymin=mean_scaled_abundance - sd_scaled_abundance,
@@ -81,7 +81,9 @@ main = function(theme_path = "spn1_2020_theme.R",
               panel.border=element_blank(),
               axis.text.x=element_text(angle=20,
                                        hjust=0.9),
-              axis.ticks=element_blank())
+              axis.text.y=element_text(margin=margin(r=-2, unit="pt")),
+              axis.ticks=element_blank(),
+              plot.title=element_text(hjust=1))
 
     ggsave(pdf_out,
            plot=chipseq_abundance_barplot,
