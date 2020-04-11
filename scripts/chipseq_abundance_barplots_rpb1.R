@@ -101,7 +101,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         theme_default +
         theme(panel.grid.major.x=element_blank(),
               panel.border=element_blank(),
-              panel.spacing.x=unit(16, "pt"),
+              panel.spacing.x=unit(14, "pt"),
               axis.text.x=element_blank(),
               axis.ticks=element_blank(),
               legend.position="bottom",

@@ -21,6 +21,7 @@ rule target:
         "figures/figure_rnaseq_rpb1.pdf",
         "panels/rnaseq_single_locus_datavis_supp.pdf",
         "panels/differential_expression_rtqpcr.pdf",
+        "panels/rna_single_v_custom.pdf",
         "panels/antisense_single_locus_datavis.pdf",
         "panels/chipseq_abundance_barplots_rpb1.pdf",
         "panels/slow_growth_signature.pdf",
@@ -365,6 +366,24 @@ rule differential_expression_rtqpcr:
     script:
         "scripts/differential_expression_rtqpcr.R"
 
+rule rna_single_v_custom:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        single = config["rna_single_v_custom"]["single"],
+        custom = config["rna_single_v_custom"]["custom"]
+    output:
+        pdf = "panels/rna_single_v_custom.pdf",
+        grob = "panels/rna_single_v_custom.Rdata",
+    params:
+        fig_height = eval(str(config["rna_single_v_custom"]["fig_height"])),
+        fig_width = eval(str(config["rna_single_v_custom"]["fig_width"])),
+        panel_letter = config["rna_single_v_custom"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rna_single_v_custom.R"
+
 
 rule antisense_single_locus_datavis:
     input:
@@ -427,6 +446,8 @@ rule assemble_figure_rnaseq_rpb1_supp:
     input:
         fonts = ".fonts_registered.txt",
         differential_expression_rtqpcr = "panels/differential_expression_rtqpcr.Rdata",
+        rna_single_v_custom = "panels/rna_single_v_custom.Rdata",
+        slow_growth_signature = "panels/slow_growth_signature.Rdata",
         antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
         chipseq_abundance_barplots_rpb1 = "panels/chipseq_abundance_barplots_rpb1.Rdata",
     output:
