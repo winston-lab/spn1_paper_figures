@@ -8,46 +8,46 @@ rule target:
         "panels/spn1_depletion_scatter.pdf",
         "panels/spn1_depletion_metagene.pdf",
         "panels/spn1_depletion_chipseq_barplot.pdf",
-        "figures/figure_spn1_depletion.pdf",
+        "figures/figure_1_spn1_depletion.pdf",
         "panels/spn1_depletion_viability.pdf",
         "panels/spn1_v_rpb1_nondepleted.pdf",
         "panels/spn1_rpb1norm_v_rpb1_nondepleted.pdf",
-        "figures/figure_spn1_depletion_supplemental.pdf",
+        "figures/figure_S1_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
         "panels/rnaseq_single_locus_datavis.pdf",
         "panels/rnaseq_vs_rpb1_single_locus.pdf",
         "panels/rpb1_metagenes.pdf",
         "panels/rnaseq_vs_rpb1.pdf",
-        "figures/figure_rnaseq_rpb1.pdf",
+        "figures/figure_2_rnaseq_rpb1.pdf",
         "panels/rnaseq_single_locus_datavis_supp.pdf",
         "panels/differential_expression_rtqpcr.pdf",
         "panels/rna_single_v_custom.pdf",
         "panels/antisense_single_locus_datavis.pdf",
         "panels/chipseq_abundance_barplots_rpb1.pdf",
         "panels/slow_growth_signature.pdf",
-        "figures/figure_rnaseq_rpb1_supplemental.pdf",
+        "figures/figure_S2_rnaseq_rpb1_supplemental.pdf",
         "panels/splicing.pdf",
         "panels/splicing_rtqpcr.pdf",
-        "figures/figure_splicing.pdf",
+        "figures/figure_7_splicing.pdf",
         "panels/promoter_swap_diagram.pdf",
         "panels/promoter_swap_rtqpcr.pdf",
-        "figures/figure_promoter_swap.pdf",
+        "figures/figure_3_promoter_swap.pdf",
         "panels/coip_western.pdf",
         "panels/set2_metagene.pdf",
         "panels/spt6_metagene.pdf",
         "panels/set2_abundance_chipseq_barplot.pdf",
         "panels/spt6_abundance_chipseq_barplot.pdf",
-        "figures/figure_set2_spt6.pdf",
+        "figures/figure_4_set2_spt6.pdf",
         "panels/set2_spt6_v_rpb1.pdf",
         "panels/set2_spt6_rpb1norm_v_rpb1.pdf",
-        "figures/figure_set2_spt6_supplemental.pdf",
+        "figures/figure_S3_set2_spt6_supplemental.pdf",
         "panels/h3_vs_rpb1_ma.pdf",
         "panels/reduced_h3_h3_metagene.pdf",
         "panels/h3_single_locus_datavis.pdf",
-        "figures/figure_h3.pdf",
+        "figures/figure_5_h3.pdf",
         # "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
-        "figures/figure_h3_mods.pdf"
+        "figures/figure_6_h3_mods.pdf"
 
 rule register_fonts:
     input:
@@ -138,7 +138,7 @@ rule assemble_figure_spn1_depletion:
         spn1_depletion_metagene = "panels/spn1_depletion_metagene.Rdata",
         spn1_depletion_scatter = "panels/spn1_depletion_scatter.Rdata",
     output:
-        pdf = "figures/figure_spn1_depletion.pdf"
+        pdf = "figures/figure_1_spn1_depletion.pdf"
     params:
         fig_width = eval(str(config["spn1_depletion_figure"]["fig_width"])),
         fig_height = eval(str(config["spn1_depletion_figure"]["fig_height"])),
@@ -207,7 +207,7 @@ rule assemble_figure_spn1_depletion_supp:
         spn1_v_rpb1_nondepleted = "panels/spn1_v_rpb1_nondepleted.Rdata",
         spn1_rpb1norm_v_rpb1_nondepleted = "panels/spn1_rpb1norm_v_rpb1_nondepleted.Rdata",
     output:
-        pdf = "figures/figure_spn1_depletion_supplemental.pdf"
+        pdf = "figures/figure_S1_spn1_depletion_supplemental.pdf"
     params:
         fig_width = eval(str(config["spn1_depletion_supplemental"]["fig_width"])),
         fig_height = eval(str(config["spn1_depletion_supplemental"]["fig_height"])),
@@ -319,7 +319,7 @@ rule assemble_figure_rnaseq_rpb1:
         rpb1_metagenes = "panels/rpb1_metagenes.Rdata",
         rnaseq_vs_rpb1 = "panels/rnaseq_vs_rpb1.Rdata",
     output:
-        pdf = "figures/figure_rnaseq_rpb1.pdf"
+        pdf = "figures/figure_2_rnaseq_rpb1.pdf"
     params:
         fig_width = eval(str(config["rnaseq_rpb1_figure"]["fig_width"])),
         fig_height = eval(str(config["rnaseq_rpb1_figure"]["fig_height"])),
@@ -451,7 +451,7 @@ rule assemble_figure_rnaseq_rpb1_supp:
         antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
         chipseq_abundance_barplots_rpb1 = "panels/chipseq_abundance_barplots_rpb1.Rdata",
     output:
-        pdf = "figures/figure_rnaseq_rpb1_supplemental.pdf"
+        pdf = "figures/figure_S2_rnaseq_rpb1_supplemental.pdf"
     params:
         fig_width = eval(str(config["rnaseq_rpb1_supplemental"]["fig_width"])),
         fig_height = eval(str(config["rnaseq_rpb1_supplemental"]["fig_height"])),
@@ -502,7 +502,7 @@ rule assemble_figure_splicing:
         splicing = "panels/splicing.Rdata",
         splicing_rtqpcr = "panels/splicing_rtqpcr.Rdata",
     output:
-        pdf = "figures/figure_splicing.pdf"
+        pdf = "figures/figure_7_splicing.pdf"
     params:
         fig_width = eval(str(config["splicing_figure"]["fig_width"])),
         fig_height = eval(str(config["splicing_figure"]["fig_height"])),
@@ -553,7 +553,7 @@ rule assemble_figure_promoter_swap:
         promoter_swap_diagram = "panels/promoter_swap_diagram.Rdata",
         promoter_swap_rtqpcr = "panels/promoter_swap_rtqpcr.Rdata",
     output:
-        pdf = "figures/figure_promoter_swap.pdf"
+        pdf = "figures/figure_3_promoter_swap.pdf"
     params:
         fig_width = eval(str(config["promoter_swap_figure"]["fig_width"])),
         fig_height = eval(str(config["promoter_swap_figure"]["fig_height"])),
@@ -678,7 +678,7 @@ rule assemble_figure_set2_spt6:
         set2_abundance_chipseq_barplot = "panels/set2_abundance_chipseq_barplot.Rdata",
         spt6_abundance_chipseq_barplot = "panels/spt6_abundance_chipseq_barplot.Rdata",
     output:
-        pdf = "figures/figure_set2_spt6.pdf"
+        pdf = "figures/figure_4_set2_spt6.pdf"
     params:
         fig_width = eval(str(config["set2_spt6_figure"]["fig_width"])),
         fig_height = eval(str(config["set2_spt6_figure"]["fig_height"])),
@@ -731,7 +731,7 @@ rule assemble_figure_set2_spt6_supp:
         set2_spt6_v_rpb1 = "panels/set2_spt6_v_rpb1.Rdata",
         set2_spt6_rpb1norm_v_rpb1 = "panels/set2_spt6_rpb1norm_v_rpb1.Rdata",
     output:
-        pdf = "figures/figure_set2_spt6_supplemental.pdf"
+        pdf = "figures/figure_S3_set2_spt6_supplemental.pdf"
     params:
         fig_width = eval(str(config["set2_spt6_supplemental"]["fig_width"])),
         fig_height = eval(str(config["set2_spt6_supplemental"]["fig_height"])),
@@ -803,7 +803,7 @@ rule assemble_figure_h3:
         reduced_h3_h3_metagene = "panels/reduced_h3_h3_metagene.Rdata",
         h3_single_locus_datavis = "panels/h3_single_locus_datavis.Rdata",
     output:
-        pdf = "figures/figure_h3.pdf"
+        pdf = "figures/figure_5_h3.pdf"
     params:
         fig_width = eval(str(config["h3_figure"]["fig_width"])),
         fig_height = eval(str(config["h3_figure"]["fig_height"])),
@@ -853,7 +853,7 @@ rule assemble_figure_h3_mods:
         # h3_metagene = "panels/h3_metagene.Rdata",
         h3_modification_datavis = "panels/h3_modification_datavis.Rdata",
     output:
-        pdf = "figures/figure_h3_mods.pdf"
+        pdf = "figures/figure_6_h3_mods.pdf"
     params:
         fig_width = eval(str(config["h3_mods_figure"]["fig_width"])),
         fig_height = eval(str(config["h3_mods_figure"]["fig_height"])),

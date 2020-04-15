@@ -11,9 +11,11 @@ main = function(spt6_path="depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spiken
     source(theme_path)
 
     df = read_tsv(spt6_path) %>%
-        mutate(chip_factor="atop(\"log\"[2] ~ textstyle(frac(\"Spt6\", \"Rpb1\")) * \",\", \"non-depleted\")") %>%
+        # mutate(chip_factor="atop(\"log\"[2] ~ textstyle(frac(\"Spt6\", \"Rpb1\")) * \",\", \"non-depleted\")") %>%
+        mutate(chip_factor="atop(\"log\"[2] ~ frac(\"Spt6\", \"Rpb1\") * \",\", \"non-depleted\")") %>%
         bind_rows(read_tsv(set2_path) %>%
-                      mutate(chip_factor="atop(\"log\"[2] ~ textstyle(frac(\"Set2\", \"Rpb1\")) * \",\", \"non-depleted\")")) %>%
+                      # mutate(chip_factor="atop(\"log\"[2] ~ textstyle(frac(\"Set2\", \"Rpb1\")) * \",\", \"non-depleted\")")) %>%
+                      mutate(chip_factor="atop(\"log\"[2] ~ frac(\"Set2\", \"Rpb1\") * \",\", \"non-depleted\")")) %>%
         mutate(chip_factor = fct_inorder(chip_factor, ordered=TRUE)) %>%
         left_join(read_tsv(rpb1_path),
                   by=c("chrom", "start", "end", "name", "strand"),

@@ -237,12 +237,11 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),
               axis.text.y=element_text(size=5),
-              axis.text.x=element_text(color="white"),
               axis.ticks.length=unit(1, "pt"),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5,
                                         hjust=1),
-              plot.margin=margin(0, 0, -11/4, 0, "pt"))
+              plot.margin=margin(-11/4, 0, 0, 0, "pt"))
 
     rna_plot = ggplot() +
         geom_ribbon(data=df_rna,
@@ -288,16 +287,17 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),
+              axis.text.x=element_text(color="white"),
               axis.text.y=element_text(size=5),
               axis.ticks.length=unit(1, "pt"),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5,
                                         hjust=1),
-              plot.margin=margin(-11/4, 0, 0, 0, "pt"))
+              plot.margin=margin(0, 0, -11/4, 0, "pt"))
 
     rnaseq_vs_rpb1_single_locus = plot_grid(annotation_plot,
-                                                rpb1_plot,
                                                 rna_plot,
+                                                rpb1_plot,
               align="v",
               axis="lr",
               ncol=1,
