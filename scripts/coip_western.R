@@ -10,7 +10,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 ip_set2_blot_path = "Set2 WB Rep2 IPs_8-7.tif",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata",
-                fig_width=8.5,
+                fig_width=11.4,
                 fig_height=13/3,
                 panel_letter="a"){
     source(theme_path)
@@ -20,7 +20,14 @@ main = function(theme_path = "spn1_2020_theme.R",
     library(ggplotify)
 
     antigen_label_edge = 0.08
-    antigen_labels_y = c(0.62, 0.5, 0.28, 0.06)
+    y_margin_size = 0.015
+    blot_max_y = 0.67
+    blot_min_y = 0.045
+    blot_height= ((blot_max_y - blot_min_y) - 3 * y_margin_size) / 6
+    antigen_labels_y = c(blot_max_y - (1/2) * blot_height,
+                         blot_max_y - (3/2) * blot_height - y_margin_size,
+                         blot_max_y - (7/2) * blot_height - 2 * y_margin_size,
+                         blot_max_y - (11/2) * blot_height - 3 * y_margin_size)
 
     blot_width = ((1 - antigen_label_edge) - (3 * 0.02)) / 2
     blot_centers = c(antigen_label_edge + 0.02 + blot_width / 2,
@@ -93,7 +100,10 @@ main = function(theme_path = "spn1_2020_theme.R",
                                gp=gpar(fontsize=7,
                                        fontfamily="FreeSans"))
     blot_outlines = rectGrob(width = blot_width,
-                             height=rep(c(0.1, 0.1, 0.3, 0.1), 2),
+                             height=rep(c(blot_height,
+                                          blot_height,
+                                          blot_height * 3,
+                                          blot_height), 2),
                              x=c(rep(antigen_label_edge + 0.02 + blot_width / 2, 4),
                                  rep(1 - 0.02 - blot_width / 2, 4)),
                              y=rep(antigen_labels_y, 2),
@@ -107,7 +117,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                   139:(139+input_pixel_width - 10),
                                                   1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[1],
                                  y=antigen_labels_y[1])
     input_spt6_image = readTIFF(input_spt6_blot_path)
@@ -115,7 +125,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                   141:(141 + input_pixel_width - 12),
                                                   1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[1],
                                  y=antigen_labels_y[2])
 
@@ -125,7 +135,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                   137:(137 + input_pixel_width - 10),
                                                   1:3],
                                  width=blot_width,
-                                 height=0.3,
+                                 height=blot_height * 3,
                                  x=blot_centers[1],
                                  y=antigen_labels_y[3])
 
@@ -134,7 +144,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                   118:(118 + input_pixel_width),
                                                   1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[1],
                                  y=antigen_labels_y[4])
 
@@ -144,7 +154,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                             121:(121+ip_pixel_width),
                                             1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[2],
                                  y=antigen_labels_y[1])
     ip_spt6_image = readTIFF(ip_spt6_blot_path)
@@ -152,7 +162,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                             129:(129+ip_pixel_width-16),
                                             1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[2],
                                  y=antigen_labels_y[2])
 
@@ -161,7 +171,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                             127:(127+ip_pixel_width-5),
                                             1:3],
                                  width=blot_width,
-                                 height=0.3,
+                                 height=blot_height*3,
                                  x=blot_centers[2],
                                  y=antigen_labels_y[3])
 
@@ -170,12 +180,20 @@ main = function(theme_path = "spn1_2020_theme.R",
                                             135:(135+ip_pixel_width-12),
                                             1:3],
                                  width=blot_width,
-                                 height=0.1,
+                                 height=blot_height,
                                  x=blot_centers[2],
                                  y=antigen_labels_y[4])
 
-    lane_alignment = segmentsGrob(x0=ip_lane_centers,
-                                  x1=ip_lane_centers,
+    lane_labels = textGrob(x=c(input_lane_centers,
+                               ip_lane_centers),
+                           y=0,
+                           label=seq(length(c(input_lane_centers,
+                                              ip_lane_centers))),
+                           vjust=0,
+                           gp=gpar(fontsize=5,
+                                   fontfamily="FreeSans"))
+    lane_alignment = segmentsGrob(x0=c(input_lane_centers, ip_lane_centers),
+                                  x1=c(input_lane_centers, ip_lane_centers),
                                   y0=0, y1=1,
                                   gp=gpar(lwd=0.2))
     horizontal_alignment = segmentsGrob(x0=0,
@@ -202,7 +220,8 @@ main = function(theme_path = "spn1_2020_theme.R",
         ip_spt6_blot,
         ip_spn1_blot,
         ip_set2_blot,
-        blot_outlines#,
+        blot_outlines,
+        lane_labels#,
         # horizontal_alignment
         # lane_alignment
         ))
