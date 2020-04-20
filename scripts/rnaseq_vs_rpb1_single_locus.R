@@ -11,19 +11,23 @@ import = function(df,
         return()
 }
 
-main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz"),
-                targets = c("GCV3", "UBI4"),
+main = function(data_paths=c("SRB4_all-assays.tsv.gz",
+                             "GCV3_all-assays.tsv.gz",
+                             "UBI4_all-assays.tsv.gz",
+                             "SER3_all-assays.tsv.gz"),
+                targets = c("SRB4", "GCV3", "UBI4", "SER3"),
                 transcript_annotation_path = "Scer_polIItranscripts-adjustedTSS.bed",
                 orf_annotation_path = "Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed",
                 theme_path = "spn1_2020_theme.R",
-                fig_width=17.4 / 2,
-                fig_height=7,
+                fig_width=17.4,
+                fig_height=12/3,
                 panel_letter="b",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata"){
 
     source(theme_path)
     library(cowplot)
+    library(ggforce)
 
     df = tibble()
     for (i in 1:length(data_paths)){
@@ -189,22 +193,28 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
                    aes(xintercept=x_intercept),
                    size=0.5,
                    color="gray70") +
-        facet_grid(.~target,
-                   scales="free_x",
-                   space="free_x") +
+        ggforce::facet_row(~target,
+                  scales="free",
+                  space="free") +
         scale_x_continuous(expand=c(0,0),
                            name=NULL,
                            breaks=scales::pretty_breaks(3),
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
+        scale_y_continuous(limits=range(orf_annotations["orf_y"]),
+                           labels=function(x) str_pad(x, 4)) +
         theme_default +
         theme(panel.grid=element_blank(),
-              panel.spacing.x=unit(3, "pt"),
+              panel.spacing.x=unit(0, "pt"),
               axis.title.y=element_blank(),
-              axis.text=element_blank(),
-              axis.ticks=element_blank(),
+              axis.text.x=element_blank(),
+              axis.text.y=element_text(size=5,
+                                       color="#ffffffff"),
+              axis.ticks.length=unit(1, "pt"),
+              axis.ticks=element_line(color="#ffffffff"),
               strip.text=element_blank(),
-              plot.margin=margin(t=2, b=-2, unit="pt"),
+              # plot.margin=margin(t=2, b=-2, unit="pt"),
+              plot.margin=margin(t=2, b=0, unit="pt"),
               panel.border=element_blank())
 
     rpb1_plot = ggplot() +
@@ -212,15 +222,16 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
                   aes(x=position,
                       y=signal,
                       color=group)) +
-        facet_grid(.~target,
-                   scales="free",
-                   space="free_x")  +
+        ggforce::facet_row(~target,
+                           scales="free",
+                           space="free") +
         scale_x_continuous(expand=c(0,0),
                            name=NULL,
-                           breaks=scales::pretty_breaks(2),
+                           breaks=scales::pretty_breaks(3),
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
+                           labels=function(x) str_pad(x, 4),
                            name="Rpb1\nenrichment") +
         scale_color_viridis_d(end=0.6,
                               name=NULL,
@@ -228,11 +239,10 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
                                                  keyheight=unit(8, "pt"))) +
         theme_default +
         theme(strip.text.x=element_blank(),
-              panel.spacing.x=unit(3, "pt"),
+              panel.spacing.x=unit(0, "pt"),
               panel.grid=element_blank(),
-              # legend.position=c(0.01, 0.99),
-              # legend.justification = c(0, 1),
-              legend.position=c(0.65, 0.2),
+              # legend.position=c(0.65, 0.2),
+              legend.position="none",
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),
@@ -251,27 +261,29 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
                         fill=group),
                     linetype="blank",
                     alpha=0.35) +
-        geom_ribbon(data=df_rna,
-                    aes(x=position,
-                        ymin=-antisense,
-                        ymax=0,
-                        fill=group),
-                    linetype="blank",
-                    alpha=0.35) +
+        # geom_ribbon(data=df_rna,
+        #             aes(x=position,
+        #                 ymin=-antisense,
+        #                 ymax=0,
+        #                 fill=group),
+        #             linetype="blank",
+        #             alpha=0.35) +
         geom_hline(yintercept=0,
                    size=0.2,
                    color="gray70") +
-        facet_grid(.~target,
+        ggforce::facet_row(~target,
                    scales="free",
-                   space="free_x")  +
+                   space="free")  +
         scale_x_continuous(expand=c(0,0),
                            name=NULL,
-                           breaks=scales::pretty_breaks(2),
+                           breaks=scales::pretty_breaks(3),
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
         scale_y_continuous(breaks=scales::pretty_breaks(3),
                            oob=scales::squish,
-                           labels=function(x) abs(x),
+                           limits=function(x) c(0, x[2] * 1.05),
+                           expand=c(0,0),
+                           labels=function(x) str_pad(abs(x), 4),
                            name="RNA-seq") +
         scale_fill_viridis_d(end=0.6,
                              name=NULL,
@@ -279,11 +291,11 @@ main = function(data_paths=c("GCV3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz")
                                                 keyheight=unit(8, "pt"))) +
         theme_default +
         theme(strip.text.x=element_blank(),
-              panel.spacing.x=unit(3, "pt"),
+              panel.spacing.x=unit(0, "pt"),
               panel.grid=element_blank(),
               # legend.position=c(0.01, 0.99),
               # legend.justification = c(0, 1),
-              legend.position="none",
+              legend.position=c(0.73, 0.5),
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),

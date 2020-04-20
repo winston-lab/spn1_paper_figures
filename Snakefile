@@ -469,6 +469,7 @@ rule assemble_figure_rnaseq_rpb1_supp:
         fonts = ".fonts_registered.txt",
         differential_expression_rtqpcr = "panels/differential_expression_rtqpcr.Rdata",
         rna_single_v_custom = "panels/rna_single_v_custom.Rdata",
+        esr_fgsea = "panels/esr_fgsea.Rdata",
         slow_growth_signature = "panels/slow_growth_signature.Rdata",
         antisense_single_locus_datavis = "panels/antisense_single_locus_datavis.Rdata",
         chipseq_abundance_barplots_rpb1 = "panels/chipseq_abundance_barplots_rpb1.Rdata",

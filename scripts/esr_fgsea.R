@@ -54,6 +54,9 @@ main = function(theme_path="spn1_2020_theme.R",
         filter(pathway=="ESR_downregulated") %>%
         pull(padj)
 
+    enrichment_plot_single = plotEnrichment(go_mapping_list[["ESR_downregulated"]],
+                                            feature_stats_single)
+
     df = as_tibble(enrichment_plot_single$data)
 
     esr_fgsea = ggplot(data=df,
@@ -84,7 +87,8 @@ main = function(theme_path="spn1_2020_theme.R",
         theme_default +
         theme(panel.grid=element_blank(),
               plot.margin=margin(11/2, 11, 11/2, 11/2, "pt"),
-              plot.title=element_text(margin=margin(0, 0, 0, 0, "pt")))
+              axis.text=element_text(size=5),
+              plot.title=element_text(margin=margin(0, 0, 1, 0, "pt")))
 
     ggsave(pdf_out,
            plot=esr_fgsea,

@@ -17,18 +17,25 @@ import = function(df,
         return()
 }
 
-main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz", "GCV3_all-assays.tsv.gz"),
-                targets = c("SER3", "UBI4", "GCV3"),
+main = function(data_paths=c("RRP1_all-assays.tsv.gz",
+                             "MET10_all-assays.tsv.gz",
+                             "ARO80_all-assays.tsv.gz",
+                             "MAF1_all-assays.tsv.gz"),
+                targets = c("RRP1",
+                            "MET10",
+                            "ARO80",
+                            "MAF1"),
                 transcript_annotation_path = "Scer_polIItranscripts-adjustedTSS.bed",
                 orf_annotation_path = "Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed",
                 theme_path = "spn1_2020_theme.R",
                 panel_letter = "b",
-                fig_width=17.4/2,
-                fig_height=7/12 * 12,
+                fig_width=8 / 12 * 17.4,
+                fig_height=3 / 11 * 12,
                 pdf_out="test.pdf",
                 grob_out="test.Rdata"){
 
     source(theme_path)
+    library(ggforce)
 
     df = tibble()
     for (i in 1:length(data_paths)){
@@ -202,21 +209,17 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
                   size=5/72*25.4,
                   family="FreeSans",
                   fontface="italic") +
-        facet_wrap(~target,
-                   scales="free",
-                   nrow=1)  +
+        ggforce::facet_row(~target,
+                           scales="free",
+                           space="free") +
         scale_x_continuous(expand=c(0,0),
                            name=NULL,
-                           breaks=scales::pretty_breaks(3),
+                           breaks=scales::pretty_breaks(2),
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
         scale_y_continuous(breaks=scales::pretty_breaks(3),
                            labels=function(x) abs(x),
                            name="normalized counts") +
-        # scale_color_viridis_d(end=0.6,
-        #                       name=NULL,
-        #                       guide=guide_legend(keywidth=unit(10, "pt"),
-        #                                          keyheight=unit(8, "pt"))) +
         scale_fill_viridis_d(end=0.6,
                               name=NULL,
                               guide=guide_legend(keywidth=unit(10, "pt"),
@@ -228,9 +231,9 @@ main = function(data_paths=c("SER3_all-assays.tsv.gz", "UBI4_all-assays.tsv.gz",
               panel.spacing.y=unit(2, "pt"),
               panel.spacing.x=unit(3, "pt"),
               panel.grid=element_blank(),
-              # legend.position=c(0.01, 0.99),
-              # legend.justification = c(0, 1),
-              legend.position=c(0.65, 0.99),
+              plot.title=element_text(size=8,
+                                      margin=margin(0, 0, 1, 0, "pt")),
+              legend.position=c(0.69, 0.99),
               legend.justification = c(0.5, 1),
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),

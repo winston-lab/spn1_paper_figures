@@ -13,4 +13,5 @@ dependencies:
     - r-ggplotify=0.0.4
     - r-mratios=1.4.0
     - r-ggrepel=0.8.2
+    - r-ggforce=0.3.1
 
