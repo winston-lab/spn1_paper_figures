@@ -79,7 +79,7 @@ main = function(theme_path="spn1_2020_theme.R",
         scale_x_continuous(name=quote("(more upregulated)" %<-%  "gene rank"  %->% "(more downregulated)"),
                            expand=c(0,0),
                            breaks=scales::pretty_breaks(4)) +
-        scale_y_continuous(name="running\nenrichment score",
+        scale_y_continuous(name="running\nenrichment\nscore",
                            expand=c(0.07, 0),
                            breaks=scales::pretty_breaks(4)) +
         labs(tag=panel_letter,
@@ -88,6 +88,8 @@ main = function(theme_path="spn1_2020_theme.R",
         theme(panel.grid=element_blank(),
               plot.margin=margin(11/2, 11, 11/2, 11/2, "pt"),
               axis.text=element_text(size=5),
+              axis.title.y=element_text(angle=0,
+                                        vjust=0.5),
               plot.title=element_text(margin=margin(0, 0, 1, 0, "pt")))
 
     ggsave(pdf_out,

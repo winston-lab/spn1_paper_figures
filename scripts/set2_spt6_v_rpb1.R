@@ -1,42 +1,66 @@
+import = function(data_path,
+                  chip_factor_id){
+    read_tsv(data_path) %>%
+        select(chrom, start, end, name, strand, condition_enrichment, control_enrichment) %>%
+        pivot_longer(c(condition_enrichment,
+                       control_enrichment),
+                     names_to="condition",
+                     values_to="enrichment") %>%
+        mutate(chip_factor=chip_factor_id) %>%
+        return()
+}
+
 main = function(spt6_path="depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv",
                 set2_path="depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv",
                 rpb1_path="depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv",
                 theme_path = "spn1_2020_theme.R",
                 panel_letter = "b",
-                fig_width=8.5,
-                fig_height=9/16*8.5*2,
+                fig_width=17.4/2,
+                fig_height=7,
                 pdf_out="test.pdf",
                 grob_out="test.Rdata"){
 
     source(theme_path)
 
-    df = read_tsv(spt6_path) %>%
-        mutate(chip_factor="non-depleted\nSpt6 enrichment") %>%
-        bind_rows(read_tsv(set2_path) %>%
-                      mutate(chip_factor="non-depleted\nSet2 enrichment")) %>%
-        mutate(chip_factor = fct_inorder(chip_factor, ordered=TRUE)) %>%
-        left_join(read_tsv(rpb1_path),
-                  by=c("chrom", "start", "end", "name", "strand"),
-                  suffix=c("_factor", "_rpb1"))
+    df = import(spt6_path,
+           "Spt6\nenrichment") %>%
+        bind_rows(import(set2_path,
+                         "Set2\nenrichment")) %>%
+        left_join(import(rpb1_path,
+                         "Rpb1 enrichment"),
+                  by=c("chrom", "start", "end", "name", "strand", "condition"),
+                  suffix=c("_y",
+                           "_x")) %>%
+        mutate(chip_factor_y=fct_inorder(chip_factor_y,
+                                         ordered=TRUE),
+               condition=ordered(condition,
+                                 levels=c("control_enrichment",
+                                          "condition_enrichment"),
+                                 labels=c("non-depleted",
+                                          "Spn1-depleted")))
 
     df_cor = df %>%
-        group_by(chip_factor) %>%
-        summarize(pearson=cor(control_enrichment_rpb1,
-                              control_enrichment_factor,
+        group_by(chip_factor_y) %>%
+        mutate(x=min(enrichment_x,
+                     na.rm=TRUE),
+               y=max(enrichment_y,
+                     na.rm=TRUE)) %>%
+        group_by(chip_factor_y,
+                 condition) %>%
+        summarize(pearson=cor(enrichment_x,
+                              enrichment_y,
                               use="complete.obs"),
-                  x=min(control_enrichment_rpb1,
-                        na.rm=TRUE),
-                  y=max(control_enrichment_factor,
-                        na.rm=TRUE))
+                  x=first(x),
+                  y=first(y))
 
     set2_spt6_v_rpb1 = ggplot(data=df,
-           aes(x=control_enrichment_rpb1,
-               y=control_enrichment_factor)) +
+                              aes(x=enrichment_x,
+                                  y=enrichment_y)) +
         stat_binhex(geom="point",
                     aes(color=..count..),
-                    bins=150,
+                    bins=125,
                     shape=16,
-                    size=0.3,
+                    size=0.2,
                     alpha=0.8) +
         geom_text(data=df_cor,
                   aes(x=x,
@@ -47,8 +71,8 @@ main = function(spt6_path="depleted-v-non-depleted_Spt6-chipseq-spikenorm-verifi
                   hjust=0,
                   vjust=1) +
         scale_color_viridis_c(option="cividis") +
-        scale_x_continuous(name="non-depleted Rpb1 enrichment") +
-        facet_grid(chip_factor ~ .,
+        scale_x_continuous(name="Rpb1 enrichment") +
+        facet_grid(chip_factor_y ~ condition,
                    scales="free_y",
                    switch="y") +
         labs(tag=panel_letter) +
