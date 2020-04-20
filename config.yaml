@@ -79,14 +79,14 @@ rnaseq_single_locus_datavis:
 
 rnaseq_vs_rpb1_single_locus:
     data:
+        SRB4: ../spn1-data-integration/browser-shots/SRB4/SRB4_all-assays.tsv.gz
         GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
         UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
+        SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
         # PHS1: ../spn1-data-integration/browser-shots/PHS1/PHS1_all-assays.tsv.gz
         # HXT1: ../spn1-data-integration/browser-shots/HXT1/HXT1_all-assays.tsv.gz
-        # SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
         # KAP120: ../spn1-data-integration/browser-shots/KAP120/KAP120_all-assays.tsv.gz
         # HSP82: ../spn1-data-integration/browser-shots/HSP82/HSP82_all-assays.tsv.gz
-        # SRB4: ../spn1-data-integration/browser-shots/SRB4/SRB4_all-assays.tsv.gz
         # GTR2: ../spn1-data-integration/browser-shots/GTR2/GTR2_all-assays.tsv.gz
     transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
@@ -160,6 +160,13 @@ chipseq_abundance_barplots_rpb1:
     fig_width: "17.4 * 5 / 12"
     fig_height: 5
     panel_letter: f
+
+esr_fgsea:
+    diffexp_path_single: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
+    go_mapping_path: ../genome/go_slim_mappings/spn1_go_slim_mapping.tsv
+    fig_width: "17.4 / 2"
+    fig_height: "4 / 11 * 12"
+    panel_letter: c
 
 slow_growth_signature:
     oduibhir: ../other-datasets/oduibhir2014/data/oduibhir2014_supp_data_4.txt

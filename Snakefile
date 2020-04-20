@@ -24,6 +24,7 @@ rule target:
         "panels/rna_single_v_custom.pdf",
         "panels/antisense_single_locus_datavis.pdf",
         "panels/chipseq_abundance_barplots_rpb1.pdf",
+        "panels/esr_fgsea.pdf",
         "panels/slow_growth_signature.pdf",
         "figures/figure_S2_rnaseq_rpb1_supplemental.pdf",
         "panels/splicing.pdf",
@@ -422,6 +423,27 @@ rule chipseq_abundance_barplots_rpb1:
         "envs/plot_figures.yaml"
     script:
         "scripts/chipseq_abundance_barplots_rpb1.R"
+
+rule esr_fgsea:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        diffexp_path_single = config["esr_fgsea"]["diffexp_path_single"],
+        go_mapping_path = config["esr_fgsea"]["go_mapping_path"],
+    output:
+        pdf = "panels/esr_fgsea.pdf",
+        grob = "panels/esr_fgsea.Rdata",
+    params:
+        min_go_group_size=15,
+        max_go_group_size="Inf",
+        n_permutations=1e4,
+        fig_height = eval(str(config["esr_fgsea"]["fig_height"])),
+        fig_width = eval(str(config["esr_fgsea"]["fig_width"])),
+        panel_letter = config["esr_fgsea"]["panel_letter"],
+    conda:
+        "envs/fgsea.yaml"
+    script:
+        "scripts/esr_fgsea.R"
 
 rule slow_growth_signature:
     input:
