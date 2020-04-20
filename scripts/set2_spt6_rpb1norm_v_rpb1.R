@@ -39,19 +39,19 @@ main = function(spt6_path="depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spiken
                                  labels=c("\"non-depleted\"",
                                           "\"Spn1-depleted\"")))
 
-    # df_cor = df %>%
-    #     group_by(chip_factor_y) %>%
-    #     mutate(x=min(enrichment_x,
-    #                  na.rm=TRUE),
-    #            y=max(enrichment_y,
-    #                  na.rm=TRUE)) %>%
-    #     group_by(chip_factor_y,
-    #              condition) %>%
-    #     summarize(pearson=cor(enrichment_x,
-    #                           enrichment_y,
-    #                           use="complete.obs"),
-    #               x=first(x),
-    #               y=first(y))
+    df_cor = df %>%
+        group_by(chip_factor_y) %>%
+        mutate(x=max(enrichment_x,
+                     na.rm=TRUE),
+               y=max(enrichment_y,
+                     na.rm=TRUE)) %>%
+        group_by(chip_factor_y,
+                 condition) %>%
+        summarize(pearson=cor(enrichment_x,
+                              enrichment_y,
+                              use="complete.obs"),
+                  x=first(x),
+                  y=first(y))
 
     set2_spt6_rpb1norm_v_rpb1 = ggplot(data=df %>%
                                            filter(enrichment_y > -6),
@@ -63,14 +63,14 @@ main = function(spt6_path="depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spiken
                     shape=16,
                     size=0.2,
                     alpha=0.8) +
-        # geom_text(data=df_cor,
-        #           aes(x=x,
-        #               y=y,
-        #               label=glue::glue("R={round(pearson, 2)}")),
-        #           family="FreeSans",
-        #           size=5/72*25.4,
-        #           hjust=0,
-        #           vjust=1) +
+        geom_text(data=df_cor,
+                  aes(x=x,
+                      y=y,
+                      label=glue::glue("R={round(pearson, 2)}")),
+                  family="FreeSans",
+                  size=5/72*25.4,
+                  hjust=1,
+                  vjust=1) +
         # geom_smooth(method="lm",
         #             size=0.2,
         #             color=viridisLite::viridis(2, end=0.8)[2]) +

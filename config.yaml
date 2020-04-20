@@ -90,8 +90,8 @@ rnaseq_vs_rpb1_single_locus:
         # GTR2: ../spn1-data-integration/browser-shots/GTR2/GTR2_all-assays.tsv.gz
     transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "17.4 / 2"
-    fig_height: "7 / 12 * 12"
+    fig_width: "17.4"
+    fig_height: "12/3"
     panel_letter: d
 
 rpb1_metagenes:

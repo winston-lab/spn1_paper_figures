@@ -108,7 +108,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                            name=expression(atop("RT-qPCR:",
                                                 displaystyle(atop("log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                           "non-depleted") ~ ","),
-                                                                  "promoter replacement"))))) +
+                                                                  "gene fusion"))))) +
         scale_color_brewer(palette="Set1") +
         labs(tag=panel_letter) +
         theme_default +

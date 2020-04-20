@@ -20,10 +20,10 @@ main = function(rnaseq_maplot_rdata,
                    c(3,3,3,3,3,3,NA,2,2,2,2,2),
                    c(3,3,3,3,3,3,NA,2,2,2,2,2),
                    c(3,3,3,3,3,3,NA,2,2,2,2,2),
-                   c(4,4,4,4,4,4,4,5,5,5,5,5),
-                   c(4,4,4,4,4,4,4,5,5,5,5,5),
-                   c(4,4,4,4,4,4,4,5,5,5,5,5),
-                   c(4,4,4,4,4,4,4,5,5,5,5,5))
+                   c(4,4,4,4,4,4,4,4,4,4,4,4),
+                   c(4,4,4,4,4,4,4,4,4,4,4,4),
+                   c(4,4,4,4,4,4,4,4,4,4,4,4),
+                   c(4,4,4,4,4,4,4,4,4,4,4,4))
 
     load(rnaseq_maplot_rdata)
     # load(rnaseq_single_locus_datavis_rdata)
@@ -35,7 +35,6 @@ main = function(rnaseq_maplot_rdata,
                                      rpb1_metagenes,
                                      rnaseq_v_rpb1,
                                      rnaseq_vs_rpb1_single_locus,
-                                     nullGrob(),
                                      # rnaseq_single_locus_datavis,
                                      layout_matrix=layout)
 
