@@ -10,7 +10,7 @@ rule target:
         "panels/spn1_depletion_chipseq_barplot.pdf",
         "figures/figure_1_spn1_depletion.pdf",
         "panels/spn1_depletion_viability.pdf",
-        "panels/spn1_v_rpb1_nondepleted.pdf",
+        "panels/spn1_v_rpb1.pdf",
         "panels/spn1_rpb1norm_v_rpb1_nondepleted.pdf",
         "figures/figure_S1_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
@@ -165,48 +165,48 @@ rule spn1_depletion_viability:
     script:
         "scripts/spn1_depletion_viability.R"
 
-rule spn1_v_rpb1_nondepleted:
+rule spn1_v_rpb1:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        spn1 = config["spn1_v_rpb1_nondepleted"]["spn1"],
-        rpb1 = config["spn1_v_rpb1_nondepleted"]["rpb1"],
+        spn1 = config["spn1_v_rpb1"]["spn1"],
+        rpb1 = config["spn1_v_rpb1"]["rpb1"],
     output:
-        pdf = "panels/spn1_v_rpb1_nondepleted.pdf",
-        grob = "panels/spn1_v_rpb1_nondepleted.Rdata",
+        pdf = "panels/spn1_v_rpb1.pdf",
+        grob = "panels/spn1_v_rpb1.Rdata",
     params:
-        fig_height = eval(str(config["spn1_v_rpb1_nondepleted"]["fig_height"])),
-        fig_width = eval(str(config["spn1_v_rpb1_nondepleted"]["fig_width"])),
-        panel_letter = config["spn1_v_rpb1_nondepleted"]["panel_letter"]
+        fig_height = eval(str(config["spn1_v_rpb1"]["fig_height"])),
+        fig_width = eval(str(config["spn1_v_rpb1"]["fig_width"])),
+        panel_letter = config["spn1_v_rpb1"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/spn1_v_rpb1_nondepleted.R"
+        "scripts/spn1_v_rpb1.R"
 
-rule spn1_rpb1norm_v_rpb1_nondepleted:
+rule spn1_rpb1norm_v_rpb1:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        spn1 = config["spn1_rpb1norm_v_rpb1_nondepleted"]["spn1"],
-        rpb1 = config["spn1_rpb1norm_v_rpb1_nondepleted"]["rpb1"],
+        spn1 = config["spn1_rpb1norm_v_rpb1"]["spn1"],
+        rpb1 = config["spn1_rpb1norm_v_rpb1"]["rpb1"],
     output:
-        pdf = "panels/spn1_rpb1norm_v_rpb1_nondepleted.pdf",
-        grob = "panels/spn1_rpb1norm_v_rpb1_nondepleted.Rdata",
+        pdf = "panels/spn1_rpb1norm_v_rpb1.pdf",
+        grob = "panels/spn1_rpb1norm_v_rpb1.Rdata",
     params:
-        fig_height = eval(str(config["spn1_rpb1norm_v_rpb1_nondepleted"]["fig_height"])),
-        fig_width = eval(str(config["spn1_rpb1norm_v_rpb1_nondepleted"]["fig_width"])),
-        panel_letter = config["spn1_rpb1norm_v_rpb1_nondepleted"]["panel_letter"]
+        fig_height = eval(str(config["spn1_rpb1norm_v_rpb1"]["fig_height"])),
+        fig_width = eval(str(config["spn1_rpb1norm_v_rpb1"]["fig_width"])),
+        panel_letter = config["spn1_rpb1norm_v_rpb1"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/spn1_rpb1norm_v_rpb1_nondepleted.R"
+        "scripts/spn1_rpb1norm_v_rpb1.R"
 
 rule assemble_figure_spn1_depletion_supp:
     input:
         fonts = ".fonts_registered.txt",
         spn1_depletion_viability = "panels/spn1_depletion_viability.Rdata",
-        spn1_v_rpb1_nondepleted = "panels/spn1_v_rpb1_nondepleted.Rdata",
-        spn1_rpb1norm_v_rpb1_nondepleted = "panels/spn1_rpb1norm_v_rpb1_nondepleted.Rdata",
+        spn1_v_rpb1 = "panels/spn1_v_rpb1.Rdata",
+        spn1_rpb1norm_v_rpb1 = "panels/spn1_rpb1norm_v_rpb1.Rdata",
     output:
         pdf = "figures/figure_S1_spn1_depletion_supplemental.pdf"
     params:

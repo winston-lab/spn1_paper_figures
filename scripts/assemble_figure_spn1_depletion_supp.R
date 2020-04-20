@@ -5,8 +5,8 @@ library(gridExtra)
 library(extrafont)
 
 main = function(spn1_depletion_viability_rdata,
-                spn1_v_rpb1_nondepleted_rdata,
-                spn1_rpb1norm_v_rpb1_nondepleted_rdata,
+                spn1_v_rpb1_rdata,
+                spn1_rpb1norm_v_rpb1_rdata,
                 fig_width=8.5,
                 fig_height=9/16 * 8.5 * 2,
                 pdf_out="test.pdf"){
@@ -24,12 +24,12 @@ main = function(spn1_depletion_viability_rdata,
                    c(2,2,2,2,2,2,3,3,3,3,3,3))
 
     load(spn1_depletion_viability_rdata)
-    load(spn1_v_rpb1_nondepleted_rdata)
-    load(spn1_rpb1norm_v_rpb1_nondepleted_rdata)
+    load(spn1_v_rpb1_rdata)
+    load(spn1_rpb1norm_v_rpb1_rdata)
 
     figure_spn1_depletion_supp = arrangeGrob(viability_barplot,
-                                             spn1_v_rpb1_nondepleted,
-                                             spn1_rpb1norm_v_rpb1_nondepleted,
+                                             spn1_v_rpb1,
+                                             spn1_rpb1norm_v_rpb1,
                                              layout_matrix=layout)
 
     ggsave(pdf_out,
@@ -41,8 +41,8 @@ main = function(spn1_depletion_viability_rdata,
 }
 
 main(spn1_depletion_viability_rdata = snakemake@input[["spn1_depletion_viability"]],
-     spn1_v_rpb1_nondepleted_rdata = snakemake@input[["spn1_v_rpb1_nondepleted"]],
-     spn1_rpb1norm_v_rpb1_nondepleted_rdata = snakemake@input[["spn1_rpb1norm_v_rpb1_nondepleted"]],
+     spn1_v_rpb1_rdata = snakemake@input[["spn1_v_rpb1"]],
+     spn1_rpb1norm_v_rpb1_rdata = snakemake@input[["spn1_rpb1norm_v_rpb1"]],
      fig_width = snakemake@params[["fig_width"]],
      fig_height = snakemake@params[["fig_height"]],
      pdf_out = snakemake@output[["pdf"]])
