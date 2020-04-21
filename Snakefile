@@ -46,6 +46,7 @@ rule target:
         "panels/reduced_h3_h3_metagene.pdf",
         "panels/h3_single_locus_datavis.pdf",
         "figures/figure_5_h3.pdf",
+        "panels/h3_vs_rpb1_ma_5p500bp.pdf",
         "panels/h3_plmin_reduced_lfc_scatterplots.pdf",
         "panels/reduced_h3_matched_metagenes.pdf",
         "figures/figure_S4_h3_supplemental.pdf",
@@ -838,6 +839,24 @@ rule assemble_figure_h3:
     script:
         "scripts/assemble_figure_h3.R"
 
+rule h3_vs_rpb1_ma_5p500bp:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        h3_path = config["h3_vs_rpb1_ma_5p500bp"]["h3"],
+        rpb1_path = config["h3_vs_rpb1_ma_5p500bp"]["rpb1"],
+    output:
+        pdf = "panels/h3_vs_rpb1_ma_5p500bp.pdf",
+        grob = "panels/h3_vs_rpb1_ma_5p500bp.Rdata",
+    params:
+        fig_height = eval(str(config["h3_vs_rpb1_ma_5p500bp"]["fig_height"])),
+        fig_width = eval(str(config["h3_vs_rpb1_ma_5p500bp"]["fig_width"])),
+        panel_letter = config["h3_vs_rpb1_ma_5p500bp"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_vs_rpb1_ma_5p500bp.R"
+
 rule h3_plmin_reduced_lfc_scatterplots:
     input:
         fonts = ".fonts_registered.txt",
@@ -877,6 +896,7 @@ rule reduced_h3_matched_metagenes:
 rule assemble_figure_h3_supp:
     input:
         fonts = ".fonts_registered.txt",
+        h3_vs_rpb1_ma_5p500bp = "panels/h3_vs_rpb1_ma_5p500bp.Rdata",
         h3_plmin_reduced_lfc_scatterplots = "panels/h3_plmin_reduced_lfc_scatterplots.Rdata",
         reduced_h3_matched_metagenes = "panels/reduced_h3_matched_metagenes.Rdata",
     output:
