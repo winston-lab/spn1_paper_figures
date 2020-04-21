@@ -46,6 +46,8 @@ rule target:
         "panels/reduced_h3_h3_metagene.pdf",
         "panels/h3_single_locus_datavis.pdf",
         "figures/figure_5_h3.pdf",
+        "panels/h3_plmin_reduced_lfc_scatterplots.pdf",
+        "figures/figure_S4_h3_supplemental.pdf",
         # "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "figures/figure_6_h3_mods.pdf"
@@ -834,6 +836,39 @@ rule assemble_figure_h3:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_h3.R"
+
+rule h3_plmin_reduced_lfc_scatterplots:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = [v for k,v in config["h3_plmin_reduced_lfc_scatterplots"]["data"].items()],
+        h3_path = config["h3_plmin_reduced_lfc_scatterplots"]["h3"]
+    output:
+        pdf = "panels/h3_plmin_reduced_lfc_scatterplots.pdf",
+        grob = "panels/h3_plmin_reduced_lfc_scatterplots.Rdata",
+    params:
+        chip_factors = [k for k,v in config["h3_plmin_reduced_lfc_scatterplots"]["data"].items()],
+        fig_height = eval(str(config["h3_plmin_reduced_lfc_scatterplots"]["fig_height"])),
+        fig_width = eval(str(config["h3_plmin_reduced_lfc_scatterplots"]["fig_width"])),
+        panel_letter = config["h3_plmin_reduced_lfc_scatterplots"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_plmin_reduced_lfc_scatterplots.R"
+
+rule assemble_figure_h3_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        h3_plmin_reduced_lfc_scatterplots = "panels/h3_plmin_reduced_lfc_scatterplots.Rdata",
+    output:
+        pdf = "figures/figure_S4_h3_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["h3_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["h3_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_h3_supp.R"
 
 rule h3_metagene:
     input:

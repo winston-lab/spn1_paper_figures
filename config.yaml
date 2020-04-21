@@ -307,6 +307,20 @@ h3_figure:
     fig_width: 8.5
     fig_height: 12
 
+h3_plmin_reduced_lfc_scatterplots:
+    data:
+        Rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
+        Spt6: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+        Spt6/Rpb1: ../chipseq-spt6-rpb1norm/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+    h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
+    fig_width: 17.4
+    fig_height: 5
+    panel_letter: a
+
+h3_supplemental:
+    fig_width: 17.4
+    fig_height: 12
+
 h3_metagene:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz

@@ -102,7 +102,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_x_continuous(limits=c(-4.15, NA),
                            name=expression("RNA-seq: log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                               "non-depleted")) ~
-                                               ", native genes"),
+                                               ", native gene"),
                            breaks=scales::pretty_breaks(4)) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
                            name=expression(atop("RT-qPCR:",
