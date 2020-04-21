@@ -5,6 +5,7 @@ library(gridExtra)
 library(extrafont)
 
 main = function(h3_plmin_reduced_lfc_scatterplots_rdata,
+                reduced_h3_matched_metagenes_rdata,
                 fig_width=17.4,
                 fig_height=12,
                 pdf_out="test.pdf"){
@@ -13,19 +14,20 @@ main = function(h3_plmin_reduced_lfc_scatterplots_rdata,
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2))
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA))
 
     load(h3_plmin_reduced_lfc_scatterplots_rdata)
+    load(reduced_h3_matched_metagenes_rdata)
 
     figure_h3_supp = arrangeGrob(h3_plmin_reduced_lfc_scatterplots,
-                                nullGrob(),
-                                layout_matrix=layout)
+                                 reduced_h3_matched_metagenes,
+                                 layout_matrix=layout)
 
     ggsave(pdf_out,
            plot=figure_h3_supp,
@@ -36,6 +38,7 @@ main = function(h3_plmin_reduced_lfc_scatterplots_rdata,
 }
 
 main(h3_plmin_reduced_lfc_scatterplots_rdata = snakemake@input[["h3_plmin_reduced_lfc_scatterplots"]],
+     reduced_h3_matched_metagenes_rdata = snakemake@input[["reduced_h3_matched_metagenes"]],
      fig_width = snakemake@params[["fig_width"]],
      fig_height = snakemake@params[["fig_height"]],
      pdf_out = snakemake@output[["pdf"]])

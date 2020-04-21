@@ -317,6 +317,15 @@ h3_plmin_reduced_lfc_scatterplots:
     fig_height: 5
     panel_letter: a
 
+reduced_h3_matched_metagenes:
+    data:
+        - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-H3.tsv.gz
+        - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Rpb1.tsv.gz
+        -  ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6.tsv.gz
+    fig_width: "17.4 * 9 / 12"
+    fig_height: 6
+    panel_letter: b
+
 h3_supplemental:
     fig_width: 17.4
     fig_height: 12
