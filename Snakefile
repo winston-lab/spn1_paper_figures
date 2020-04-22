@@ -52,7 +52,8 @@ rule target:
         "figures/figure_S4_h3_supplemental.pdf",
         # "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
-        "figures/figure_6_h3_mods.pdf"
+        "figures/figure_6_h3_mods.pdf",
+        "panels/chipseq_abundance_barplots_h3.pdf",
 
 rule register_fonts:
     input:
@@ -426,7 +427,7 @@ rule chipseq_abundance_barplots_rpb1:
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/chipseq_abundance_barplots_rpb1.R"
+        "scripts/chipseq_abundance_barplots_multifactor.R"
 
 rule esr_fgsea:
     input:
@@ -958,4 +959,22 @@ rule assemble_figure_h3_mods:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_h3_mods.R"
+
+rule chipseq_abundance_barplots_h3:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = list(config["chipseq_abundance_barplots_h3"]["data"].values()),
+    output:
+        pdf = "panels/chipseq_abundance_barplots_h3.pdf",
+        grob = "panels/chipseq_abundance_barplots_h3.Rdata",
+    params:
+        factor_ids = list(config["chipseq_abundance_barplots_h3"]["data"].keys()),
+        fig_height = eval(str(config["chipseq_abundance_barplots_h3"]["fig_height"])),
+        fig_width = eval(str(config["chipseq_abundance_barplots_h3"]["fig_width"])),
+        panel_letter = config["chipseq_abundance_barplots_h3"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chipseq_abundance_barplots_multifactor.R"
 

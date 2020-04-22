@@ -357,3 +357,14 @@ h3_modification_datavis:
 h3_mods_figure:
     fig_width: 17.4
     fig_height: 11
+
+chipseq_abundance_barplots_h3:
+    data:
+        H3: ../chipseq-h3/qual_ctrl/spikein/H3-chipseq_spikein-counts.tsv
+        H3K4me3: ../chipseq-h3k4me3/qual_ctrl/spikein/H3K4me3-chipseq_spikein-counts.tsv
+        H3K36me2: ../chipseq-h3k36me2/qual_ctrl/spikein/H3K36me2-chipseq_spikein-counts.tsv
+        H3K36me3: ../chipseq-h3k36me3/qual_ctrl/spikein/H3K36me3-chipseq_spikein-counts.tsv
+    fig_width: "17.4 * 5 / 12"
+    fig_height: 5
+    panel_letter: a
+
