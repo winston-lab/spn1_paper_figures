@@ -54,6 +54,9 @@ rule target:
         "panels/h3_modification_datavis.pdf",
         "figures/figure_6_h3_mods.pdf",
         "panels/chipseq_abundance_barplots_h3.pdf",
+        "panels/h3_mods_facet_expression.pdf",
+        "figures/figure_S5_h3_mods_supplemental.pdf",
+        # expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3"])
 
 rule register_fonts:
     input:
@@ -977,4 +980,57 @@ rule chipseq_abundance_barplots_h3:
         "envs/plot_figures.yaml"
     script:
         "scripts/chipseq_abundance_barplots_multifactor.R"
+
+# rule h3_mods_facet_expression_length:
+#     input:
+#         fonts = ".fonts_registered.txt",
+#         theme = config["theme_path"],
+#         data = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["data"]
+#     output:
+#         pdf = "panels/{mod}_facet_expression_length.pdf",
+#         grob = "panels/{mod}_facet_expression_length.Rdata",
+#     params:
+#         fig_height = eval(str(config["h3_mods_facet_expression_length"]["fig_height"])),
+#         fig_width = eval(str(config["h3_mods_facet_expression_length"]["fig_width"])),
+#         panel_letter = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["panel_letter"],
+#     conda:
+#         "envs/plot_figures.yaml"
+#     script:
+#         "scripts/h3_mods_facet_expression_length.R"
+
+rule h3_mods_facet_expression:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = lambda wc: config["h3_mods_facet_expression"]["data"]
+    output:
+        pdf = "panels/h3_mods_facet_expression.pdf",
+        grob = "panels/h3_mods_facet_expression.Rdata",
+    params:
+        fig_height = eval(str(config["h3_mods_facet_expression"]["fig_height"])),
+        fig_width = eval(str(config["h3_mods_facet_expression"]["fig_width"])),
+        panel_letter = config["h3_mods_facet_expression"]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_mods_facet_expression.R"
+
+
+rule assemble_figure_h3_mods_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        chipseq_abundance_barplots_h3 = "panels/chipseq_abundance_barplots_h3.Rdata",
+        h3_mods_facet_expression = "panels/h3_mods_facet_expression.Rdata",
+        # h3k4me3 = "panels/H3K4me3_facet_expression_length.Rdata",
+        # h3k36me2 = "panels/H3K36me2_facet_expression_length.Rdata",
+        # h3k36me3 = "panels/H3K36me3_facet_expression_length.Rdata",
+    output:
+        pdf = "figures/figure_S5_h3_mods_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["h3_mods_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["h3_mods_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_h3_mods_supp.R"
 

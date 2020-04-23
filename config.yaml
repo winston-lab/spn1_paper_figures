@@ -368,3 +368,29 @@ chipseq_abundance_barplots_h3:
     fig_height: 5
     panel_letter: a
 
+h3_mods_facet_expression_length:
+    fig_width: "17.4 / 2"
+    fig_height: 4
+    H3K36me2:
+        data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K36me2-H3norm.tsv.gz
+        panel_letter: b
+    H3K36me3:
+        data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K36me3-H3norm.tsv.gz
+        panel_letter: c
+    H3K4me3:
+        data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K4me3-H3norm.tsv.gz
+        panel_letter: d
+
+h3_mods_facet_expression:
+    data:
+        - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K36me2-H3norm.tsv.gz
+        - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K36me3-H3norm.tsv.gz
+        - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K4me3-H3norm.tsv.gz
+    fig_width: "17.4 * 8 / 12"
+    fig_height: 6
+    panel_letter: b
+
+h3_mods_supplemental:
+    fig_width: 17.4
+    fig_height: 12
+
