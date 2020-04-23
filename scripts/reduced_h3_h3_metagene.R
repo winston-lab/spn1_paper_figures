@@ -80,8 +80,7 @@ main = function(theme_path = "custom_theme.R",
               axis.text.y=element_text(size=5),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5),
-              # plot.margin=margin(0, 11/2, 0, 11/2, "pt")
-              )
+              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
 
     ggsave(pdf_out,
            plot=reduced_h3_h3_metagene,

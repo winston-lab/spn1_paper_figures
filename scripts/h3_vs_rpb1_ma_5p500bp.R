@@ -39,7 +39,8 @@ plot_ma = function(df,
               axis.title.y=element_text(angle=0,
                                         hjust=1,
                                         vjust=0.5),
-              legend.position="none")
+              legend.position="none",
+              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
     return(ma_plot)
 }
 

@@ -312,7 +312,7 @@ h3_vs_rpb1_ma_5p500bp:
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     fig_width: "17.4 / 2"
     fig_height: 5
-    panel_letter: a
+    panel_letter: b
 
 h3_plmin_reduced_lfc_scatterplots:
     data:
@@ -322,7 +322,7 @@ h3_plmin_reduced_lfc_scatterplots:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     fig_width: 17.4
     fig_height: 5
-    panel_letter: b
+    panel_letter: c
 
 reduced_h3_matched_metagenes:
     data:
@@ -331,18 +331,18 @@ reduced_h3_matched_metagenes:
         -  ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6.tsv.gz
     fig_width: "17.4 * 9 / 12"
     fig_height: 6
-    panel_letter: c
+    panel_letter: d
 
 h3_supplemental:
     fig_width: 17.4
-    fig_height: 12
+    fig_height: 14
 
 h3_metagene:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz
     fig_width: "17.4 / 2"
     fig_height: "17.4 / 2 * 9 / 16"
-    panel_letter: b
+    panel_letter: a
 
 h3_modification_datavis:
     data:
@@ -380,6 +380,9 @@ h3_mods_facet_expression_length:
     H3K4me3:
         data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K4me3-H3norm.tsv.gz
         panel_letter: d
+    H3:
+        data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3.tsv.gz
+        panel_letter: x
 
 h3_mods_facet_expression:
     data:

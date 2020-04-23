@@ -50,13 +50,13 @@ rule target:
         "panels/h3_plmin_reduced_lfc_scatterplots.pdf",
         "panels/reduced_h3_matched_metagenes.pdf",
         "figures/figure_S4_h3_supplemental.pdf",
-        # "panels/h3_metagene.pdf",
+        "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "figures/figure_6_h3_mods.pdf",
         "panels/chipseq_abundance_barplots_h3.pdf",
         "panels/h3_mods_facet_expression.pdf",
         "figures/figure_S5_h3_mods_supplemental.pdf",
-        # expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3"])
+        expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3", "H3"])
 
 rule register_fonts:
     input:
@@ -772,6 +772,23 @@ rule assemble_figure_set2_spt6_supp:
         "scripts/assemble_figure_set2_spt6_supp.R"
 
 
+rule h3_metagene:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["h3_metagene"]["data"],
+    output:
+        pdf = "panels/h3_metagene.pdf",
+        grob = "panels/h3_metagene.Rdata",
+    params:
+        fig_height = eval(str(config["h3_metagene"]["fig_height"])),
+        fig_width = eval(str(config["h3_metagene"]["fig_width"])),
+        panel_letter = config["h3_metagene"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_metagene.R"
+
 rule h3_vs_rpb1_ma:
     input:
         fonts = ".fonts_registered.txt",
@@ -900,6 +917,7 @@ rule reduced_h3_matched_metagenes:
 rule assemble_figure_h3_supp:
     input:
         fonts = ".fonts_registered.txt",
+        h3_metagene = "panels/h3_metagene.Rdata",
         h3_vs_rpb1_ma_5p500bp = "panels/h3_vs_rpb1_ma_5p500bp.Rdata",
         h3_plmin_reduced_lfc_scatterplots = "panels/h3_plmin_reduced_lfc_scatterplots.Rdata",
         reduced_h3_matched_metagenes = "panels/reduced_h3_matched_metagenes.Rdata",
@@ -912,23 +930,6 @@ rule assemble_figure_h3_supp:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_h3_supp.R"
-
-rule h3_metagene:
-    input:
-        fonts = ".fonts_registered.txt",
-        theme = config["theme_path"],
-        data = config["h3_metagene"]["data"],
-    output:
-        pdf = "panels/h3_metagene.pdf",
-        grob = "panels/h3_metagene.Rdata",
-    params:
-        fig_height = eval(str(config["h3_metagene"]["fig_height"])),
-        fig_width = eval(str(config["h3_metagene"]["fig_width"])),
-        panel_letter = config["h3_metagene"]["panel_letter"]
-    conda:
-        "envs/plot_figures.yaml"
-    script:
-        "scripts/h3_metagene.R"
 
 rule h3_modification_datavis:
     input:
@@ -981,22 +982,22 @@ rule chipseq_abundance_barplots_h3:
     script:
         "scripts/chipseq_abundance_barplots_multifactor.R"
 
-# rule h3_mods_facet_expression_length:
-#     input:
-#         fonts = ".fonts_registered.txt",
-#         theme = config["theme_path"],
-#         data = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["data"]
-#     output:
-#         pdf = "panels/{mod}_facet_expression_length.pdf",
-#         grob = "panels/{mod}_facet_expression_length.Rdata",
-#     params:
-#         fig_height = eval(str(config["h3_mods_facet_expression_length"]["fig_height"])),
-#         fig_width = eval(str(config["h3_mods_facet_expression_length"]["fig_width"])),
-#         panel_letter = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["panel_letter"],
-#     conda:
-#         "envs/plot_figures.yaml"
-#     script:
-#         "scripts/h3_mods_facet_expression_length.R"
+rule h3_mods_facet_expression_length:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["data"]
+    output:
+        pdf = "panels/{mod}_facet_expression_length.pdf",
+        grob = "panels/{mod}_facet_expression_length.Rdata",
+    params:
+        fig_height = eval(str(config["h3_mods_facet_expression_length"]["fig_height"])),
+        fig_width = eval(str(config["h3_mods_facet_expression_length"]["fig_width"])),
+        panel_letter = lambda wc: config["h3_mods_facet_expression_length"][wc.mod]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_mods_facet_expression_length.R"
 
 rule h3_mods_facet_expression:
     input:

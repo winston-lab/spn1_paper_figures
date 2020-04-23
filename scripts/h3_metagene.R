@@ -79,7 +79,7 @@ main = function(theme_path = "spn1_2020_theme.R",
               axis.text.y=element_text(size=5),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5),
-              plot.margin=margin(0, 11/2, 0, 11/2, "pt"))
+              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
 
     ggsave(pdf_out,
            plot=h3_metagene,

@@ -95,7 +95,8 @@ plot_gene_group_lfc = function(df,
               legend.spacing.x=unit(0, "pt"),
               strip.placement="outside",
               strip.text.x=element_text(margin=margin(t=0, b=4, unit="pt")),
-              axis.text.x=element_text(margin=margin(b=-3, unit="pt")))
+              axis.text.x=element_text(margin=margin(b=-3, unit="pt")),
+              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
     return(plot)
 }
 
