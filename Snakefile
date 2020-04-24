@@ -54,6 +54,7 @@ rule target:
         "panels/h3_modification_datavis.pdf",
         "figures/figure_6_h3_mods.pdf",
         "panels/chipseq_abundance_barplots_h3.pdf",
+        "panels/h3_mods_non_h3_norm.pdf",
         "panels/h3_mods_facet_expression.pdf",
         "figures/figure_S5_h3_mods_supplemental.pdf",
         expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3", "H3"])
@@ -938,6 +939,7 @@ rule h3_modification_datavis:
         data = config["h3_modification_datavis"]["data"],
         annotation = config["h3_modification_datavis"]["annotation"],
     output:
+        quantification =  "panels/h3_modification_datavis_quantification.tsv",
         pdf = "panels/h3_modification_datavis.pdf",
         grob = "panels/h3_modification_datavis.Rdata",
     params:
@@ -981,6 +983,23 @@ rule chipseq_abundance_barplots_h3:
         "envs/plot_figures.yaml"
     script:
         "scripts/chipseq_abundance_barplots_multifactor.R"
+
+rule h3_mods_non_h3_norm:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["h3_mods_non_h3_norm"]["data"],
+    output:
+        pdf = "panels/h3_mods_non_h3_norm.pdf",
+        grob = "panels/h3_mods_non_h3_norm.Rdata",
+    params:
+        fig_height = eval(str(config["h3_mods_non_h3_norm"]["fig_height"])),
+        fig_width = eval(str(config["h3_mods_non_h3_norm"]["fig_width"])),
+        panel_letter = config["h3_mods_non_h3_norm"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_mods_non_h3_norm.R"
 
 rule h3_mods_facet_expression_length:
     input:

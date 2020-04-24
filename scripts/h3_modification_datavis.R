@@ -159,6 +159,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz"),
                 annotation_path = "Scer_transcripts_w_verifiedORFs-nonoverlapping.bed",
                 panel_letter="c",
+                df_quant_out="df_quant.tsv",
                 pdf_out = "test.pdf",
                 grob_out = "test.Rdata",
                 fig_width=17.4,
@@ -187,11 +188,11 @@ main = function(theme_path = "spn1_2020_theme.R",
                              labels=c("non-depleted",
                                       "Spn1-depleted")),
                assay=ordered(assay,
-                             levels=c("ChIPseq-H3K36me3-H3norm",
-                                      "ChIPseq-H3K36me2-H3norm",
+                             levels=c("ChIPseq-H3K36me2-H3norm",
+                                      "ChIPseq-H3K36me3-H3norm",
                                       "ChIPseq-H3K4me3-H3norm"),
-                             labels=c("textstyle(frac(\"H3K36me3\",\"H3\"))",
-                                      "textstyle(frac(\"H3K36me2\",\"H3\"))",
+                             labels=c("textstyle(frac(\"H3K36me2\",\"H3\"))",
+                                      "textstyle(frac(\"H3K36me3\",\"H3\"))",
                                       "textstyle(frac(\"H3K4me3\",\"H3\"))"))) %>%
         left_join(annotation,
                   by="index")
@@ -202,16 +203,44 @@ main = function(theme_path = "spn1_2020_theme.R",
                   mid=median(signal, na.rm=TRUE),
                   high=quantile(signal, 0.75, na.rm=TRUE))
 
+    df_quant_increase = df_metagene %>%
+        filter(position >= 0) %>%
+        group_by(group, assay) %>%
+        mutate(scaled = scales::rescale(mid)) %>%
+        filter(scaled >= 0.9) %>%
+        arrange(position) %>%
+        slice(1) %>%
+        select(assay, group,
+               position_90_increase=position, signal_90_increase=mid, scaled_signal_90_increase=scaled) %>%
+        arrange(assay, group)
+    df_quant_decrease = df_metagene %>%
+        filter(position >= 0) %>%
+        group_by(group, assay) %>%
+        mutate(scaled = scales::rescale(mid)) %>%
+        filter(scaled <= 0.1) %>%
+        arrange(position) %>%
+        slice(1) %>%
+        select(assay, group,
+               position_10_decrease=position, signal_10_decrease=mid, scaled_signal_10_decrease=scaled) %>%
+        arrange(assay, group)
+    df_quant = inner_join(df_quant_increase, df_quant_decrease,
+                          by=c("assay", "group")) %>%
+        mutate_at(vars(signal_90_increase,
+                       scaled_signal_90_increase,
+                       signal_10_decrease,
+                       scaled_signal_10_decrease),
+                  ~signif(., 4)) %>%
+        write_tsv(df_quant_out)
 
     assays = levels(df[["assay"]])
 
     plots = list(plot_metagene(df=df_metagene,
                                filter_assay=assays[1],
-                               plot_title="H3K36me3 / H3",
+                               plot_title="H3K36me2 / H3",
                                leftmost=TRUE),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[2],
-                               plot_title="H3K36me2 / H3"),
+                               plot_title="H3K36me3 / H3"),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[3],
                                plot_title="H3K4me3 / H3"),
@@ -219,12 +248,12 @@ main = function(theme_path = "spn1_2020_theme.R",
                               filter_assay=assays[1],
                               quantile_low=0.20,
                               quantile_high=0.80,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3")))),
+                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me2", "H3")))),
                  plot_heatmap(df=df,
                               filter_assay=assays[2],
                               quantile_low=0.20,
                               quantile_high=0.80,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me2", "H3"))),
+                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3"))),
                               leftmost=FALSE),
                  plot_heatmap(df=df,
                               filter_assay=assays[3],
@@ -238,7 +267,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         axis="rl",
                                         nrow=2,
                                         ncol=3,
-                                        rel_heights=c(0.4, 1)) %>%
+                                        rel_heights=c(0.35, 1)) %>%
         as.ggplot()
 
     h3_modification_datavis = h3_modification_datavis +
@@ -262,8 +291,8 @@ main(theme_path=snakemake@input[["theme"]],
      data_paths=snakemake@input[["data"]],
      annotation_path=snakemake@input[["annotation"]],
      panel_letter=snakemake@params[["panel_letter"]],
+     df_quant_out=snakemake@output[["quantification"]],
      pdf_out=snakemake@output[["pdf"]],
      grob_out=snakemake@output[["grob"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]])
-
