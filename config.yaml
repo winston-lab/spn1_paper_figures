@@ -361,9 +361,9 @@ h3_mods_figure:
 chipseq_abundance_barplots_h3:
     data:
         H3: ../chipseq-h3/qual_ctrl/spikein/H3-chipseq_spikein-counts.tsv
-        H3K4me3: ../chipseq-h3k4me3/qual_ctrl/spikein/H3K4me3-chipseq_spikein-counts.tsv
         H3K36me2: ../chipseq-h3k36me2/qual_ctrl/spikein/H3K36me2-chipseq_spikein-counts.tsv
         H3K36me3: ../chipseq-h3k36me3/qual_ctrl/spikein/H3K36me3-chipseq_spikein-counts.tsv
+        H3K4me3: ../chipseq-h3k4me3/qual_ctrl/spikein/H3K4me3-chipseq_spikein-counts.tsv
     fig_width: "17.4 * 5 / 12"
     fig_height: 5
     panel_letter: a
@@ -400,7 +400,7 @@ h3_mods_facet_expression:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K4me3-H3norm.tsv.gz
     fig_width: "17.4 * 8 / 12"
     fig_height: 6
-    panel_letter: b
+    panel_letter: c
 
 h3_mods_supplemental:
     fig_width: 17.4

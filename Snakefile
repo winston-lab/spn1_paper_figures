@@ -1035,11 +1035,11 @@ rule h3_mods_facet_expression:
     script:
         "scripts/h3_mods_facet_expression.R"
 
-
 rule assemble_figure_h3_mods_supp:
     input:
         fonts = ".fonts_registered.txt",
         chipseq_abundance_barplots_h3 = "panels/chipseq_abundance_barplots_h3.Rdata",
+        h3_mods_non_h3_norm = "panels/h3_mods_non_h3_norm.Rdata",
         h3_mods_facet_expression = "panels/h3_mods_facet_expression.Rdata",
         # h3k4me3 = "panels/H3K4me3_facet_expression_length.Rdata",
         # h3k36me2 = "panels/H3K36me2_facet_expression_length.Rdata",
