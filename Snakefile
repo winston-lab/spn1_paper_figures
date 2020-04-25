@@ -57,7 +57,9 @@ rule target:
         "panels/h3_mods_non_h3_norm.pdf",
         "panels/h3_mods_facet_expression.pdf",
         "figures/figure_S5_h3_mods_supplemental.pdf",
-        expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3", "H3"])
+        expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3", "H3"]),
+        "panels/rpgene_datavis.pdf",
+        "panels/rpgene_datavis_supp.pdf",
 
 rule register_fonts:
     input:
@@ -533,6 +535,7 @@ rule assemble_figure_splicing:
         fonts = ".fonts_registered.txt",
         splicing = "panels/splicing.Rdata",
         splicing_rtqpcr = "panels/splicing_rtqpcr.Rdata",
+        rpgene_datavis = "panels/rpgene_datavis.Rdata",
     output:
         pdf = "figures/figure_7_splicing.pdf"
     params:
@@ -1053,4 +1056,38 @@ rule assemble_figure_h3_mods_supp:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_h3_mods_supp.R"
+
+rule rpgene_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["rpgene_datavis"]["data"],
+    output:
+        pdf = "panels/rpgene_datavis.pdf",
+        grob = "panels/rpgene_datavis.Rdata",
+    params:
+        fig_height = eval(str(config["rpgene_datavis"]["fig_height"])),
+        fig_width = eval(str(config["rpgene_datavis"]["fig_width"])),
+        panel_letter = config["rpgene_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rpgene_datavis.R"
+
+rule rpgene_datavis_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["rpgene_datavis_supp"]["data"],
+    output:
+        pdf = "panels/rpgene_datavis_supp.pdf",
+        grob = "panels/rpgene_datavis_supp.Rdata",
+    params:
+        fig_height = eval(str(config["rpgene_datavis_supp"]["fig_height"])),
+        fig_width = eval(str(config["rpgene_datavis_supp"]["fig_width"])),
+        panel_letter = config["rpgene_datavis_supp"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rpgene_datavis.R"
 
