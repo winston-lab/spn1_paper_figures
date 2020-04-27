@@ -60,6 +60,9 @@ rule target:
         expand("panels/{mod}_facet_expression_length.pdf", mod=["H3K4me3", "H3K36me2", "H3K36me3", "H3"]),
         "panels/rpgene_datavis.pdf",
         "panels/rpgene_datavis_supp.pdf",
+        # "panels/rpgene_datavis_length_filtered.pdf",
+        # "panels/rpgene_datavis_supp_length_filtered.pdf",
+        "figures/figure_S6_splicing_supplemental.pdf"
 
 rule register_fonts:
     input:
@@ -993,6 +996,7 @@ rule h3_mods_non_h3_norm:
         theme = config["theme_path"],
         data = config["h3_mods_non_h3_norm"]["data"],
     output:
+        quantification =  "panels/h3_mods_non_h3_norm_quantification.tsv",
         pdf = "panels/h3_mods_non_h3_norm.pdf",
         grob = "panels/h3_mods_non_h3_norm.Rdata",
     params:
@@ -1064,7 +1068,9 @@ rule rpgene_datavis:
         data = config["rpgene_datavis"]["data"],
     output:
         pdf = "panels/rpgene_datavis.pdf",
+        # pdf = "panels/rpgene_datavis_length_filtered.pdf",
         grob = "panels/rpgene_datavis.Rdata",
+        # grob = "panels/rpgene_datavis_length_filtered.Rdata",
     params:
         fig_height = eval(str(config["rpgene_datavis"]["fig_height"])),
         fig_width = eval(str(config["rpgene_datavis"]["fig_width"])),
@@ -1081,7 +1087,9 @@ rule rpgene_datavis_supp:
         data = config["rpgene_datavis_supp"]["data"],
     output:
         pdf = "panels/rpgene_datavis_supp.pdf",
+        # pdf = "panels/rpgene_datavis_supp_length_filtered.pdf",
         grob = "panels/rpgene_datavis_supp.Rdata",
+        # grob = "panels/rpgene_datavis_supp_length_filtered.Rdata",
     params:
         fig_height = eval(str(config["rpgene_datavis_supp"]["fig_height"])),
         fig_width = eval(str(config["rpgene_datavis_supp"]["fig_width"])),
@@ -1090,4 +1098,18 @@ rule rpgene_datavis_supp:
         "envs/plot_figures.yaml"
     script:
         "scripts/rpgene_datavis.R"
+
+rule assemble_figure_splicing_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        rpgene_datavis_supp = "panels/rpgene_datavis_supp.Rdata",
+    output:
+        pdf = "figures/figure_S6_splicing_supplemental.pdf"
+    params:
+        fig_width = eval(str(config["splicing_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["splicing_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_splicing_supp.R"
 

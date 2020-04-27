@@ -136,7 +136,7 @@ plot_metagene = function(df_metagene,
         theme_default +
         theme(panel.grid=element_blank(),
               legend.title=element_blank(),
-              legend.justification=c(1,1),
+              legend.justification=c(1,0),
               legend.position=legend_position,
               legend.background=element_blank(),
               legend.spacing.x=unit(1, "pt"),
@@ -237,6 +237,7 @@ main = function(theme_path = "spn1_2020_theme.R",
     plots = list(plot_metagene(df=df_metagene,
                                filter_assay=assays[1],
                                plot_title="H3K36me2 / H3",
+                               legend_position=c(0.90, 0.11),
                                leftmost=TRUE),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[2],
@@ -267,7 +268,8 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         axis="rl",
                                         nrow=2,
                                         ncol=3,
-                                        rel_heights=c(0.35, 1)) %>%
+                                        # rel_heights=c(0.35, 1)) %>%
+                                        rel_heights=c(0.30, 1)) %>%
         as.ggplot()
 
     h3_modification_datavis = h3_modification_datavis +

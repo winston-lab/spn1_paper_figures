@@ -356,7 +356,7 @@ h3_modification_datavis:
 
 h3_mods_figure:
     fig_width: 17.4
-    fig_height: 12
+    fig_height: 14
 
 chipseq_abundance_barplots_h3:
     data:
@@ -412,14 +412,14 @@ rpgene_datavis:
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_GC-pct.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
-    fig_width: "17.4 * 7 / 12"
+    fig_width: "17.4 * 6 / 12"
     fig_height: 8
     panel_letter: c
 
 rpgene_datavis_supp:
     data:
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_RNAseq-sense.tsv.gz
-        - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_GC-pct.tsv.gz
+        # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_GC-pct.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-Rpb1.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-Ser5P-Rpb1norm.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-Ser2P-Rpb1norm.tsv.gz
@@ -428,8 +428,13 @@ rpgene_datavis_supp:
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-Set2-Rpb1norm.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz
-        - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
-        - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
+        # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
+        # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
     fig_width: "17.4 * 7 / 12"
     fig_height: 14
-    panel_letter: x
+    panel_letter: a
+
+splicing_supplemental:
+    fig_width: 17.4
+    fig_height: 12
+

@@ -13,18 +13,18 @@ main = function(chipseq_abundance_barplots_h3_rdata,
                 fig_width=8.5,
                 fig_height=9/16 * 8.5 * 2,
                 pdf_out="test.pdf"){
-    layout = rbind(c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
-                   c(1,1,1,1,1,2,2,2,2,2,2,2),
+    layout = rbind(c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
+                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
+                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,2,4,4,4),
+                   c(2,2,2,2,2,2,2,2,2,4,4,4),
+                   c(2,2,2,2,2,2,2,2,2,4,4,4),
                    c(3,3,3,3,3,3,3,3,3,4,4,4),
                    c(3,3,3,3,3,3,3,3,3,4,4,4),
                    c(3,3,3,3,3,3,3,3,3,4,4,4),
                    c(3,3,3,3,3,3,3,3,3,4,4,4),
                    c(3,3,3,3,3,3,3,3,3,4,4,4),
-                   c(3,3,3,3,3,3,3,3,3,4,4,4),
-                   c(5,5,5,5,5,5,5,5,5,5,5,5),
-                   c(5,5,5,5,5,5,5,5,5,5,5,5),
-                   c(5,5,5,5,5,5,5,5,5,5,5,5))
+                   c(3,3,3,3,3,3,3,3,3,4,4,4))
 
     load(chipseq_abundance_barplots_h3_rdata)
     load(h3_mods_non_h3_norm_rdata)
@@ -39,7 +39,6 @@ main = function(chipseq_abundance_barplots_h3_rdata,
     figure_h3_mods = arrangeGrob(chipseq_abundance_barplot,
                                  h3_mods_non_h3_norm,
                                  h3_mods_facet_expression,
-                                 nullGrob(),
                                  nullGrob(),
                                  # h3k36me2,
                                  # h3k36me3,
