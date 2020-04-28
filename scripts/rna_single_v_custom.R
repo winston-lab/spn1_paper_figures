@@ -14,8 +14,12 @@ main = function(single_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
                   by=c("chrom", "start", "end", "name", "strand"),
                   suffix=c("_single", "_custom"))
 
-    # pearson = cor(df$log2_foldchange,
-    #               df$log2FC_enrichment)
+    df_cor = df %>%
+        summarize(x=min(log2_foldchange_single, na.rm=TRUE),
+                  y=max(log2_foldchange_custom, na.rm=TRUE),
+                  pearson=cor(log2_foldchange_single,
+                              log2_foldchange_custom,
+                              use="complete.obs"))
 
     rna_single_vs_custom = ggplot(data=df,
            aes(y=log2_foldchange_single,
@@ -26,6 +30,14 @@ main = function(single_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
         geom_vline(xintercept=0,
                    size=0.2,
                    color="gray70") +
+        geom_text(data=df_cor,
+                  aes(x=x,
+                      y=y,
+                      label=glue::glue("R={round(pearson, 2)}")),
+                  hjust=0,
+                  vjust=1,
+                  size=5/72*25.4,
+                  family="FreeSans")+
         # geom_smooth(size=0.5) +
         stat_binhex(geom="point",
                     aes(color=..count..),
@@ -41,14 +53,6 @@ main = function(single_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
                     size=0.2,
                     color="gray70",
                     alpha=0.5)+
-        # annotate(geom="text",
-        #          x=min(df[["log2FC_enrichment"]]),
-        #          y=max(df[["log2_foldchange"]]),
-        #          label=glue::glue("R={signif(pearson, 2)}"),
-        #          vjust=1,
-        #          hjust=0,
-        #          size=5/72*25.4,
-        #          family="FreeSans") +
         scale_color_viridis_c(option="cividis") +
         scale_x_continuous(breaks=scales::pretty_breaks(4),
                            name=quote("log"[2] ~ textstyle(frac("Spn1-depleted",
@@ -83,4 +87,3 @@ main(single_path=snakemake@input[["single"]],
      fig_height=snakemake@params[["fig_height"]],
      pdf_out=snakemake@output[["pdf"]],
      grob_out=snakemake@output[["grob"]])
-

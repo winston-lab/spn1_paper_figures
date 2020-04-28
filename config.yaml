@@ -329,6 +329,7 @@ reduced_h3_matched_metagenes:
         - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-H3.tsv.gz
         - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Rpb1.tsv.gz
         -  ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6.tsv.gz
+        - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6-Rpb1norm.tsv.gz
     fig_width: "17.4 * 9 / 12"
     fig_height: 6
     panel_letter: d
