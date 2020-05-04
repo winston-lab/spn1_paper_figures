@@ -20,9 +20,9 @@ main = function(theme_path = "spn1_2020_theme.R",
                                        "pGCV3-2"),
                               labels=c("\"wild type\"[\"unmarked\"]",
                                        "\"wild type\"[\"marked\"]",
-                                       "\"p\" * italic(\"UBI4\")[\"[-567, -1]\"]",
-                                       "\"p\" * italic(\"GCV3\")[\"[-232, -1]\"]",
-                                       "\"p\" * italic(\"GCV3\")[\"[-232, +90]\"]")),
+                                       "italic(\"UBI4\")[\"[-567, -1]\"]",
+                                       "italic(\"GCV3\")[\"[-232, -1]\"]",
+                                       "italic(\"GCV3\")[\"[-232, +90]\"]")),
                condition=fct_inorder(condition,
                                      ordered=TRUE))
 
