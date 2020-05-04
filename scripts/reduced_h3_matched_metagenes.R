@@ -58,7 +58,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              labels=c("\"H3: log\"[2] ~ textstyle(frac(\"IP\", \"input\"))",
                                       "\"Rpb1: log\"[2] ~ textstyle(frac(\"IP\", \"input\"))",
                                       "\"Spt6: log\"[2] ~ textstyle(frac(\"IP\", \"input\"))",
-                                      "\"log\"[2] ~ textstyle(frac(\"Spt6\", \"Rpb1\"))")))
+                                      "\"log\"[2] ~ frac(\"Spt6\", \"Rpb1\")")))
 
     reduced_h3_matched_metagenes = ggplot(data=df,
            aes(x=position,
@@ -102,7 +102,8 @@ main = function(theme_path = "spn1_2020_theme.R",
               legend.key.width=unit(10, "pt"),
               legend.title=element_blank(),
               legend.justification=c(0.5,0.5),
-              legend.position=c(0.83, 0.87),
+              # legend.position=c(0.83, 0.87),
+              legend.position=c(0.33, 0.86),
               legend.background=element_blank(),
               legend.spacing.x=unit(1, "pt"),
               axis.text.y=element_text(size=5),
