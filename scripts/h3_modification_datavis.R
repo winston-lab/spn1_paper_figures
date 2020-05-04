@@ -85,13 +85,6 @@ plot_heatmap = function(df,
               plot.margin=margin(0, 6, 0, -3, "pt"))
 
     return(heatmap)
-
-    # ggsave("test.pdf",
-    #        plot=heatmap,
-    #        width=17.4/3,
-    #        height=9/16 * 17.4,
-    #        units="cm",
-    #        device=cairo_pdf)
 }
 
 plot_metagene = function(df_metagene,
@@ -99,10 +92,8 @@ plot_metagene = function(df_metagene,
                          plot_title=expression(textstyle(frac("H3K36me3",
                                                               "H3")) ~
                                                    "ChIP-seq enrichment"),
-                         # yaxis_label = expression("log"[2] ~
-                         #                              textstyle(frac("H3K4me3",
-                         #                                             "H3"))),
                          legend_position="none",
+                         panel_letter="x",
                          leftmost=FALSE){
     df_metagene %<>%
         filter(assay==filter_assay)
@@ -128,11 +119,11 @@ plot_metagene = function(df_metagene,
                                                         TRUE ~ as.character(x)),
                            name=NULL) +
         scale_y_continuous(breaks=scales::pretty_breaks(3),
-                           # name=yaxis_label) +
                            name=expression("log"[2] ~ "ratio")) +
         scale_color_viridis_d(end=0.6) +
         scale_fill_viridis_d(end=0.6) +
-        ggtitle(plot_title) +
+        labs(title=plot_title,
+             tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
               legend.title=element_blank(),
@@ -146,7 +137,7 @@ plot_metagene = function(df_metagene,
                                                      "white"),
                                         margin=margin(l=0, r=-3, unit="pt")),
               # plot.margin=margin(11/2, 6, 11/2, -3, "pt"),
-              plot.margin=margin(0, 6, 11/2, -3, "pt"),
+              plot.margin=margin(0, 6, 11/2, 0, "pt"),
               plot.title=element_text(hjust=0.5))
 
     return(metagene)
@@ -166,7 +157,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 fig_height=17.4 * 9 / 16){
     source(theme_path)
     library(cowplot)
-    library(ggplotify)
+    # library(ggplotify)
 
     df = tibble()
     for (path in data_paths){
@@ -238,13 +229,16 @@ main = function(theme_path = "spn1_2020_theme.R",
                                filter_assay=assays[1],
                                plot_title="H3K36me2 / H3",
                                legend_position=c(0.90, 0.11),
+                               panel_letter="a",
                                leftmost=TRUE),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[2],
-                               plot_title="H3K36me3 / H3"),
+                               plot_title="H3K36me3 / H3",
+                               panel_letter="b"),
                  plot_metagene(df=df_metagene,
                                filter_assay=assays[3],
-                               plot_title="H3K4me3 / H3"),
+                               plot_title="H3K4me3 / H3",
+                               panel_letter="c"),
                  plot_heatmap(df=df,
                               filter_assay=assays[1],
                               quantile_low=0.20,
@@ -269,15 +263,15 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         nrow=2,
                                         ncol=3,
                                         # rel_heights=c(0.35, 1)) %>%
-                                        rel_heights=c(0.30, 1)) %>%
-        as.ggplot()
+                                        rel_heights=c(0.30, 1)) #%>%
+        # as.ggplot()
 
-    h3_modification_datavis = h3_modification_datavis +
-        labs(tag=panel_letter) +
-        theme(plot.tag=element_text(family="FreeSans",
-                                    size=9,
-                                    face="bold"),
-              plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
+    # h3_modification_datavis = h3_modification_datavis +
+    #     labs(tag=panel_letter) +
+    #     theme(plot.tag=element_text(family="FreeSans",
+    #                                 size=9,
+    #                                 face="bold"),
+    #           plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
 
     ggsave(pdf_out,
            plot=h3_modification_datavis,
