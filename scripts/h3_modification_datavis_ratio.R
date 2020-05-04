@@ -21,40 +21,26 @@ plot_heatmap = function(df,
                         colorbar_title=expression("relative enrichment," ~
                                                       textstyle(frac("H3K4me3",
                                                                      "H3"))),
-                        leftmost=TRUE){
+                        leftmost=FALSE){
     df %<>%
-        filter(assay==filter_assay)
+        filter(assay==filter_assay) %>%
+        pivot_wider(names_from=group,
+                    values_from=signal) %>%
+        mutate(signal = `Spn1-depleted` - `non-depleted`)
 
     heatmap = ggplot() +
         geom_raster(data=df,
                      aes(x=position,
                          y=sorted_index,
                          fill=signal)) +
-        geom_text(data=df %>%
-                      group_by(group) %>%
-                      summarize(sorted_index = max(sorted_index)),
-                  aes(y=sorted_index,
-                      label=group),
-                  x=max(df[["position"]]) - 0.5,
-                  size=ifelse(leftmost,
-                              8/72*25.4,
-                              0),
-                  hjust=1,
-                  nudge_y=-500,
-                  family="FreeSans") +
-        facet_grid(group ~ .) +
-        scale_fill_viridis_c(limits=quantile(df[["signal"]],
-                                             probs=c(quantile_low,
-                                                     quantile_high),
-                                             na.rm=TRUE),
+        scale_fill_distiller(palette="PiYG",
+                             limits=c(-1.2,1.2),
                              oob=scales::squish,
-                             option="viridis",
-                             na.value=viridisLite::viridis(1),
                              name=colorbar_title,
-                             guide=guide_colorbar(barwidth=unit(4, "cm"),
-                                                  barheight=unit(0.2, "cm"),
+                             guide=guide_colorbar(barwidth=unit(0.2, "cm"),
+                                                  barheight=unit(3, "cm"),
                                                   title.position="top",
-                                                  title.hjust=0.5,
+                                                  title.hjust=1,
                                                   breaks=scales::pretty_breaks(3))) +
         scale_x_continuous(expand=c(0,0),
                            labels=function(x) case_when(x==0 ~ "TSS",
@@ -71,18 +57,26 @@ plot_heatmap = function(df,
                                                      "white"),
                                         margin=margin(l=0, r=4, unit="pt")),
               panel.grid=element_blank(),
-              panel.grid.major.x=element_line(size=0.1,
-                                              color="gray85"),
               panel.border=element_blank(),
-              legend.position="top",
-              legend.margin=margin(b=-10, unit="pt"),
-              legend.title=element_text(margin=margin(b=-4, unit="pt")),
-              legend.text=element_text(margin=margin(t=-1.5, unit="pt")),
+              legend.justification=c(1,1),
+              legend.direction="vertical",
+              legend.title=element_text(margin=margin(l=-40, unit="pt")),
+              # legend.title=element_text(margin=margin(b=-4, unit="pt")),
+              # legend.text=element_text(margin=margin(t=-1.5, unit="pt")),
               strip.text=element_blank(),
               panel.spacing.y=unit(2, "pt"),
               axis.ticks.length.y=unit(1, "pt"),
               # plot.margin=margin(11/2, 6, 0, -3, "pt"))
-              plot.margin=margin(0, 6, 0, -3, "pt"))
+              plot.margin=margin(0, 6, 0, 0, "pt"))
+    if (leftmost){
+        heatmap = heatmap +
+            theme(legend.position=c(0.97, 0.97))
+    } else {
+        heatmap = heatmap +
+            theme(legend.position="none",
+                  panel.grid.major.x=element_line(size=0.1,
+                                                  color="gray85"))
+    }
 
     return(heatmap)
 }
@@ -154,7 +148,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 pdf_out = "test.pdf",
                 grob_out = "test.Rdata",
                 fig_width=17.4,
-                fig_height=17.4 * 9 / 16){
+                fig_height=10){
     source(theme_path)
     library(cowplot)
     # library(ggplotify)
@@ -243,19 +237,24 @@ main = function(theme_path = "spn1_2020_theme.R",
                               filter_assay=assays[1],
                               quantile_low=0.20,
                               quantile_high=0.80,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me2", "H3")))),
+                              colorbar_title=expression("log"[2] ~
+                                                            textstyle(frac("Spn1-depleted",
+                                                                           "non-depleted"))),
+                              leftmost=TRUE),
                  plot_heatmap(df=df,
                               filter_assay=assays[2],
                               quantile_low=0.20,
                               quantile_high=0.80,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K36me3", "H3"))),
-                              leftmost=FALSE),
+                              colorbar_title=expression("log"[2] ~
+                                                            textstyle(frac("Spn1-depleted",
+                                                                           "non-depleted")))),
                  plot_heatmap(df=df,
                               filter_assay=assays[3],
                               quantile_low=0.20,
                               quantile_high=0.80,
-                              colorbar_title=expression("log"[2] ~ textstyle(frac("H3K4me3", "H3"))),
-                              leftmost=FALSE))
+                              colorbar_title=expression("log"[2] ~
+                                                            textstyle(frac("Spn1-depleted",
+                                                                           "non-depleted")))))
 
     h3_modification_datavis = plot_grid(plotlist=plots,
                                         align="v",
@@ -263,7 +262,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         nrow=2,
                                         ncol=3,
                                         # rel_heights=c(0.35, 1)) %>%
-                                        rel_heights=c(0.30, 1)) #%>%
+                                        rel_heights=c(0.55, 1)) #%>%
         # as.ggplot()
 
     # h3_modification_datavis = h3_modification_datavis +
@@ -292,3 +291,4 @@ main(theme_path=snakemake@input[["theme"]],
      grob_out=snakemake@output[["grob"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]])
+

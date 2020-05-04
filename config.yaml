@@ -353,7 +353,11 @@ h3_modification_datavis:
     annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping.bed
     fig_width: 17.4
     fig_height: 12
-    panel_letter: a
+    # panel_letter: a
+
+h3_modification_datavis_ratio:
+    fig_width: 17.4
+    fig_height: 10
 
 h3_mods_figure:
     fig_width: 17.4

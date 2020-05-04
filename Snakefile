@@ -52,6 +52,7 @@ rule target:
         "figures/figure_S4_h3_supplemental.pdf",
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
+        "panels/h3_modification_datavis_ratio.pdf",
         "figures/figure_6_h3_mods.pdf",
         "panels/chipseq_abundance_barplots_h3.pdf",
         "panels/h3_mods_non_h3_norm.pdf",
@@ -951,11 +952,29 @@ rule h3_modification_datavis:
     params:
         fig_height = eval(str(config["h3_modification_datavis"]["fig_height"])),
         fig_width = eval(str(config["h3_modification_datavis"]["fig_width"])),
-        panel_letter = config["h3_modification_datavis"]["panel_letter"]
+        # panel_letter = config["h3_modification_datavis"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
         "scripts/h3_modification_datavis.R"
+
+rule h3_modification_datavis_ratio:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["h3_modification_datavis"]["data"],
+        annotation = config["h3_modification_datavis"]["annotation"],
+    output:
+        quantification =  "panels/h3_modification_datavis_ratio_quantification.tsv",
+        pdf = "panels/h3_modification_datavis_ratio.pdf",
+        grob = "panels/h3_modification_datavis_ratio.Rdata",
+    params:
+        fig_height = eval(str(config["h3_modification_datavis_ratio"]["fig_height"])),
+        fig_width = eval(str(config["h3_modification_datavis_ratio"]["fig_width"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_modification_datavis_ratio.R"
 
 rule assemble_figure_h3_mods:
     input:
