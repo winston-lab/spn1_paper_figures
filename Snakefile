@@ -64,7 +64,8 @@ rule target:
         "panels/rpgene_datavis_supp.pdf",
         # "panels/rpgene_datavis_length_filtered.pdf",
         # "panels/rpgene_datavis_supp_length_filtered.pdf",
-        "figures/figure_S6_splicing_supplemental.pdf"
+        "figures/figure_S6_splicing_supplemental.pdf",
+        "panels/intron_containing_gene_heatmaps.pdf",
 
 rule register_fonts:
     input:
@@ -1150,4 +1151,25 @@ rule assemble_figure_splicing_supp:
         "envs/plot_figures.yaml"
     script:
         "scripts/assemble_figure_splicing_supp.R"
+
+rule intron_containing_gene_heatmaps:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["intron_containing_gene_heatmaps"]["data"],
+        rp_with_intron_bed = config["intron_containing_gene_heatmaps"]["rp_with_intron_bed"],
+        nonrp_with_intron_bed = config["intron_containing_gene_heatmaps"]["nonrp_with_intron_bed"],
+        intron_bed = config["intron_containing_gene_heatmaps"]["intron_bed"],
+        name_lookup = config["intron_containing_gene_heatmaps"]["name_lookup"],
+    output:
+        pdf = "panels/intron_containing_gene_heatmaps.pdf",
+        grob = "panels/intron_containing_gene_heatmaps.Rdata",
+    params:
+        fig_height = eval(str(config["intron_containing_gene_heatmaps"]["fig_height"])),
+        fig_width = eval(str(config["intron_containing_gene_heatmaps"]["fig_width"])),
+        panel_letter = config["intron_containing_gene_heatmaps"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/intron_containing_gene_heatmaps.R"
 

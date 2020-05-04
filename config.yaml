@@ -456,3 +456,14 @@ splicing_supplemental:
     fig_width: 17.4
     fig_height: 12
 
+intron_containing_gene_heatmaps:
+    data:
+        - ../spn1-data-integration/datavis/intron-containing-genes-plmin-RP-TSS-intron-dist-sort/intron-containing-genes-plmin-RP-TSS-intron-dist-sort_RNAseq-sense.tsv.gz
+        - ../spn1-data-integration/datavis/intron-containing-genes-plmin-RP-TSS-intron-dist-sort/intron-containing-genes-plmin-RP-TSS-intron-dist-sort_ChIPseq-H3K36me2-H3norm.tsv.gz
+    rp_with_intron_bed: ../genome/annotations/gene_lists/Scer_RPgene_with_intron_transcripts_TSS_intron_dist_sort.bed
+    nonrp_with_intron_bed: ../genome/annotations/gene_lists/Scer_nonRPgene_with_intron_transcripts_TSS_intron_dist_sort.bed
+    intron_bed: ../genome/annotations/gene_lists/Scer_introns_in_coding_genes.bed
+    name_lookup: /n/groups/winston/jc459/intragenic/genome/Scer-sys-to-common-name.tsv
+    fig_width: "17.4 / 2"
+    fig_height: 8
+    panel_letter: x
