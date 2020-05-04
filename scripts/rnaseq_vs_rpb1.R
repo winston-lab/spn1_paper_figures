@@ -69,7 +69,8 @@ main = function(rnaseq_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
               legend.position="none",
               axis.title.y=element_text(angle=0,
                                         hjust=1,
-                                        vjust=0.5))
+                                        vjust=0.5),
+              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
 
     ggsave(pdf_out,
            rnaseq_v_rpb1,

@@ -79,10 +79,10 @@ rnaseq_single_locus_datavis:
 
 rnaseq_vs_rpb1_single_locus:
     data:
-        SRB4: ../spn1-data-integration/browser-shots/SRB4/SRB4_all-assays.tsv.gz
-        GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
-        UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
         SER3: ../spn1-data-integration/browser-shots/SER3/SER3_all-assays.tsv.gz
+        UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
+        GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
+        SRB4: ../spn1-data-integration/browser-shots/SRB4/SRB4_all-assays.tsv.gz
         # PHS1: ../spn1-data-integration/browser-shots/PHS1/PHS1_all-assays.tsv.gz
         # HXT1: ../spn1-data-integration/browser-shots/HXT1/HXT1_all-assays.tsv.gz
         # KAP120: ../spn1-data-integration/browser-shots/KAP120/KAP120_all-assays.tsv.gz
@@ -259,13 +259,13 @@ chip_maplot:
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     Set2:
         data: ../chipseq-set2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-        fig_width: 8.5
-        fig_height: "8.5 * 9 / 16"
+        fig_width: "17.4 * 5 / 12"
+        fig_height: "13 / 3"
         panel_letter: x
     Spt6:
         data: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-        fig_width: 8.5
-        fig_height: "8.5 * 9 / 16"
+        fig_width: "17.4 * 5 / 12"
+        fig_height: "13 / 3"
         panel_letter: x
 
 set2_spt6_figure:

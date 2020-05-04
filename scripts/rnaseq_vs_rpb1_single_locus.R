@@ -201,11 +201,10 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                            breaks=scales::pretty_breaks(3),
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
-        scale_y_continuous(limits=range(orf_annotations["orf_y"]),
-                           labels=function(x) str_pad(x, 4)) +
+        scale_y_continuous(limits=range(orf_annotations["orf_y"])) +
         theme_default +
         theme(panel.grid=element_blank(),
-              panel.spacing.x=unit(0, "pt"),
+              panel.spacing.x=unit(2, "pt"),
               axis.title.y=element_blank(),
               axis.text.x=element_blank(),
               axis.text.y=element_text(size=5,
@@ -213,7 +212,6 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
               axis.ticks.length=unit(1, "pt"),
               axis.ticks=element_line(color="#ffffffff"),
               strip.text=element_blank(),
-              # plot.margin=margin(t=2, b=-2, unit="pt"),
               plot.margin=margin(t=2, b=0, unit="pt"),
               panel.border=element_blank())
 
@@ -231,7 +229,6 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                            labels=function(x) case_when(x==0 ~ "TSS",
                                                         TRUE ~ paste(x, "kb"))) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
-                           labels=function(x) str_pad(x, 4),
                            name="Rpb1\nenrichment") +
         scale_color_viridis_d(end=0.6,
                               name=NULL,
@@ -239,14 +236,15 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                                                  keyheight=unit(8, "pt"))) +
         theme_default +
         theme(strip.text.x=element_blank(),
-              panel.spacing.x=unit(0, "pt"),
+              panel.spacing.x=unit(2, "pt"),
               panel.grid=element_blank(),
               # legend.position=c(0.65, 0.2),
               legend.position="none",
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),
-              axis.text.y=element_text(size=5),
+              axis.text.y=element_text(size=5,
+                                       hjust=1),
               axis.ticks.length=unit(1, "pt"),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5,
@@ -283,7 +281,6 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                            oob=scales::squish,
                            limits=function(x) c(0, x[2] * 1.05),
                            expand=c(0,0),
-                           labels=function(x) str_pad(abs(x), 4),
                            name="RNA-seq") +
         scale_fill_viridis_d(end=0.6,
                              name=NULL,
@@ -291,29 +288,40 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                                                 keyheight=unit(8, "pt"))) +
         theme_default +
         theme(strip.text.x=element_blank(),
-              panel.spacing.x=unit(0, "pt"),
+              panel.spacing.x=unit(2, "pt"),
               panel.grid=element_blank(),
-              # legend.position=c(0.01, 0.99),
-              # legend.justification = c(0, 1),
-              legend.position=c(0.73, 0.5),
+              # legend.position=c(0.73, 0.5),
+              legend.position=c(0.08, 0.5),
               legend.spacing.x=unit(1, "pt"),
               legend.spacing.y=unit(1, "pt"),
               legend.background=element_blank(),
               axis.text.x=element_text(color="white"),
-              axis.text.y=element_text(size=5),
+              axis.text.y=element_text(size=5,
+                                       hjust=1),
               axis.ticks.length=unit(1, "pt"),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5,
                                         hjust=1),
               plot.margin=margin(0, 0, -11/4, 0, "pt"))
 
+    annotation_plot = ggplotGrob(annotation_plot)
+    rna_plot = ggplotGrob(rna_plot)
+    rpb1_plot = ggplotGrob(rpb1_plot)
+
+    max_widths = grid::unit.pmax(annotation_plot$widths,
+                                 rna_plot$widths,
+                                 rpb1_plot$widths)
+    annotation_plot$widths = max_widths
+    rna_plot$widths = max_widths
+    rpb1_plot$widths = max_widths
+
     rnaseq_vs_rpb1_single_locus = plot_grid(annotation_plot,
-                                                rna_plot,
-                                                rpb1_plot,
-              align="v",
-              axis="lr",
-              ncol=1,
-              rel_heights=c(0.33, 1, 1))
+                                            rna_plot,
+                                            rpb1_plot,
+                                            align="v",
+                                            axis="rl",
+                                            ncol=1,
+                                            rel_heights=c(0.33, 1, 1))
 
     rnaseq_vs_rpb1_single_locus = rnaseq_vs_rpb1_single_locus +
         labs(tag=panel_letter) +
