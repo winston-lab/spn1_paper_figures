@@ -255,6 +255,19 @@ spt6_abundance_chipseq_barplot:
     fig_height: 4
     panel_letter: b
 
+chip_maplot:
+    rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
+    Set2:
+        data: ../chipseq-set2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+        fig_width: 8.5
+        fig_height: "8.5 * 9 / 16"
+        panel_letter: x
+    Spt6:
+        data: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
+        fig_width: 8.5
+        fig_height: "8.5 * 9 / 16"
+        panel_letter: x
+
 set2_spt6_figure:
     fig_width: 11.4
     fig_height: 13

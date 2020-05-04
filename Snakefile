@@ -38,6 +38,7 @@ rule target:
         "panels/spt6_metagene.pdf",
         "panels/set2_abundance_chipseq_barplot.pdf",
         "panels/spt6_abundance_chipseq_barplot.pdf",
+        expand("panels/{factor}_chip_maplot.pdf", factor=["Set2", "Spt6"]),
         "figures/figure_4_set2_spt6.pdf",
         "panels/set2_spt6_v_rpb1.pdf",
         "panels/set2_spt6_rpb1norm_v_rpb1.pdf",
@@ -648,6 +649,24 @@ rule set2_metagene:
     script:
         "scripts/single_factor_ratio_metagene.R"
         # "scripts/single_factor_standardized_metagene.R"
+
+rule chip_maplot:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = lambda wc: config["chip_maplot"][wc.factor]["data"],
+        rpb1 = config["chip_maplot"]["rpb1"]
+    output:
+        pdf = "panels/{factor}_chip_maplot.pdf",
+        grob = "panels/{factor}_chip_maplot.Rdata",
+    params:
+        fig_height = lambda wc: eval(str(config["chip_maplot"][wc.factor]["fig_height"])),
+        fig_width = lambda wc: eval(str(config["chip_maplot"][wc.factor]["fig_width"])),
+        panel_letter = lambda wc: config["chip_maplot"][wc.factor]["panel_letter"],
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chip_maplot.R"
 
 rule spt6_metagene:
     input:
