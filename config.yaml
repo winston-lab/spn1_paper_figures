@@ -142,9 +142,9 @@ rnaseq_single_locus_datavis_supp:
 
 antisense_single_locus_datavis:
     data:
+        ARO80: ../spn1-data-integration/browser-shots/ARO80/ARO80_all-assays.tsv.gz
         RRP1: ../spn1-data-integration/browser-shots/RRP1/RRP1_all-assays.tsv.gz
         MET10: ../spn1-data-integration/browser-shots/MET10/MET10_all-assays.tsv.gz
-        ARO80: ../spn1-data-integration/browser-shots/ARO80/ARO80_all-assays.tsv.gz
         MAF1: ../spn1-data-integration/browser-shots/MAF1/MAF1_all-assays.tsv.gz
     transcript_annotation: ../custom_differential_expression/merged_transcripts/custom_diffexp_experimental-merged-transcripts-annotated.bed
     orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
