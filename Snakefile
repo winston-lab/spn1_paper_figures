@@ -54,6 +54,7 @@ rule target:
         "panels/h3_metagene.pdf",
         "panels/h3_modification_datavis.pdf",
         "panels/h3_modification_datavis_ratio.pdf",
+        "panels/h3_mods_single_locus_datavis.pdf",
         "figures/figure_6_h3_mods.pdf",
         "panels/chipseq_abundance_barplots_h3.pdf",
         "panels/h3_mods_non_h3_norm.pdf",
@@ -995,6 +996,26 @@ rule h3_modification_datavis_ratio:
         "envs/plot_figures.yaml"
     script:
         "scripts/h3_modification_datavis_ratio.R"
+
+rule h3_mods_single_locus_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["h3_mods_single_locus_datavis"]["data"].values()),
+        transcript_annotations = config["h3_mods_single_locus_datavis"]["transcript_annotation"],
+        orf_annotations = config["h3_mods_single_locus_datavis"]["orf_annotation"]
+    output:
+        pdf = "panels/h3_mods_single_locus_datavis.pdf",
+        grob = "panels/h3_mods_single_locus_datavis.Rdata",
+    params:
+        targets = list(config["h3_mods_single_locus_datavis"]["data"].keys()),
+        fig_height = eval(str(config["h3_mods_single_locus_datavis"]["fig_height"])),
+        fig_width = eval(str(config["h3_mods_single_locus_datavis"]["fig_width"])),
+        panel_letter = config["h3_mods_single_locus_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3_mods_single_locus_datavis.R"
 
 rule assemble_figure_h3_mods:
     input:

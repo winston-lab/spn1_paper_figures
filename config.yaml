@@ -372,6 +372,18 @@ h3_modification_datavis_ratio:
     fig_width: 17.4
     fig_height: 10
 
+h3_mods_single_locus_datavis:
+    data:
+        UBI4: ../spn1-data-integration/browser-shots/UBI4/UBI4_all-assays.tsv.gz
+        GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
+        ARO80: ../spn1-data-integration/browser-shots/ARO80/ARO80_all-assays.tsv.gz
+        PHO89: ../spn1-data-integration/browser-shots/PHO89/PHO89_all-assays.tsv.gz
+    transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
+    orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
+    fig_width: "17.4"
+    fig_height: 7
+    panel_letter: x
+
 h3_mods_figure:
     fig_width: 17.4
     fig_height: 14
