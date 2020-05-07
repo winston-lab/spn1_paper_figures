@@ -14,6 +14,7 @@ rule target:
         "panels/spn1_rpb1norm_v_rpb1_nondepleted.pdf",
         "figures/figure_S1_spn1_depletion_supplemental.pdf",
         "panels/rnaseq_maplot.pdf",
+        "panels/rnaseq_maplot_alternate.pdf",
         "panels/rnaseq_single_locus_datavis.pdf",
         "panels/rnaseq_vs_rpb1_single_locus.pdf",
         "panels/rpb1_metagenes.pdf",
@@ -252,6 +253,23 @@ rule rnaseq_maplot:
         "envs/plot_figures.yaml"
     script:
         "scripts/rnaseq_maplot.R"
+
+rule rnaseq_maplot_alternate:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data = config["rnaseq_maplot"]["data"]
+    output:
+        pdf = "panels/rnaseq_maplot_alternate.pdf",
+        grob = "panels/rnaseq_maplot_alternate.Rdata",
+    params:
+        fig_height = eval(str(config["rnaseq_maplot"]["fig_height"])),
+        fig_width = eval(str(config["rnaseq_maplot"]["fig_width"])),
+        panel_letter = config["rnaseq_maplot"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/rnaseq_maplot_alternate.R"
 
 rule rnaseq_single_locus_datavis:
     input:
