@@ -53,7 +53,6 @@ rule target:
         "panels/reduced_h3_matched_metagenes.pdf",
         "figures/figure_S4_h3_supplemental.pdf",
         "panels/h3_metagene.pdf",
-        "panels/h3_modification_datavis.pdf",
         "panels/h3_modification_datavis_ratio.pdf",
         "panels/h3_mods_single_locus_datavis.pdf",
         "figures/figure_6_h3_mods.pdf",
@@ -978,30 +977,12 @@ rule assemble_figure_h3_supp:
     script:
         "scripts/assemble_figure_h3_supp.R"
 
-rule h3_modification_datavis:
-    input:
-        fonts = ".fonts_registered.txt",
-        theme = config["theme_path"],
-        data = config["h3_modification_datavis"]["data"],
-        annotation = config["h3_modification_datavis"]["annotation"],
-    output:
-        quantification =  "panels/h3_modification_datavis_quantification.tsv",
-        pdf = "panels/h3_modification_datavis.pdf",
-        grob = "panels/h3_modification_datavis.Rdata",
-    params:
-        fig_height = eval(str(config["h3_modification_datavis"]["fig_height"])),
-        fig_width = eval(str(config["h3_modification_datavis"]["fig_width"])),
-        # panel_letter = config["h3_modification_datavis"]["panel_letter"]
-    conda:
-        "envs/plot_figures.yaml"
-    script:
-        "scripts/h3_modification_datavis.R"
-
 rule h3_modification_datavis_ratio:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        data = config["h3_modification_datavis"]["data"],
+        metagene_data = config["h3_modification_datavis"]["metagene_data"],
+        heatmap_data = config["h3_modification_datavis"]["heatmap_data"],
         annotation = config["h3_modification_datavis"]["annotation"],
     output:
         quantification =  "panels/h3_modification_datavis_ratio_quantification.tsv",
@@ -1038,8 +1019,7 @@ rule h3_mods_single_locus_datavis:
 rule assemble_figure_h3_mods:
     input:
         fonts = ".fonts_registered.txt",
-        # h3_metagene = "panels/h3_metagene.Rdata",
-        h3_modification_datavis = "panels/h3_modification_datavis.Rdata",
+        h3_modification_datavis = "panels/h3_modification_datavis_ratio.Rdata",
     output:
         pdf = "figures/figure_6_h3_mods.pdf"
     params:

@@ -1,5 +1,5 @@
-import = function(df,
-                  data_path){
+import_for_heatmap = function(df,
+                              data_path){
     read_tsv(data_path,
              col_names=c("group",
                          "sample",
@@ -14,10 +14,28 @@ import = function(df,
         return()
 }
 
+import_for_metagene = function(df,
+                              data_path){
+    read_tsv(data_path,
+             col_names=c("group",
+                         "sample",
+                         "annotation",
+                         "assay",
+                         "index",
+                         "position",
+                         "signal")) %>%
+        group_by(group, assay, index, position) %>%
+        summarize(signal=mean(signal, na.rm=TRUE)) %>%
+        group_by(group, assay, position) %>%
+        summarize(low=quantile(signal, 0.25, na.rm=TRUE),
+                  mid=median(signal, na.rm=TRUE),
+                  high=quantile(signal, 0.75, na.rm=TRUE)) %>%
+        bind_rows(df, .) %>%
+        return()
+}
+
 plot_heatmap = function(df,
                         filter_assay,
-                        quantile_low=0.05,
-                        quantile_high=0.95,
                         colorbar_title=expression("relative enrichment," ~
                                                       textstyle(frac("H3K4me3",
                                                                      "H3"))),
@@ -28,17 +46,29 @@ plot_heatmap = function(df,
                     values_from=signal) %>%
         mutate(signal = `Spn1-depleted` - `non-depleted`)
 
+    df_anno = distinct(df,
+                       chrom, start, end, name, score, strand, sorted_index) %>%
+        mutate(cps = (end - start - 300) / 1000) %>%
+        arrange(desc(sorted_index))
+
     heatmap = ggplot() +
         geom_raster(data=df,
                      aes(x=position,
                          y=sorted_index,
                          fill=signal)) +
+        geom_path(data=filter(df_anno,
+                              cps <= 3),
+                  aes(x=cps,
+                      y=sorted_index),
+                  size=0.3,
+                  linetype="dotted",
+                  alpha=0.5) +
         scale_fill_distiller(palette="PiYG",
                              limits=c(-1.2,1.2),
                              oob=scales::squish,
                              name=colorbar_title,
                              guide=guide_colorbar(barwidth=unit(0.2, "cm"),
-                                                  barheight=unit(3, "cm"),
+                                                  barheight=unit(2.5, "cm"),
                                                   title.position="top",
                                                   title.hjust=1,
                                                   breaks=scales::pretty_breaks(3))) +
@@ -60,13 +90,10 @@ plot_heatmap = function(df,
               panel.border=element_blank(),
               legend.justification=c(1,1),
               legend.direction="vertical",
-              legend.title=element_text(margin=margin(l=-40, unit="pt")),
-              # legend.title=element_text(margin=margin(b=-4, unit="pt")),
-              # legend.text=element_text(margin=margin(t=-1.5, unit="pt")),
+              legend.title=element_text(margin=margin(l=-40, b=-3, unit="pt")),
               strip.text=element_blank(),
               panel.spacing.y=unit(2, "pt"),
               axis.ticks.length.y=unit(1, "pt"),
-              # plot.margin=margin(11/2, 6, 0, -3, "pt"))
               plot.margin=margin(0, 6, 0, 0, "pt"))
     if (leftmost){
         heatmap = heatmap +
@@ -130,7 +157,6 @@ plot_metagene = function(df_metagene,
                                                      "black",
                                                      "white"),
                                         margin=margin(l=0, r=-3, unit="pt")),
-              # plot.margin=margin(11/2, 6, 11/2, -3, "pt"),
               plot.margin=margin(0, 6, 11/2, 0, "pt"),
               plot.title=element_text(hjust=0.5))
 
@@ -139,10 +165,13 @@ plot_metagene = function(df_metagene,
 
 
 main = function(theme_path = "spn1_2020_theme.R",
-                data_paths = c("verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz",
-                               "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz",
-                               "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz"),
-                annotation_path = "Scer_transcripts_w_verifiedORFs-nonoverlapping.bed",
+                metagene_data_paths = c("verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz",
+                                       "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz",
+                                       "verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz"),
+                heatmap_data_paths = c("verified-transcripts-nonoverlapping-TSS-slopR300_ChIPseq-H3K36me3-H3norm.tsv.gz",
+                                       "verified-transcripts-nonoverlapping-TSS-slopR300_ChIPseq-H3K36me2-H3norm.tsv.gz",
+                                       "verified-transcripts-nonoverlapping-TSS-slopR300_ChIPseq-H3K4me3-H3norm.tsv.gz"),
+                annotation_path = "Scer_transcripts_w_verifiedORFs-nonoverlapping_slopR300.bed",
                 # panel_letter="c",
                 df_quant_out="df_quant.tsv",
                 pdf_out = "test.pdf",
@@ -151,11 +180,14 @@ main = function(theme_path = "spn1_2020_theme.R",
                 fig_height=10){
     source(theme_path)
     library(cowplot)
-    # library(ggplotify)
 
-    df = tibble()
-    for (path in data_paths){
-        df %<>% import(path)
+    df_heatmap = tibble()
+    for (path in heatmap_data_paths){
+        df_heatmap %<>% import_for_heatmap(path)
+    }
+    df_metagene = tibble()
+    for (path in metagene_data_paths){
+        df_metagene %<>% import_for_metagene(path)
     }
 
     annotation = read_tsv(annotation_path,
@@ -165,7 +197,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         arrange(desc(end - start)) %>%
         mutate(sorted_index = row_number())
 
-    df %<>%
+    df_heatmap %<>%
         ungroup() %>%
         mutate(group=ordered(group,
                              levels=c("non-depleted",
@@ -182,11 +214,20 @@ main = function(theme_path = "spn1_2020_theme.R",
         left_join(annotation,
                   by="index")
 
-    df_metagene = df %>%
-        group_by(group, assay, position) %>%
-        summarize(low=quantile(signal, 0.25, na.rm=TRUE),
-                  mid=median(signal, na.rm=TRUE),
-                  high=quantile(signal, 0.75, na.rm=TRUE))
+    df_metagene %<>%
+        ungroup() %>%
+        mutate(group=ordered(group,
+                             levels=c("non-depleted",
+                                      "depleted"),
+                             labels=c("non-depleted",
+                                      "Spn1-depleted")),
+               assay=ordered(assay,
+                             levels=c("ChIPseq-H3K36me2-H3norm",
+                                      "ChIPseq-H3K36me3-H3norm",
+                                      "ChIPseq-H3K4me3-H3norm"),
+                             labels=c("textstyle(frac(\"H3K36me2\",\"H3\"))",
+                                      "textstyle(frac(\"H3K36me3\",\"H3\"))",
+                                      "textstyle(frac(\"H3K4me3\",\"H3\"))")))
 
     df_quant_increase = df_metagene %>%
         filter(position >= 0) %>%
@@ -217,7 +258,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                   ~signif(., 4)) %>%
         write_tsv(df_quant_out)
 
-    assays = levels(df[["assay"]])
+    assays = levels(df_heatmap[["assay"]])
 
     plots = list(plot_metagene(df=df_metagene,
                                filter_assay=assays[1],
@@ -233,25 +274,19 @@ main = function(theme_path = "spn1_2020_theme.R",
                                filter_assay=assays[3],
                                plot_title="H3K4me3 / H3",
                                panel_letter="c"),
-                 plot_heatmap(df=df,
+                 plot_heatmap(df=df_heatmap,
                               filter_assay=assays[1],
-                              quantile_low=0.20,
-                              quantile_high=0.80,
                               colorbar_title=expression("log"[2] ~
                                                             textstyle(frac("Spn1-depleted",
                                                                            "non-depleted"))),
                               leftmost=TRUE),
-                 plot_heatmap(df=df,
+                 plot_heatmap(df=df_heatmap,
                               filter_assay=assays[2],
-                              quantile_low=0.20,
-                              quantile_high=0.80,
                               colorbar_title=expression("log"[2] ~
                                                             textstyle(frac("Spn1-depleted",
                                                                            "non-depleted")))),
-                 plot_heatmap(df=df,
+                 plot_heatmap(df=df_heatmap,
                               filter_assay=assays[3],
-                              quantile_low=0.20,
-                              quantile_high=0.80,
                               colorbar_title=expression("log"[2] ~
                                                             textstyle(frac("Spn1-depleted",
                                                                            "non-depleted")))))
@@ -261,16 +296,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                         axis="rl",
                                         nrow=2,
                                         ncol=3,
-                                        # rel_heights=c(0.35, 1)) %>%
-                                        rel_heights=c(0.55, 1)) #%>%
-        # as.ggplot()
-
-    # h3_modification_datavis = h3_modification_datavis +
-    #     labs(tag=panel_letter) +
-    #     theme(plot.tag=element_text(family="FreeSans",
-    #                                 size=9,
-    #                                 face="bold"),
-    #           plot.margin=margin(11/2, 11/2, 11/2, 11/2, "pt"))
+                                        rel_heights=c(0.55, 1))
 
     ggsave(pdf_out,
            plot=h3_modification_datavis,
@@ -283,7 +309,8 @@ main = function(theme_path = "spn1_2020_theme.R",
 }
 
 main(theme_path=snakemake@input[["theme"]],
-     data_paths=snakemake@input[["data"]],
+     metagene_data_paths=snakemake@input[["metagene_data"]],
+     heatmap_data_paths=snakemake@input[["heatmap_data"]],
      annotation_path=snakemake@input[["annotation"]],
      # panel_letter=snakemake@params[["panel_letter"]],
      df_quant_out=snakemake@output[["quantification"]],
@@ -291,4 +318,3 @@ main(theme_path=snakemake@input[["theme"]],
      grob_out=snakemake@output[["grob"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]])
-
