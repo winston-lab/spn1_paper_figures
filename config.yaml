@@ -48,7 +48,7 @@ spn1_v_rpb1:
     fig_height: "9 / 16 * 8.5"
     panel_letter: b
 
-spn1_rpb1norm_v_rpb1:
+spn1_rpb1norm_v_rpb1_nondepleted:
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     spn1: ../chipseq-spn1-rpb1norm/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     fig_width: 8.5
