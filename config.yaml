@@ -30,8 +30,6 @@ spn1_depletion_metagene:
     panel_letter: b
 
 spn1_depletion_figure:
-    # fig_width: 8.5
-    # fig_height: 8
     fig_width: 17.4
     fig_height: 4
 
@@ -313,7 +311,7 @@ h3_single_locus_datavis:
         GLY1: ../spn1-data-integration/browser-shots/GLY1/GLY1_all-assays.tsv.gz
         # RPL28: ../spn1-data-integration/browser-shots/RPL28/RPL28_all-assays.tsv.gz
         # IMD4: ../spn1-data-integration/browser-shots/IMD4/IMD4_all-assays.tsv.gz
-        PDC1: ../spn1-data-integration/browser-shots/PDC1/PDC1_all-assays.tsv.gz
+        CDC19: ../spn1-data-integration/browser-shots/CDC19/CDC19_all-assays.tsv.gz
     transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs.bed
     orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
     fig_width: 8.5
