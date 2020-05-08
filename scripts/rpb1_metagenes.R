@@ -64,7 +64,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              labels=c("non-depleted",
                                       "Spn1-depleted")),
                assay=ordered(assay,
-                             levels="ChIPseq-Rpb1",
+                             levels="ChIPseq-Rpb1-spikenorm-batchB",
                              labels="\"Rpb1\""))
 
     rpb1_metagene = ggplot(data=df_rpb1,

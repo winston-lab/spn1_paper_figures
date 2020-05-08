@@ -33,6 +33,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                             "log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                       "non-depleted")))),
                            breaks=scales::pretty_breaks(3)) +
+        labs(tag=panel_letter) +
         theme_default +
         theme(legend.position="none",
               panel.grid=element_blank(),
