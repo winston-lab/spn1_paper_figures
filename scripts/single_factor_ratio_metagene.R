@@ -1,11 +1,12 @@
-main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-Rpb1norm.tsv.gz",
+main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-Rpb1norm-batchAB.tsv.gz",
                 theme_path = "spn1_2020_theme.R",
                 panel_letter = "b",
-                fig_width=8.5,
-                fig_height=9/16*8.5,
+                fig_width=17.4 * 5 / 12,
+                fig_height=13 * 4 / 12,
                 numerator_factor="Spt6",
                 denominator_factor="Rpb1",
-                legend_position=c(0.6, 0.4),
+                control_label_y = -0.5,
+                condition_label_y = -3.9,
                 pdf_out="test.pdf",
                 grob_out="test.Rdata"){
 
@@ -41,13 +42,19 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-
                     alpha=0.15) +
         geom_line(alpha=0.9,
                   size=0.5) +
+        annotate(geom="text",
+                 x=2.9,
+                 y=c(control_label_y,
+                     condition_label_y),
+                 label=c("non-depleted", "Spn1-depleted"),
+                 hjust=1,
+                 family="FreeSans",
+                 size=7/72*25.4) +
         scale_x_continuous(expand=c(0,0),
                            labels=function(x){case_when(x==0 ~ "TSS",
                                                         x==3 ~ paste(x, "kb"),
                                                         TRUE ~ as.character(x))},
                            name=NULL) +
-        # scale_y_continuous(name=bquote("log"[2] ~ textstyle(frac(.(numerator_factor),
-        #                                                         .(denominator_factor))))) +
         scale_y_continuous(name=bquote("log"[2] ~ frac(.(numerator_factor),
                                                        .(denominator_factor)))) +
         scale_color_viridis_d(end=0.6) +
@@ -57,7 +64,7 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-
         theme(panel.grid=element_blank(),
               legend.title=element_blank(),
               legend.justification=c(0.5,0.5),
-              legend.position=legend_position,
+              legend.position="none",
               legend.background=element_blank(),
               legend.spacing.x=unit(1, "pt"),
               axis.text.y=element_text(size=5),
@@ -81,7 +88,8 @@ main(data_path=snakemake@input[["data"]],
      fig_height=snakemake@params[["fig_height"]],
      numerator_factor=snakemake@params[["numerator_factor"]],
      denominator_factor=snakemake@params[["denominator_factor"]],
-     legend_position=snakemake@params[["legend_position"]],
+     control_label_y = snakemake@params[["control_label_y"]],
+     condition_label_y = snakemake@params[["condition_label_y"]],
      pdf_out=snakemake@output[["pdf"]],
      grob_out=snakemake@output[["grob"]])
 

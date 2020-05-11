@@ -39,7 +39,7 @@ rule target:
         "panels/spt6_metagene.pdf",
         "panels/set2_abundance_chipseq_barplot.pdf",
         "panels/spt6_abundance_chipseq_barplot.pdf",
-        expand("panels/{factor}_chip_maplot.pdf", factor=["Set2", "Spt6"]),
+        expand("panels/{factor}_chip_maplot.pdf", factor=["Set2", "Spt6", "Set2-Rpb1norm", "Spt6-Rpb1norm"]),
         "figures/figure_4_set2_spt6.pdf",
         "panels/set2_spt6_v_rpb1.pdf",
         "panels/set2_spt6_rpb1norm_v_rpb1.pdf",
@@ -660,14 +660,12 @@ rule set2_metagene:
         panel_letter = config["set2_metagene"]["panel_letter"],
         numerator_factor = "Set2",
         denominator_factor = "Rpb1",
-        # plot_title = "Set2 ChIP-seq",
-        # plot_subtitle = "3087 non-overlapping coding genes",
-        legend_position = [0.6, 0.15]
+        control_label_y = config["set2_metagene"]["control_label_y"],
+        condition_label_y = config["set2_metagene"]["condition_label_y"],
     conda:
         "envs/plot_figures.yaml"
     script:
         "scripts/single_factor_ratio_metagene.R"
-        # "scripts/single_factor_standardized_metagene.R"
 
 rule chip_maplot:
     input:
@@ -679,6 +677,8 @@ rule chip_maplot:
         pdf = "panels/{factor}_chip_maplot.pdf",
         grob = "panels/{factor}_chip_maplot.Rdata",
     params:
+        factor_id = lambda wc: config["chip_maplot"][wc.factor]["factor_id"],
+        rpb1_norm = lambda wc: config["chip_maplot"][wc.factor]["rpb1_norm"],
         fig_height = lambda wc: eval(str(config["chip_maplot"][wc.factor]["fig_height"])),
         fig_width = lambda wc: eval(str(config["chip_maplot"][wc.factor]["fig_width"])),
         panel_letter = lambda wc: config["chip_maplot"][wc.factor]["panel_letter"],
@@ -701,14 +701,12 @@ rule spt6_metagene:
         panel_letter = config["spt6_metagene"]["panel_letter"],
         numerator_factor = "Spt6",
         denominator_factor = "Rpb1",
-        # plot_title = "Spt6 ChIP-seq",
-        # plot_subtitle = "3087 non-overlapping coding genes",
-        legend_position = [0.6, 0.25]
+        control_label_y = config["spt6_metagene"]["control_label_y"],
+        condition_label_y = config["spt6_metagene"]["condition_label_y"],
     conda:
         "envs/plot_figures.yaml"
     script:
         "scripts/single_factor_ratio_metagene.R"
-        # "scripts/single_factor_standardized_metagene.R"
 
 rule set2_abundance_chipseq_barplot:
     input:

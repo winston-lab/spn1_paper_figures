@@ -1,6 +1,7 @@
 main = function(theme_path = "spn1_2020_theme.R",
-                data_path = "depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv",
+                data_path = "depleted-v-non-depleted_Set2-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv",
                 rpb1_path = "depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv",
+                rpb1_norm = FALSE,
                 factor_id = "Set2",
                 panel_letter = "x",
                 fig_width = 8.5,
@@ -13,6 +14,9 @@ main = function(theme_path = "spn1_2020_theme.R",
         left_join(read_tsv(rpb1_path),
                   by=c("chrom", "start", "end", "name", "strand"),
                   suffix=c("_factor", "_rpb1"))
+
+    y_text = ifelse(rpb1_norm, "/ Rpb1:", "ChIP-seq:")
+    y_text = paste(factor_id, y_text)
 
     maplot = ggplot(data=df,
            aes(x=control_enrichment_rpb1,
@@ -29,7 +33,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_color_viridis_c(option="cividis") +
         scale_x_continuous(name="non-depleted Rpb1 enrichment",
                            breaks=scales::pretty_breaks(3)) +
-        scale_y_continuous(name=bquote(atop(.(factor_id) ~ "ChIP-seq:",
+        scale_y_continuous(name=bquote(atop(.(y_text),
                                             "log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                       "non-depleted")))),
                            breaks=scales::pretty_breaks(3)) +
@@ -53,7 +57,8 @@ main = function(theme_path = "spn1_2020_theme.R",
 main(theme_path = snakemake@input[["theme"]],
      data_path = snakemake@input[["data"]],
      rpb1_path = snakemake@input[["rpb1"]],
-     factor_id = snakemake@wildcards[["factor"]],
+     rpb1_norm = snakemake@params[["rpb1_norm"]],
+     factor_id = snakemake@params[["factor_id"]],
      panel_letter = snakemake@params[["panel_letter"]],
      fig_width = snakemake@params[["fig_width"]],
      fig_height = snakemake@params[["fig_height"]],
