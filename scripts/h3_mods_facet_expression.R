@@ -147,7 +147,8 @@ main = function(theme_path = "spn1_2020_theme.R",
         labs(tag=panel_letter) +
         theme(plot.margin=margin(11/2, 0, 0, 11/2, "pt"),
               plot.tag=element_text(size=9,
-                                    face="bold"))
+                                    face="bold",
+                                    family="FreeSans"))
 
     ggsave(pdf_out,
            plot=h3_mods_facet_expression,

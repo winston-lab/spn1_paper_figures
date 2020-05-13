@@ -63,7 +63,7 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-chipseq-spikenorm-verifi
         facet_grid(.~condition) +
         scale_color_viridis_c(option="cividis") +
         scale_x_continuous(name="Rpb1 enrichment",
-                           breaks=scales::pretty_breaks(3)) +
+                           breaks=scales::pretty_breaks(4)) +
         scale_y_continuous(name="Spn1\nenrichment",
                            breaks=scales::pretty_breaks(3)) +
         labs(tag=panel_letter) +

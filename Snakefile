@@ -471,7 +471,7 @@ rule esr_fgsea:
     params:
         min_go_group_size=15,
         max_go_group_size="Inf",
-        n_permutations=1e4,
+        n_permutations=1e5,
         fig_height = eval(str(config["esr_fgsea"]["fig_height"])),
         fig_width = eval(str(config["esr_fgsea"]["fig_width"])),
         panel_letter = config["esr_fgsea"]["panel_letter"],

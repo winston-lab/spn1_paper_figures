@@ -50,7 +50,8 @@ main = function(data_paths=c("SRB4_all-assays.tsv.gz",
                   x_max = max(position))
 
     df_rpb1 = df %>%
-        filter(assay == "ChIPseq-Rpb1")
+        # filter(assay == "ChIPseq-Rpb1")
+        filter(assay == "ChIPseq-Rpb1-spikenorm")
 
     df_rna = df %>%
         filter(str_detect(assay, "RNAseq")) %>%

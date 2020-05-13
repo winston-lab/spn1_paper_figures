@@ -23,11 +23,11 @@ get_fgsea_results = function(go_mapping_list,
 }
 
 main = function(theme_path="spn1_2020_theme.R",
-                diffexp_results_path_single = "Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv",
+                diffexp_results_path_single = "Spn1-IAA-v-Spn1-DMSO_rnaseq-libsizenorm-verified-coding-genes-diffexp-results-all.tsv",
                 go_mapping_path = "spn1_go_slim_mapping.tsv",
                 min_go_group_size = 15,
                 max_go_group_size = Inf,
-                n_permutations = 1e4,
+                n_permutations = 1e5,
                 pdf_out = "test.pdf",
                 grob_out = "test.Rdata",
                 fig_width=17.4/2,
@@ -49,32 +49,52 @@ main = function(theme_path="spn1_2020_theme.R",
                                              max_go_group_size=max_go_group_size,
                                              n_permutations=n_permutations)
 
-    padj = fgsea_results_single %>%
+    fgsea_results = fgsea_results_single %>%
         as_tibble() %>%
-        filter(pathway=="ESR_downregulated") %>%
-        pull(padj)
+        filter(pathway %in% c("ESR_downregulated",
+                              "ESR_upregulated"))
 
-    enrichment_plot_single = plotEnrichment(go_mapping_list[["ESR_downregulated"]],
+    enrichment_plot_esr_down = plotEnrichment(go_mapping_list[["ESR_downregulated"]],
+                                            feature_stats_single)
+    enrichment_plot_esr_up = plotEnrichment(go_mapping_list[["ESR_upregulated"]],
                                             feature_stats_single)
 
-    df = as_tibble(enrichment_plot_single$data)
+    df = as_tibble(enrichment_plot_esr_down$data) %>%
+        mutate(group="down") %>%
+        bind_rows(as_tibble(enrichment_plot_esr_up$data) %>%
+                      mutate(group="up"))
 
     esr_fgsea = ggplot(data=df,
-           aes(x=x,
-               y=y)) +
+                       aes(x=x,
+                           y=y,
+                           color=group)) +
         geom_hline(yintercept=0,
                    size=0.2,
                    color="gray70") +
         geom_line(size=0.3) +
-        geom_rug(sides="b",
+        geom_rug(data=filter(df, group=="down"),
+                 aes(x=x),
+                 sides="b",
+                 size=0.1,
+                 alpha=0.2,
+                 length=unit(3, "pt")) +
+        geom_rug(data=filter(df, group=="up"),
+                 aes(x=x),
+                 sides="t",
                  size=0.1,
                  alpha=0.2,
                  length=unit(3, "pt")) +
         annotate(geom="text",
-                 x=2500,
-                 y=-0.18,
-                 label=bquote("p"["adj"] == .(round(padj, 3))),
+                 x=rep(c(400, 2750), 2),
+                 y=c(c(0.35, -0.25),
+                     c(0.35, -0.25) - 0.07),
+                 label=c("ESR upregulated",
+                         "ESR downregulated",
+                         expression("p"["adj"] < "7e-4"),
+                         expression("p"["adj"] < "7e-4")),
+                 color=rep(c("#FAA43A", "#5DA5DA"), 2),
                  size=5/72*25.4,
+                 hjust=0,
                  family="FreeSans") +
         scale_x_continuous(name=quote("(more upregulated)" %<-%  "gene rank"  %->% "(more downregulated)"),
                            expand=c(0,0),
@@ -82,10 +102,11 @@ main = function(theme_path="spn1_2020_theme.R",
         scale_y_continuous(name="running\nenrichment\nscore",
                            expand=c(0.07, 0),
                            breaks=scales::pretty_breaks(4)) +
-        labs(tag=panel_letter,
-             title="Enrichment of genes downregulated in ESR") +
+        scale_color_manual(values=c("#5DA5DA", "#FAA43A")) +
+        labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
+              legend.position="none",
               plot.margin=margin(11/2, 11, 11/2, 11/2, "pt"),
               axis.text=element_text(size=5),
               axis.title.y=element_text(angle=0,
