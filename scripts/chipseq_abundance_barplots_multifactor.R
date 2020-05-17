@@ -95,8 +95,9 @@ main = function(theme_path = "spn1_2020_theme.R",
                            name="total signal") +
         scale_fill_viridis_d(end=0.6,
                              name=NULL,
-                             guide=guide_legend(label.position="top",
-                                                keyheight=unit(7, "pt"))) +
+                             guide=guide_legend(label.position="right",
+                                                keyheight=unit(10, "pt"),
+                                                keywidth=unit(10, "pt"))) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid.major.x=element_blank(),
@@ -105,7 +106,7 @@ main = function(theme_path = "spn1_2020_theme.R",
               axis.text.x=element_blank(),
               axis.ticks=element_blank(),
               legend.position="bottom",
-              legend.text=element_text(margin=margin(b=-3, unit="pt")),
+              legend.text=element_text(margin=margin(l=-4, unit="pt")),
               legend.margin=margin(t=-10, unit="pt"),
               strip.text.x=element_text(margin=margin(b=2, unit="pt")))
 
