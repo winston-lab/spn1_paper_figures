@@ -14,6 +14,13 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spiken
                   by=c("chrom", "start", "end", "name", "strand"),
                   suffix=c("_spn1", "_rpb1"))
 
+    df_cor = df %>%
+        summarize(x=max(control_enrichment_rpb1, na.rm=TRUE),
+                  y=max(control_enrichment_spn1, na.rm=TRUE),
+                  pearson=cor(control_enrichment_rpb1,
+                              control_enrichment_spn1,
+                              use="complete.obs"))
+
     spn1_rpb1norm_v_rpb1_nondepleted = ggplot(data=df,
            aes(x=control_enrichment_rpb1,
                y=control_enrichment_spn1)) +
@@ -23,6 +30,14 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spiken
                     shape=16,
                     size=0.3,
                     alpha=0.8) +
+        geom_text(data=df_cor,
+                  aes(x=x,
+                      y=y,
+                      label=glue::glue("R={round(pearson, 2)}")),
+                  hjust=1,
+                  vjust=1,
+                  size=5/72*25.4,
+                  family="FreeSans") +
         geom_smooth(method="lm",
                     size=0.2,
                     color=viridisLite::viridis(2, end=0.8)[2]) +

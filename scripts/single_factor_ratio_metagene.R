@@ -69,7 +69,9 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-
               legend.spacing.x=unit(1, "pt"),
               axis.text.y=element_text(size=5),
               axis.title.y=element_text(angle=0,
-                                        vjust=0.5))
+                                        vjust=0.5,
+                                        margin=margin(l=-4, unit="pt")),
+              plot.margin=margin(11/2, 11/2+1, 11/2+4, 11/2, "pt"))
 
     ggsave(pdf_out,
            metagene,
