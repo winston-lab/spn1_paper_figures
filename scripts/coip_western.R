@@ -10,7 +10,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 ip_set2_blot_path = "Set2 WB Rep2 IPs_8-7.tif",
                 pdf_out="test.pdf",
                 grob_out="test.Rdata",
-                fig_width=11.4,
+                fig_width=17.4,
                 fig_height=13/3,
                 panel_letter="a"){
     source(theme_path)
@@ -22,7 +22,7 @@ main = function(theme_path = "spn1_2020_theme.R",
     antigen_label_edge = 0.08
     y_margin_size = 0.015
     blot_max_y = 0.67
-    blot_min_y = 0.045
+    blot_min_y = 0.055
     blot_height= ((blot_max_y - blot_min_y) - 3 * y_margin_size) / 6
     antigen_labels_y = c(blot_max_y - (1/2) * blot_height,
                          blot_max_y - (3/2) * blot_height - y_margin_size,
@@ -46,13 +46,13 @@ main = function(theme_path = "spn1_2020_theme.R",
         matrix(ncol=2, byrow=TRUE) %>%
         rowMeans()
 
-    antigen_labels = textGrob(x=antigen_label_edge,
+    antigen_labels = textGrob(x=antigen_label_edge + 0.015,
                               y=antigen_labels_y,
                               label=c("Rpb3",
                                       "Spt6",
                                       "Spn1",
                                       "Set2"),
-                              hjust=0.8,
+                              hjust=1,
                               gp=gpar(fontsize=7,
                                       fontfamily="FreeSans"))
     input_ip_labels = textGrob(x=blot_centers,
@@ -86,7 +86,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                               y0=0.75, y1=0.75)
     rpb3_flag_labels = textGrob(x=c(input_lane_centers[1],
                                     ip_lane_centers[1]),
-                                y=0.675,
+                                y=0.68,
                                 label="Rpb3-FLAG",
                                 rot=90,
                                 hjust=0,
@@ -228,7 +228,7 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     coip_western = as.ggplot(coip_western) +
         labs(tag=panel_letter) +
-        theme(plot.margin=margin(0, 11/2, 0, 11/2, "pt"),
+        theme(plot.margin=margin(0, 40, 0, 11/2, "pt"),
               plot.tag=element_text(family="FreeSans",
                                     size=9,
                                     face="bold"))
@@ -257,3 +257,4 @@ main(theme_path=snakemake@input[["theme"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]],
      panel_letter=snakemake@params[["panel_letter"]])
+
