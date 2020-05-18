@@ -659,8 +659,6 @@ rule set2_metagene:
         panel_letter = config["set2_metagene"]["panel_letter"],
         numerator_factor = "Set2",
         denominator_factor = "Rpb1",
-        control_label_y = config["set2_metagene"]["control_label_y"],
-        condition_label_y = config["set2_metagene"]["condition_label_y"],
     conda:
         "envs/plot_figures.yaml"
     script:
@@ -700,8 +698,6 @@ rule spt6_metagene:
         panel_letter = config["spt6_metagene"]["panel_letter"],
         numerator_factor = "Spt6",
         denominator_factor = "Rpb1",
-        control_label_y = config["spt6_metagene"]["control_label_y"],
-        condition_label_y = config["spt6_metagene"]["condition_label_y"],
     conda:
         "envs/plot_figures.yaml"
     script:

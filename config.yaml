@@ -236,8 +236,8 @@ set2_metagene:
     fig_width: 8.5
     fig_height: "9 / 16 * 8.5"
     panel_letter: g
-    control_label_y: 0.8
-    condition_label_y: -0.35
+    # control_label_y: 0.8
+    # condition_label_y: -0.35
 
 spt6_metagene:
     # data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6.tsv.gz
@@ -245,8 +245,8 @@ spt6_metagene:
     fig_width: 8.5
     fig_height: "9 / 16 * 8.5"
     panel_letter: d
-    control_label_y: 0.42
-    condition_label_y: -0.18
+    # control_label_y: 0.42
+    # condition_label_y: -0.18
 
 set2_abundance_chipseq_barplot:
     data: ../chipseq-set2/qual_ctrl/spikein/Set2-chipseq_spikein-counts.tsv
