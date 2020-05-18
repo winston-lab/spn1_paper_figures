@@ -44,7 +44,7 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                    color="gray70") +
         geom_point(shape=1,
                    size=0.3,
-                   stroke=0.1,
+                   stroke=0.15,
                    alpha=0.5) +
         scale_x_log10(breaks=c(1e1, 1e3, 1e5),
                       labels=c(expression(10^1),
@@ -57,7 +57,8 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                                                 "log"[2] ~
                                                     textstyle(frac("Spn1-depleted",
                                                                    "non-depleted"))))) +
-        scale_color_manual(values=c("black", "red")) +
+        scale_color_manual(values=c("gray50",
+                                    "#114477")) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),

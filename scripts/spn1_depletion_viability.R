@@ -62,13 +62,11 @@ main = function(theme_path = "spn1_2020_theme.R",
                    shape=16,
                    size=0.5,
                    alpha=0.8) +
-        scale_color_brewer(palette="Set1",
-                          direction = -1,
+        scale_color_manual(values=c("#377eb8",
+                                    "#BB5566"),
                           name=NULL,
                           guide=guide_legend(keywidth=unit(4, "pt"),
                                              override.aes = list(size=1.5))) +
-        # scale_color_manual(values=rep("black", 2),
-                           # guide=FALSE) +
         scale_y_continuous(limits=c(0,
                                     max(c(df_summary[["mean"]] + df_summary[["sd"]],
                                           df[["cfu_per_od_unit"]]),

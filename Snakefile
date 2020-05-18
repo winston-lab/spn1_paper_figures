@@ -349,8 +349,7 @@ rule rnaseq_vs_rpb1:
 rule assemble_figure_rnaseq_rpb1:
     input:
         fonts = ".fonts_registered.txt",
-        rnaseq_maplot = "panels/rnaseq_maplot.Rdata",
-        # rnaseq_single_locus_datavis = "panels/rnaseq_single_locus_datavis.Rdata",
+        rnaseq_maplot = "panels/rnaseq_maplot_alternate.Rdata",
         rnaseq_vs_rpb1_single_locus = "panels/rnaseq_vs_rpb1_single_locus.Rdata",
         rpb1_metagenes = "panels/rpb1_metagenes.Rdata",
         rnaseq_vs_rpb1 = "panels/rnaseq_vs_rpb1.Rdata",
