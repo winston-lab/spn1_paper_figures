@@ -67,6 +67,7 @@ rule target:
         # "panels/rpgene_datavis_supp_length_filtered.pdf",
         "figures/figure_S6_splicing_supplemental.pdf",
         "panels/intron_containing_gene_heatmaps.pdf",
+        "panels/general_spn1_depletion_westerns.pdf",
 
 rule register_fonts:
     input:
@@ -802,6 +803,7 @@ rule assemble_figure_set2_spt6_supp:
         fonts = ".fonts_registered.txt",
         set2_spt6_v_rpb1 = "panels/set2_spt6_v_rpb1.Rdata",
         set2_spt6_rpb1norm_v_rpb1 = "panels/set2_spt6_rpb1norm_v_rpb1.Rdata",
+        general_spn1_depletion_westerns = "panels/general_spn1_depletion_westerns.Rdata",
     output:
         pdf = "figures/figure_S3_set2_spt6_supplemental.pdf"
     params:
@@ -1186,4 +1188,28 @@ rule intron_containing_gene_heatmaps:
         "envs/plot_figures.yaml"
     script:
         "scripts/intron_containing_gene_heatmaps.R"
+
+rule general_spn1_depletion_westerns:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        spn1_blot = config["general_spn1_depletion_westerns"]["spn1"],
+        rpb1_blot = config["general_spn1_depletion_westerns"]["rpb1"],
+        spt6_blot = config["general_spn1_depletion_westerns"]["spt6"],
+        set2_blot = config["general_spn1_depletion_westerns"]["set2"],
+        pgk1_blot = config["general_spn1_depletion_westerns"]["pgk1"],
+        h3k36me3_blot = config["general_spn1_depletion_westerns"]["h3k36me3"],
+        h3k36me2_blot = config["general_spn1_depletion_westerns"]["h3k36me2"],
+        h3_blot = config["general_spn1_depletion_westerns"]["h3"],
+    output:
+        pdf = "panels/general_spn1_depletion_westerns.pdf",
+        grob = "panels/general_spn1_depletion_westerns.Rdata",
+    params:
+        fig_height = eval(str(config["general_spn1_depletion_westerns"]["fig_height"])),
+        fig_width = eval(str(config["general_spn1_depletion_westerns"]["fig_width"])),
+        panel_letter = config["general_spn1_depletion_westerns"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/general_spn1_depletion_westerns.R"
 

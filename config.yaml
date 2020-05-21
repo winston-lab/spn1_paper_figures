@@ -318,7 +318,7 @@ set2_spt6_rpb1norm_v_rpb1:
 
 set2_spt6_supplemental:
     fig_width: 17.4
-    fig_height: 7
+    fig_height: 12.5
 
 h3_vs_rpb1_ma:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
@@ -518,3 +518,16 @@ intron_containing_gene_heatmaps:
     fig_width: "17.4 / 2"
     fig_height: 8
     panel_letter: x
+
+general_spn1_depletion_westerns:
+    spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
+    rpb1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Rpb1-Pgk1_Rep3.tif
+    spt6: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Spt6_Rep3.tif
+    set2: ../spn1-small-data/general_westerns/raw_western_blots/Rep2/Set2_Rep2.tif
+    pgk1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Pgk1_for_Spn1_Rep3.tif
+    h3k36me3: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3K36me3_Rep3.tif
+    h3k36me2: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3K36me2_Rep3.tif
+    h3: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3_for_H3K36me2_Rep3.tif
+    fig_width: 6
+    fig_height: 5.5
+    panel_letter: c
