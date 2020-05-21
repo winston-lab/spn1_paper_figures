@@ -19,21 +19,21 @@ main = function(theme_path = "spn1_2020_theme.R",
     library(tiff)
     library(ggplotify)
 
-    y_margin_size = 0.015
+    y_margin_size = 0.0225
     blot_max_y = 0.88
-    blot_min_y = 0.055
+    blot_min_y = 0.1
     blot_height = ((blot_max_y - blot_min_y) - 4 * y_margin_size) / 9.2
     blot_pixel_height = 30
     blot_pixel_width = 169
     antigen_labels_x = 0.75
-    antigen_labels_y = blot_max_y - c((2.2 / 2) * blot_height,
-                                      (2.2 + 0.5) * blot_height + y_margin_size,
-                                      (2.2 + 1.5) * blot_height + 2 * y_margin_size,
-                                      (2.2 + 2.5) * blot_height + 3 * y_margin_size,
-                                      (2.2 + 3.5) * blot_height + 4 * y_margin_size,
-                                      (2.2 + 4.5) * blot_height + 5 * y_margin_size,
-                                      (2.2 + 5.5) * blot_height + 6 * y_margin_size,
-                                      (2.2 + 6.5) * blot_height + 7 * y_margin_size)
+    antigen_labels_y = blot_max_y - c((2.45 / 2) * blot_height,
+                                      (2.45 + 0.5) * blot_height + y_margin_size,
+                                      (2.45 + 1.5) * blot_height + 2 * y_margin_size,
+                                      (2.45 + 2.5) * blot_height + 3 * y_margin_size,
+                                      (2.45 + 3.5) * blot_height + 4 * y_margin_size,
+                                      (2.45 + 4.5) * blot_height + 5 * y_margin_size,
+                                      (2.45 + 5.5) * blot_height + 6 * y_margin_size,
+                                      (2.45 + 6.5) * blot_height + 7 * y_margin_size)
     blot_width = antigen_labels_x - 0.02
 
     antigen_labels = textGrob(x=antigen_labels_x,
@@ -44,7 +44,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                       fontfamily="FreeSans"))
     lane_centers = scales::rescale(seq(0.5/6, 5.5/6, length.out=6),
                                    from=c(0,1),
-                                   to=c(0.02, 0.02 + blot_width))
+                                   to=c(0.01, 0.01 + blot_width))
 
     lane_alignment = segmentsGrob(x0=lane_centers,
                                   x1=lane_centers,
@@ -52,7 +52,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                   y1=1)
 
     condition_labels = textGrob(x=lane_centers,
-                                y=blot_max_y + y_margin_size,
+                                y=blot_max_y + (y_margin_size / 2),
                                 label=rep(c("DMSO", "IAA"), 3),
                                 vjust=0,
                                 gp=gpar(fontsize=5,
@@ -62,8 +62,8 @@ main = function(theme_path = "spn1_2020_theme.R",
         matrix(ncol=2, byrow=TRUE) %>%
         rowMeans()
 
-    strain_lines = segmentsGrob(x0=strain_centers - blot_width / 6 + 0.02,
-                                x1=strain_centers + blot_width / 6 - 0.02,
+    strain_lines = segmentsGrob(x0=strain_centers - blot_width / 6 + 0.008,
+                                x1=strain_centers + blot_width / 6 - 0.008,
                                 y0=0.94,
                                 y1=0.94)
     strain_labels = textGrob(x=strain_centers,
@@ -76,18 +76,18 @@ main = function(theme_path = "spn1_2020_theme.R",
                                      fontfamily="FreeSans"))
 
     blot_outlines = rectGrob(width = blot_width,
-                             height = c(blot_height * 2.2, rep(blot_height, 7)) ,
+                             height = c(blot_height * 2.45, rep(blot_height, 7)) ,
                              x=antigen_labels_x / 2,
                              y=antigen_labels_y,
                              gp=gpar(lwd=1,
                                      fill=NA))
 
     spn1_image = readTIFF(spn1_blot_path)
-    spn1_raster = rasterGrob(spn1_image[100:(100 + 2.2 * blot_pixel_height),
+    spn1_raster = rasterGrob(spn1_image[95:(95 + 2.45 * blot_pixel_height),
                                         53:(53 + blot_pixel_width),
                                         1:3],
                              width=blot_width,
-                             height=blot_height * 2.2,
+                             height=blot_height * 2.45,
                              x=antigen_labels_x / 2,
                              y=antigen_labels_y[1])
 
@@ -137,7 +137,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              y=antigen_labels_y[5])
 
     h3k36me3_image = readTIFF(h3k36me3_blot_path)
-    h3k36me3_raster = rasterGrob(h3k36me3_image[202:(202 + blot_pixel_height),
+    h3k36me3_raster = rasterGrob(h3k36me3_image[199:(199 + blot_pixel_height),
                                                 52:(52 + blot_pixel_width * 1.5 - 10),
                                                 1:3],
                              width=blot_width,
@@ -146,7 +146,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              y=antigen_labels_y[6])
 
     h3k36me2_image = readTIFF(h3k36me2_blot_path)
-    h3k36me2_raster = rasterGrob(h3k36me2_image[194:(194 + blot_pixel_height),
+    h3k36me2_raster = rasterGrob(h3k36me2_image[197:(197 + blot_pixel_height),
                                                 75:(75 + blot_pixel_width * 1.5 - 10),
                                                 1:3],
                              width=blot_width,
