@@ -21,7 +21,9 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                    size=0.2) +
         geom_density(aes(y=..scaled..),
                      size=0.2,
-                     fill="#114477") +
+                     fill="#00204D",
+                     color="#00204D",
+                     alpha=0.8) +
         scale_x_continuous(limits=range(df[["log2_foldchange"]]),
                            breaks=seq(-4,4,2)) +
         scale_y_continuous(limits=c(-0.02,1.1),
@@ -58,7 +60,7 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                                                     textstyle(frac("Spn1-depleted",
                                                                    "non-depleted"))))) +
         scale_color_manual(values=c("gray50",
-                                    "#114477")) +
+                                    "#00204D")) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
