@@ -117,7 +117,7 @@ main = function(theme_path = "spn1_2020_theme.R",
               strip.text.x=element_text(margin=margin(b=1, unit="pt")),
               legend.title=element_blank(),
               legend.justification=c(0.5,0.5),
-              legend.position=c(0.20,0.38),
+              legend.position=c(0.19,0.38),
               legend.background=element_blank(),
               legend.key.width=unit(10, "pt"),
               legend.key.height=unit(10, "pt"),
@@ -125,7 +125,7 @@ main = function(theme_path = "spn1_2020_theme.R",
               axis.text.y=element_text(size=5),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5),
-              plot.margin=margin(11/2, 11/2, 0, 11/2, "pt"))
+              plot.margin=margin(11/2, 11/2 + 1, 0, 11/2, "pt"))
 
     ggsave(pdf_out,
            plot=h3_mods_non_h3_norm,

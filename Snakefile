@@ -67,7 +67,8 @@ rule target:
         # "panels/rpgene_datavis_supp_length_filtered.pdf",
         "figures/figure_S6_splicing_supplemental.pdf",
         "panels/intron_containing_gene_heatmaps.pdf",
-        "panels/general_spn1_depletion_westerns.pdf",
+        "panels/elongation_spn1_depletion_westerns.pdf",
+        "panels/histone_spn1_depletion_westerns.pdf",
 
 rule register_fonts:
     input:
@@ -803,7 +804,7 @@ rule assemble_figure_set2_spt6_supp:
         fonts = ".fonts_registered.txt",
         set2_spt6_v_rpb1 = "panels/set2_spt6_v_rpb1.Rdata",
         set2_spt6_rpb1norm_v_rpb1 = "panels/set2_spt6_rpb1norm_v_rpb1.Rdata",
-        general_spn1_depletion_westerns = "panels/general_spn1_depletion_westerns.Rdata",
+        elongation_spn1_depletion_westerns = "panels/elongation_spn1_depletion_westerns.Rdata",
     output:
         pdf = "figures/figure_S3_set2_spt6_supplemental.pdf"
     params:
@@ -1100,12 +1101,10 @@ rule h3_mods_facet_expression:
 rule assemble_figure_h3_mods_supp:
     input:
         fonts = ".fonts_registered.txt",
+        histone_spn1_depletion_westerns = "panels/histone_spn1_depletion_westerns.Rdata",
         chipseq_abundance_barplots_h3 = "panels/chipseq_abundance_barplots_h3.Rdata",
         h3_mods_non_h3_norm = "panels/h3_mods_non_h3_norm.Rdata",
         h3_mods_facet_expression = "panels/h3_mods_facet_expression.Rdata",
-        # h3k4me3 = "panels/H3K4me3_facet_expression_length.Rdata",
-        # h3k36me2 = "panels/H3K36me2_facet_expression_length.Rdata",
-        # h3k36me3 = "panels/H3K36me3_facet_expression_length.Rdata",
     output:
         pdf = "figures/figure_S5_h3_mods_supplemental.pdf"
     params:
@@ -1189,27 +1188,45 @@ rule intron_containing_gene_heatmaps:
     script:
         "scripts/intron_containing_gene_heatmaps.R"
 
-rule general_spn1_depletion_westerns:
+rule elongation_spn1_depletion_westerns:
     input:
         fonts = ".fonts_registered.txt",
         theme = config["theme_path"],
-        spn1_blot = config["general_spn1_depletion_westerns"]["spn1"],
-        rpb1_blot = config["general_spn1_depletion_westerns"]["rpb1"],
-        spt6_blot = config["general_spn1_depletion_westerns"]["spt6"],
-        set2_blot = config["general_spn1_depletion_westerns"]["set2"],
-        pgk1_blot = config["general_spn1_depletion_westerns"]["pgk1"],
-        h3k36me3_blot = config["general_spn1_depletion_westerns"]["h3k36me3"],
-        h3k36me2_blot = config["general_spn1_depletion_westerns"]["h3k36me2"],
-        h3_blot = config["general_spn1_depletion_westerns"]["h3"],
+        spn1_blot = config["elongation_spn1_depletion_westerns"]["spn1"],
+        rpb1_blot = config["elongation_spn1_depletion_westerns"]["rpb1"],
+        spt6_blot = config["elongation_spn1_depletion_westerns"]["spt6"],
+        set2_blot = config["elongation_spn1_depletion_westerns"]["set2"],
+        pgk1_blot = config["elongation_spn1_depletion_westerns"]["pgk1"],
     output:
-        pdf = "panels/general_spn1_depletion_westerns.pdf",
-        grob = "panels/general_spn1_depletion_westerns.Rdata",
+        pdf = "panels/elongation_spn1_depletion_westerns.pdf",
+        grob = "panels/elongation_spn1_depletion_westerns.Rdata",
     params:
-        fig_height = eval(str(config["general_spn1_depletion_westerns"]["fig_height"])),
-        fig_width = eval(str(config["general_spn1_depletion_westerns"]["fig_width"])),
-        panel_letter = config["general_spn1_depletion_westerns"]["panel_letter"]
+        fig_height = eval(str(config["elongation_spn1_depletion_westerns"]["fig_height"])),
+        fig_width = eval(str(config["elongation_spn1_depletion_westerns"]["fig_width"])),
+        panel_letter = config["elongation_spn1_depletion_westerns"]["panel_letter"]
     conda:
         "envs/plot_figures.yaml"
     script:
-        "scripts/general_spn1_depletion_westerns.R"
+        "scripts/elongation_spn1_depletion_westerns.R"
+
+rule histone_spn1_depletion_westerns:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        spn1_blot = config["histone_spn1_depletion_westerns"]["spn1"],
+        pgk1_blot = config["histone_spn1_depletion_westerns"]["pgk1"],
+        h3k36me3_blot = config["histone_spn1_depletion_westerns"]["h3k36me3"],
+        h3k36me2_blot = config["histone_spn1_depletion_westerns"]["h3k36me2"],
+        h3_blot = config["histone_spn1_depletion_westerns"]["h3"],
+    output:
+        pdf = "panels/histone_spn1_depletion_westerns.pdf",
+        grob = "panels/histone_spn1_depletion_westerns.Rdata",
+    params:
+        fig_height = eval(str(config["histone_spn1_depletion_westerns"]["fig_height"])),
+        fig_width = eval(str(config["histone_spn1_depletion_westerns"]["fig_width"])),
+        panel_letter = config["histone_spn1_depletion_westerns"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/histone_spn1_depletion_westerns.R"
 

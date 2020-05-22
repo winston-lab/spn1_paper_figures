@@ -1,9 +1,6 @@
 
 main = function(theme_path = "spn1_2020_theme.R",
                 spn1_blot_path="All replicates - raw western blots/Rep1/Spn1_Rep1.tif",
-                rpb1_blot_path="All replicates - raw western blots/Rep3/Rpb1-Pgk1_Rep3.tif",
-                spt6_blot_path="All replicates - raw western blots/Rep3/Spt6_Rep3.tif",
-                set2_blot_path="All replicates - raw western blots/Rep2/Set2_Rep2.tif",
                 pgk1_blot_path="All replicates - raw western blots/Rep3/Pgk1_for_Spn1_Rep3.tif",
                 h3k36me3_blot_path="All replicates - raw western blots/Rep3/H3K36me3_Rep3.tif",
                 h3k36me2_blot_path="All replicates - raw western blots/Rep3/H3K36me2_Rep3.tif",
@@ -21,8 +18,8 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     y_margin_size = 0.0225
     blot_max_y = 0.88
-    blot_min_y = 0.1
-    blot_height = ((blot_max_y - blot_min_y) - 4 * y_margin_size) / 9.2
+    blot_min_y = 0.04
+    blot_height = ((blot_max_y - blot_min_y) - 4 * y_margin_size) / 6.2
     blot_pixel_height = 30
     blot_pixel_width = 169
     antigen_labels_x = 0.75
@@ -30,15 +27,12 @@ main = function(theme_path = "spn1_2020_theme.R",
                                       (2.45 + 0.5) * blot_height + y_margin_size,
                                       (2.45 + 1.5) * blot_height + 2 * y_margin_size,
                                       (2.45 + 2.5) * blot_height + 3 * y_margin_size,
-                                      (2.45 + 3.5) * blot_height + 4 * y_margin_size,
-                                      (2.45 + 4.5) * blot_height + 5 * y_margin_size,
-                                      (2.45 + 5.5) * blot_height + 6 * y_margin_size,
-                                      (2.45 + 6.5) * blot_height + 7 * y_margin_size)
+                                      (2.45 + 3.5) * blot_height + 4 * y_margin_size)
     blot_width = antigen_labels_x - 0.02
 
     antigen_labels = textGrob(x=antigen_labels_x,
                               y=antigen_labels_y,
-                              label=c("Spn1", "Rpb1", "Spt6", "Set2", "H3", "H3K36me3", "H3K36me2", "Pgk1"),
+                              label=c("Spn1", "H3K36me2", "H3K36me3", "H3", "Pgk1"),
                               hjust=0,
                               gp=gpar(fontsize=7,
                                       fontfamily="FreeSans"))
@@ -64,8 +58,8 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     strain_lines = segmentsGrob(x0=strain_centers - blot_width / 6 + 0.008,
                                 x1=strain_centers + blot_width / 6 - 0.008,
-                                y0=0.94,
-                                y1=0.94)
+                                y0=0.935,
+                                y1=0.935)
     strain_labels = textGrob(x=strain_centers,
                              y=1,
                              label=c("wild type",
@@ -76,7 +70,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                      fontfamily="FreeSans"))
 
     blot_outlines = rectGrob(width = blot_width,
-                             height = c(blot_height * 2.45, rep(blot_height, 7)) ,
+                             height = c(blot_height * 2.45, rep(blot_height, 4)) ,
                              x=antigen_labels_x / 2,
                              y=antigen_labels_y,
                              gp=gpar(lwd=1,
@@ -91,33 +85,6 @@ main = function(theme_path = "spn1_2020_theme.R",
                              x=antigen_labels_x / 2,
                              y=antigen_labels_y[1])
 
-    rpb1_image = readTIFF(rpb1_blot_path)
-    rpb1_raster = rasterGrob(rpb1_image[50:(50 + blot_pixel_height),
-                                        55:(55 + blot_pixel_width),
-                                        1:3],
-                             width=blot_width,
-                             height=blot_height,
-                             x=antigen_labels_x / 2,
-                             y=antigen_labels_y[2])
-
-    spt6_image = readTIFF(spt6_blot_path)
-    spt6_raster = rasterGrob(spt6_image[50:(50 + blot_pixel_height),
-                                        24:(24 + blot_pixel_width - 5),
-                                        1:3],
-                             width=blot_width,
-                             height=blot_height,
-                             x=antigen_labels_x / 2,
-                             y=antigen_labels_y[3])
-
-    set2_image = readTIFF(set2_blot_path)
-    set2_raster = rasterGrob(set2_image[104:(104+blot_pixel_height),
-                                        17:(17+blot_pixel_width),
-                                        1:3],
-                             width=blot_width,
-                             height=blot_height,
-                             x=antigen_labels_x / 2,
-                             y=antigen_labels_y[4])
-
     pgk1_image = readTIFF(pgk1_blot_path)
     pgk1_raster = rasterGrob(pgk1_image[175:(175 + blot_pixel_height),
                                         47:(47 + blot_pixel_width),
@@ -125,7 +92,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              width=blot_width,
                              height=blot_height,
                              x=antigen_labels_x / 2,
-                             y=antigen_labels_y[8])
+                             y=antigen_labels_y[5])
 
     h3_image = readTIFF(h3_blot_path)
     h3_raster = rasterGrob(h3_image[200:(200 + blot_pixel_height),
@@ -134,7 +101,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              width=blot_width,
                              height=blot_height,
                              x=antigen_labels_x / 2,
-                             y=antigen_labels_y[5])
+                             y=antigen_labels_y[4])
 
     h3k36me3_image = readTIFF(h3k36me3_blot_path)
     h3k36me3_raster = rasterGrob(h3k36me3_image[199:(199 + blot_pixel_height),
@@ -143,7 +110,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              width=blot_width,
                              height=blot_height,
                              x=antigen_labels_x / 2,
-                             y=antigen_labels_y[6])
+                             y=antigen_labels_y[3])
 
     h3k36me2_image = readTIFF(h3k36me2_blot_path)
     h3k36me2_raster = rasterGrob(h3k36me2_image[197:(197 + blot_pixel_height),
@@ -152,7 +119,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                              width=blot_width,
                              height=blot_height,
                              x=antigen_labels_x / 2,
-                             y=antigen_labels_y[7])
+                             y=antigen_labels_y[2])
 
 
     western = gTree(children=gList(
@@ -161,9 +128,6 @@ main = function(theme_path = "spn1_2020_theme.R",
         strain_labels,
         condition_labels,
         spn1_raster,
-        rpb1_raster,
-        spt6_raster,
-        set2_raster,
         h3_raster,
         h3k36me3_raster,
         h3k36me2_raster,
@@ -172,7 +136,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         # lane_alignment
         ))
 
-    general_spn1_depletion_westerns = as.ggplot(western) +
+    histone_spn1_depletion_westerns = as.ggplot(western) +
         labs(tag=panel_letter) +
         theme(plot.margin=margin(11/2, 0, 0, 11/2, "pt"),
               plot.tag=element_text(family="FreeSans",
@@ -180,20 +144,17 @@ main = function(theme_path = "spn1_2020_theme.R",
                                     face="bold"))
 
     ggsave(pdf_out,
-           plot=general_spn1_depletion_westerns,
+           plot=histone_spn1_depletion_westerns,
            width=fig_width,
            height=fig_height,
            units="cm",
            device=cairo_pdf)
-    save(general_spn1_depletion_westerns,
+    save(histone_spn1_depletion_westerns,
          file=grob_out)
 }
 
 main(theme_path=snakemake@input[["theme"]],
      spn1_blot_path=snakemake@input[["spn1_blot"]],
-     rpb1_blot_path=snakemake@input[["rpb1_blot"]],
-     spt6_blot_path=snakemake@input[["spt6_blot"]],
-     set2_blot_path=snakemake@input[["set2_blot"]],
      pgk1_blot_path=snakemake@input[["pgk1_blot"]],
      h3k36me3_blot_path=snakemake@input[["h3k36me3_blot"]],
      h3k36me2_blot_path=snakemake@input[["h3k36me2_blot"]],
@@ -203,4 +164,3 @@ main(theme_path=snakemake@input[["theme"]],
      fig_width=snakemake@params[["fig_width"]],
      fig_height=snakemake@params[["fig_height"]],
      panel_letter=snakemake@params[["panel_letter"]])
-

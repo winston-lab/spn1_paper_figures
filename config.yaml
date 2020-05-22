@@ -318,7 +318,7 @@ set2_spt6_rpb1norm_v_rpb1:
 
 set2_spt6_supplemental:
     fig_width: 17.4
-    fig_height: 12.5
+    fig_height: 11.8
 
 h3_vs_rpb1_ma:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
@@ -435,7 +435,7 @@ chipseq_abundance_barplots_h3:
         H3K4me3: ../chipseq-h3k4me3/qual_ctrl/spikein/H3K4me3-chipseq_spikein-counts.tsv
     fig_width: "17.4 * 5 / 12"
     fig_height: 5
-    panel_letter: a
+    panel_letter: b
 
 h3_mods_non_h3_norm:
     data:
@@ -444,7 +444,7 @@ h3_mods_non_h3_norm:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3.tsv.gz
     fig_width: "17.4 * 7 / 12"
     fig_height: "12 * 3 / 12"
-    panel_letter: b
+    panel_letter: c
 
 h3_mods_facet_expression_length:
     fig_width: "17.4 / 2"
@@ -469,7 +469,7 @@ h3_mods_facet_expression:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K4me3-H3norm.tsv.gz
     fig_width: "17.4 * 8 / 12"
     fig_height: 6
-    panel_letter: c
+    panel_letter: d
 
 h3_mods_supplemental:
     fig_width: 17.4
@@ -519,15 +519,22 @@ intron_containing_gene_heatmaps:
     fig_height: 8
     panel_letter: x
 
-general_spn1_depletion_westerns:
+elongation_spn1_depletion_westerns:
     spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
     rpb1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Rpb1-Pgk1_Rep3.tif
     spt6: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Spt6_Rep3.tif
     set2: ../spn1-small-data/general_westerns/raw_western_blots/Rep2/Set2_Rep2.tif
     pgk1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Pgk1_for_Spn1_Rep3.tif
+    fig_width: 6
+    fig_height: 4.8
+    panel_letter: c
+
+histone_spn1_depletion_westerns:
+    spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
+    pgk1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Pgk1_for_Spn1_Rep3.tif
     h3k36me3: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3K36me3_Rep3.tif
     h3k36me2: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3K36me2_Rep3.tif
     h3: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3_for_H3K36me2_Rep3.tif
     fig_width: 6
-    fig_height: 5.5
-    panel_letter: c
+    fig_height: 4.8
+    panel_letter: a
