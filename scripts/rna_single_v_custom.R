@@ -59,7 +59,7 @@ main = function(single_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-codi
                                                                          "non-depleted")))) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
                            name=quote(atop( "log"[2] ~ textstyle(frac("Spn1-depleted",
-                                                                      "non-depleted")), "(adjusted for controls)"))) +
+                                                                      "non-depleted")), "(adjusted for all controls)"))) +
         labs(tag=panel_letter,
              title="RNA-seq") +
         theme_default +
