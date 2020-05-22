@@ -109,7 +109,9 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                 displaystyle(atop("log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                           "non-depleted") ~ ","),
                                                                   "gene fusion"))))) +
-        scale_color_brewer(palette="Set1") +
+        scale_color_manual(values=c("#E20134",
+                                    "#00C2F9",
+                                    "#009F81")) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),

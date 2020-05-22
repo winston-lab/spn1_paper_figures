@@ -120,7 +120,9 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_x_continuous(expand=c(0,0),
                            limits=x_limits) +
         scale_y_continuous(limits=c(-1.5,1.5)) +
-        scale_color_brewer(palette="Set1") +
+        scale_color_manual(values=c("#E20134",
+                                    "#00C2F9",
+                                    "#009F81")) +
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
