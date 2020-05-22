@@ -110,7 +110,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                                           "non-depleted") ~ ","),
                                                                   "gene fusion"))))) +
         scale_color_manual(values=c("#E20134",
-                                    "#00C2F9",
+                                    "#003C86",
                                     "#009F81")) +
         labs(tag=panel_letter) +
         theme_default +

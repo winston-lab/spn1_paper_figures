@@ -121,7 +121,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                            limits=x_limits) +
         scale_y_continuous(limits=c(-1.5,1.5)) +
         scale_color_manual(values=c("#E20134",
-                                    "#00C2F9",
+                                    "#003C86",
                                     "#009F81")) +
         labs(tag=panel_letter) +
         theme_default +
