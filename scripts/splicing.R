@@ -81,7 +81,7 @@ main = function(data_path="Spn1-IAA-v-all-controls_intron_retention_results.tsv"
                            expand=c(0,0)) +
         scale_alpha_manual(values=c(0.8, 0.55),
                            guide=FALSE) +
-        scale_color_brewer(palette="Set2",
+        scale_color_manual(values=c("#FF6E3A", "#009F81"),
                            name=NULL,
                            guide=guide_legend(override.aes=list(alpha=1),
                                               keywidth=unit(3, "pt"),

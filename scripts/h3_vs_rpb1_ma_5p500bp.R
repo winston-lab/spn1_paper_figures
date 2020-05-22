@@ -25,13 +25,12 @@ plot_ma = function(df,
                    shape=1,
                    stroke=0.1) +
         geom_smooth(size=0.2,
-                    # color=viridisLite::viridis(2, end=0.8)[2]) +
-                    color="#feb24c") +
+                    color="#FCA636") +
         scale_x_continuous(breaks=scales::pretty_breaks(4),
                            name=expression("non-depleted Rpb1 enrichment")) +
         scale_y_continuous(breaks=scales::pretty_breaks(4),
                            name=y_title) +
-        scale_color_manual(values=c("black", "#e41a1c")) +
+        scale_color_manual(values=c("black", "#E20134")) +
         scale_alpha_manual(values=c(0.4, 0.8)) +
         labs(tag=panel_letter) +
         theme_default +

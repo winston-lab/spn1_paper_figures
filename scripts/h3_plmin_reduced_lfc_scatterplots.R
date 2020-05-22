@@ -138,7 +138,7 @@ main = function(data_paths=c("depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-v
 
     h3_plmin_reduced_lfc_scatterplots = plot_gene_group_lfc(df=df,
                                                             color_var=h3_affected,
-                                                            highlight_color="red",
+                                                            highlight_color="#E20134",
                                                             legend_title="H3 reduced",
                                                             panel_letter=panel_letter)
 

@@ -40,7 +40,7 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spiken
                   family="FreeSans") +
         geom_smooth(method="lm",
                     size=0.2,
-                    color=viridisLite::viridis(2, end=0.8)[2]) +
+                    color="#FCA636") +
         scale_color_viridis_c(option="cividis") +
         scale_x_continuous(name="non-depleted Rpb1 enrichment") +
         scale_y_continuous(name=expression(atop("log"[2] ~ textstyle(frac("Spn1", "Rpb1") * ","), "non-depleted"))) +
