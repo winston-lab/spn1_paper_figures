@@ -9,7 +9,7 @@ import = function(h3_path,
 
 plot_ma = function(df,
                    panel_letter,
-                   y_title=expression(atop("H3 ChIP-seq\n(first 500bp):",
+                   y_title=expression(atop("H3 ChIP-seq\n(first 500 bp):",
                                                 "log"[2] ~
                                                     textstyle(frac("Spn1-depleted",
                                                                    "non-depleted"))))){
