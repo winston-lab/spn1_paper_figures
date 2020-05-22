@@ -51,7 +51,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                    shape=16,
                    size=0.7,
                    alpha=0.8) +
-        scale_color_manual(values=c("#DDAA33",
+        scale_color_manual(values=c("#377eb8",
                                     "#BB5566"),
                            name=NULL,
                            guide=guide_legend(keywidth=unit(4, "pt"),
