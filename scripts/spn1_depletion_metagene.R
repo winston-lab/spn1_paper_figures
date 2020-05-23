@@ -73,7 +73,8 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
         theme_default +
         theme(panel.grid=element_blank(),
               plot.title=element_text(size=8,
-                                      margin=margin(0, 0, 0, 0, "pt")))
+                                      margin=margin(0, 0, 0, 0, "pt")),
+              plot.margin=margin(11/2, 11/2 + 1, 11/2, 11/2, "pt"))
 
     ggsave(pdf_out,
            spn1_depletion_metagene,

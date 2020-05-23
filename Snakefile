@@ -8,7 +8,8 @@ rule target:
         "panels/spn1_depletion_scatter.pdf",
         "panels/spn1_depletion_metagene.pdf",
         "panels/spn1_depletion_chipseq_barplot.pdf",
-        "figures/figure_1_spn1_depletion.pdf",
+        # "figures/figure_1_spn1_depletion.pdf",
+        "figures/figure_1_spn1_depletion_alternate.pdf",
         "panels/spn1_depletion_viability.pdf",
         "panels/spn1_v_rpb1_nondepleted.pdf",
         "panels/spn1_rpb1norm_v_rpb1_nondepleted.pdf",
@@ -159,7 +160,7 @@ rule assemble_figure_spn1_depletion:
         spn1_depletion_metagene = "panels/spn1_depletion_metagene.Rdata",
         spn1_depletion_scatter = "panels/spn1_depletion_scatter.Rdata",
     output:
-        pdf = "figures/figure_1_spn1_depletion.pdf"
+        pdf = "figures/figure_1_spn1_depletion_alternate.pdf"
     params:
         fig_width = eval(str(config["spn1_depletion_figure"]["fig_width"])),
         fig_height = eval(str(config["spn1_depletion_figure"]["fig_height"])),
