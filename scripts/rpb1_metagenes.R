@@ -122,9 +122,10 @@ main = function(theme_path = "spn1_2020_theme.R",
                assay=ordered(assay,
                              levels=c("ChIPseq-Ser5P-Rpb1norm",
                                       "ChIPseq-Ser2P-Rpb1norm"),
-                             labels=c("textstyle(frac(\"Rpb1-Ser5P\",\"Rpb1\"))",
-                                      "textstyle(frac(\"Rpb1-Ser2P\",\"Rpb1\"))")))
-
+                             # labels=c("textstyle(frac(\"Rpb1-Ser5P\",\"Rpb1\"))",
+                                      # "textstyle(frac(\"Rpb1-Ser2P\",\"Rpb1\"))")))
+                             labels=c("frac(\"Rpb1-Ser5P\",\"Rpb1\")",
+                                      "frac(\"Rpb1-Ser2P\",\"Rpb1\")")))
 
     modification_metagenes = ggplot(data=df_mods,
            aes(x=position,

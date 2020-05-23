@@ -23,8 +23,10 @@ main = function(spt6_path="depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spiken
     source(theme_path)
 
     df = import(spt6_path,
+           # "\"log\"[2] ~ textstyle(frac(\"Spt6\", \"Rpb1\"))") %>%
            "\"log\"[2] ~ frac(\"Spt6\", \"Rpb1\")") %>%
         bind_rows(import(set2_path,
+                         # "\"log\"[2] ~ textstyle(frac(\"Set2\", \"Rpb1\"))")) %>%
                          "\"log\"[2] ~ frac(\"Set2\", \"Rpb1\")")) %>%
         left_join(import(rpb1_path,
                          "Rpb1 enrichment"),

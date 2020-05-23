@@ -43,7 +43,8 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spiken
                     color="#FCA636") +
         scale_color_viridis_c(option="cividis") +
         scale_x_continuous(name="non-depleted Rpb1 enrichment") +
-        scale_y_continuous(name=expression(atop("log"[2] ~ textstyle(frac("Spn1", "Rpb1") * ","), "non-depleted"))) +
+        # scale_y_continuous(name=expression(atop("log"[2] ~ textstyle(frac("Spn1", "Rpb1") * ","), "non-depleted"))) +
+        scale_y_continuous(name=expression(atop("log"[2] ~ frac("Spn1", "Rpb1") * ",", "non-depleted"))) +
         labs(tag=panel_letter) +
         theme_default +
         theme(legend.position="none",

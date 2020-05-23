@@ -94,7 +94,6 @@ main = function(theme_path = "spn1_2020_theme.R",
         labs(tag=panel_letter) +
         theme_default +
         theme(panel.grid=element_blank(),
-              # panel.spacing.x=unit(12, "pt"),
               panel.spacing=unit(2, "pt"),
               strip.text.x=element_text(margin=margin(t=8, b=1, unit="pt")),
               strip.text.y=element_text(angle=-180,
@@ -104,14 +103,14 @@ main = function(theme_path = "spn1_2020_theme.R",
               legend.key.width=unit(10, "pt"),
               legend.title=element_blank(),
               legend.justification=c(0.5,0.5),
-              # legend.position=c(0.83, 0.87),
               legend.position=c(0.33, 0.86),
               legend.background=element_blank(),
               legend.spacing.x=unit(1, "pt"),
               axis.text.y=element_text(size=5),
               axis.title.y=element_text(angle=0,
                                         vjust=0.5),
-              plot.title=element_text(hjust=0.5))
+              plot.title=element_text(hjust=0.5),
+              plot.margin=margin(11/2, 11/2 + 1, 11/2, 11/2, "pt"))
 
     ggsave(pdf_out,
            plot=reduced_h3_matched_metagenes,
