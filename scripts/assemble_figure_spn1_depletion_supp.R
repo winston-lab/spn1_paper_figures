@@ -10,18 +10,18 @@ main = function(spn1_depletion_viability_rdata,
                 fig_width=8.5,
                 fig_height=9/16 * 8.5 * 2,
                 pdf_out="test.pdf"){
-    layout = rbind(c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
-                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
-                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
-                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
-                   c(1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3),
-                   c(2,2,2,2,2,2,2,3,3,3,3,3))
+    layout = rbind(c(1,1,1,1,1,2,2,2,2,2,2,2),
+                   c(1,1,1,1,1,2,2,2,2,2,2,2),
+                   c(1,1,1,1,1,2,2,2,2,2,2,2),
+                   c(1,1,1,1,1,2,2,2,2,2,2,2),
+                   c(1,1,1,1,1,2,2,2,2,2,2,2),
+                   c(3,3,3,3,3,2,2,2,2,2,2,2),
+                   c(3,3,3,3,3,2,2,2,2,2,2,2),
+                   c(3,3,3,3,3,NA,NA,NA,NA,NA,NA,NA),
+                   c(3,3,3,3,3,NA,NA,NA,NA,NA,NA,NA),
+                   c(3,3,3,3,3,NA,NA,NA,NA,NA,NA,NA),
+                   c(3,3,3,3,3,NA,NA,NA,NA,NA,NA,NA),
+                   c(3,3,3,3,3,NA,NA,NA,NA,NA,NA,NA))
 
     load(spn1_depletion_viability_rdata)
     load(spn1_v_rpb1_rdata)
