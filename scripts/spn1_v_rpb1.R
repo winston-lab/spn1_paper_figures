@@ -72,7 +72,8 @@ main = function(spn1_path="depleted-v-non-depleted_Spn1-chipseq-spikenorm-verifi
               panel.grid=element_blank(),
               axis.text=element_text(size=5),
               axis.title.y=element_text(angle=0,
-                                        vjust=0.5))
+                                        vjust=0.5),
+              strip.text=element_text(margin=margin(t=0, b=2, unit="pt")))
 
     ggsave(pdf_out,
            spn1_v_rpb1,
