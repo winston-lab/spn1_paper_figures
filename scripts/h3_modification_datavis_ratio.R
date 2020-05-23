@@ -78,7 +78,7 @@ plot_heatmap = function(df,
                                                         TRUE ~ as.character(x))) +
         scale_y_continuous(limits=function(x) c(x[1], x[2] + 25),
                            expand=c(0,0),
-                           name="3087 non-overlapping coding genes") +
+                           name="3,087 non-overlapping coding genes") +
         theme_default +
         theme(axis.text.y=element_blank(),
               axis.title.x=element_blank(),

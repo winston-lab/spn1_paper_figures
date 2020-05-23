@@ -68,7 +68,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_fill_viridis_d(end=0.6) +
         labs(tag=panel_letter,
              title="H3 ChIP-seq",
-             subtitle="3087 non-overlapping coding genes") +
+             subtitle="3,087 non-overlapping coding genes") +
         theme_default +
         theme(panel.grid=element_blank(),
               legend.title=element_blank(),
