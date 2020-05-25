@@ -1157,6 +1157,7 @@ rule assemble_figure_splicing_supp:
     input:
         fonts = ".fonts_registered.txt",
         rpgene_datavis_supp = "panels/rpgene_datavis_supp.Rdata",
+        intron_containing_gene_heatmaps = "panels/intron_containing_gene_heatmaps.Rdata",
     output:
         pdf = "figures/figure_S6_splicing_supplemental.pdf"
     params:

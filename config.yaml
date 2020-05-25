@@ -501,7 +501,7 @@ rpgene_datavis_supp:
         # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
     fig_width: "17.4 * 7 / 12"
     fig_height: 14
-    panel_letter:
+    panel_letter: a
 
 splicing_supplemental:
     fig_width: 17.4
@@ -517,7 +517,7 @@ intron_containing_gene_heatmaps:
     name_lookup: /n/groups/winston/jc459/intragenic/genome/Scer-sys-to-common-name.tsv
     fig_width: "17.4 / 2"
     fig_height: 8
-    panel_letter: x
+    panel_letter: b
 
 elongation_spn1_depletion_westerns:
     spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
