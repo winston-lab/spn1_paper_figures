@@ -48,8 +48,9 @@ plot_metagene = function(df,
                     alpha=0.1) +
         geom_line(size=0.25,
                   alpha=0.8) +
-        facet_grid(annotation ~ assay,
-                   labeller=label_parsed) +
+        # facet_grid(annotation ~ assay,
+                   # labeller=label_parsed) +
+        facet_grid(annotation ~ assay) +
         scale_x_continuous(expand=c(0,0),
                            limits=c(NA, NA),
                            breaks=scales::pretty_breaks(3),
@@ -58,14 +59,15 @@ plot_metagene = function(df,
                                                         TRUE ~ as.character(x)),
                            name=NULL) +
         scale_y_continuous(breaks=scales::pretty_breaks(3),
-                           name=NULL) +
+                           # name=NULL) +
+                           name=quote("log"[2] ~ "ratio")) +
         scale_color_viridis_d(end=0.6) +
         scale_fill_viridis_d(end=0.6) +
         theme_default +
         theme(panel.grid=element_blank(),
               panel.spacing.y=unit(2, "pt"),
               strip.text.y=element_blank(),
-              strip.text.x=element_text(margin=margin(t=2, b=0, unit="pt")),
+              strip.text.x=element_text(margin=margin(t=0, b=1, unit="pt")),
               legend.key.width=unit(10, "pt"),
               legend.key.height=unit(8, "pt"),
               legend.title=element_blank(),
@@ -73,8 +75,11 @@ plot_metagene = function(df,
               legend.position=legend_position,
               legend.background=element_blank(),
               legend.spacing.x=unit(1, "pt"),
+              axis.ticks.length=unit(2, "pt"),
               axis.text.y=element_text(size=5),
-              plot.margin=margin(0,6,0,0,"pt"))
+              axis.title.y=element_text(margin=margin(r=-3, unit="pt"),
+                                        color=if_else(leftmost, "black", "#FFFFFF00")),
+              plot.margin=margin(0,6,0,-6,"pt"))
     return(metagene)
 }
 
@@ -114,28 +119,41 @@ main = function(theme_path = "spn1_2020_theme.R",
                              levels=c("ChIPseq-H3K36me2-H3norm",
                                       "ChIPseq-H3K36me3-H3norm",
                                       "ChIPseq-H3K4me3-H3norm"),
-                             labels=c("\"log\"[2] ~ textstyle(frac(\"H3K36me2\",\"H3\"))",
-                                      "\"log\"[2] ~ textstyle(frac(\"H3K36me3\",\"H3\"))",
-                                      "\"log\"[2] ~ textstyle(frac(\"H3K4me3\",\"H3\"))")))
+                             # labels=c("\"log\"[2] ~ textstyle(frac(\"H3K36me2\",\"H3\"))",
+                             #          "\"log\"[2] ~ textstyle(frac(\"H3K36me3\",\"H3\"))",
+                             #          "\"log\"[2] ~ textstyle(frac(\"H3K4me3\",\"H3\"))")))
+                             # labels=c("\"log\"[2] ~ frac(\"H3K36me2\",\"H3\")",
+                             #          "\"log\"[2] ~ frac(\"H3K36me3\",\"H3\")",
+                             #          "\"log\"[2] ~ frac(\"H3K4me3\",\"H3\")")))
+                             labels=c("H3K36me2 / H3",
+                                      "H3K36me3 / H3",
+                                      "H3K4me3 / H3")))
 
     annotation_plot = ggplot(data=distinct(df, annotation)) +
         geom_text(aes(label=annotation,
                       y=0),
                   x=0,
                   hjust=0,
-                  size=8/72*25.4,
+                  size=7/72*25.4,
                   family="FreeSans") +
         facet_grid(annotation ~ .) +
         theme_void() +
-        theme(strip.text=element_blank())
+        theme(strip.text=element_blank(),
+              plot.margin=margin(0,0,0,-6,"pt"))
 
     h3_mods_facet_expression = plot_grid(plot_metagene(df,
-                                                       "\"log\"[2] ~ textstyle(frac(\"H3K36me2\",\"H3\"))",
+                                                       # "\"log\"[2] ~ textstyle(frac(\"H3K36me2\",\"H3\"))",
+                                                       # "\"log\"[2] ~ frac(\"H3K36me2\",\"H3\")",
+                                                       "H3K36me2 / H3",
                                                        leftmost=TRUE),
                                          plot_metagene(df,
-                                                       "\"log\"[2] ~ textstyle(frac(\"H3K36me3\",\"H3\"))"),
+                                                       # "\"log\"[2] ~ textstyle(frac(\"H3K36me3\",\"H3\"))"),
+                                                       # "\"log\"[2] ~ frac(\"H3K36me3\",\"H3\")"),
+                                                       "H3K36me3 / H3"),
                                          plot_metagene(df,
-                                                       "\"log\"[2] ~ textstyle(frac(\"H3K4me3\",\"H3\"))"),
+                                                       # "\"log\"[2] ~ textstyle(frac(\"H3K4me3\",\"H3\"))"),
+                                                       # "\"log\"[2] ~ frac(\"H3K4me3\",\"H3\")"),
+                                                       "H3K36me3 / H3"),
                                          annotation_plot,
                                          nrow=1,
                                          rel_widths=c(1,1,1,0.5),
