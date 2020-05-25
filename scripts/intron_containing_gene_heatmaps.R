@@ -58,8 +58,8 @@ main = function(theme_path = "spn1_2020_theme.R",
                annotation=ordered(annotation,
                                   levels=c("RP genes with introns",
                                            "nonRP genes with introns"),
-                                  labels=c("RP genes with introns",
-                                           "non-RP genes with introns")))
+                                  labels=c("89 RP genes with introns",
+                                           "153 non-RP genes with introns")))
 
     df_annotation = import_bed(rp_with_intron_bed,
                     "RP genes with introns") %>%
@@ -86,8 +86,8 @@ main = function(theme_path = "spn1_2020_theme.R",
                annotation=ordered(annotation,
                                   levels=c("RP genes with introns",
                                            "nonRP genes with introns"),
-                                  labels=c("RP genes with introns",
-                                           "non-RP genes with introns")))
+                                  labels=c("89 RP genes with introns",
+                                           "153 non-RP genes with introns")))
 
     intron_containing_gene_heatmaps = ggplot() +
         geom_raster(data=df,
