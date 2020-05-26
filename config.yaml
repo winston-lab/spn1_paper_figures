@@ -544,3 +544,17 @@ chd1_qpcr:
     fig_width: 8.5
     fig_height: 4.5
     panel_letter: b
+
+h3k36me3_single_locus_datavis:
+    data:
+        PMA1: ../spn1-data-integration/browser-shots/PMA1/PMA1_ChIPseq-H3K36me3.tsv.gz
+        RPL20A: ../spn1-data-integration/browser-shots/RPL20A/RPL20A_ChIPseq-H3K36me3.tsv.gz
+    transcript_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs.bed
+    orf_annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
+    fig_width: 8.5
+    fig_height: 4.5
+    panel_letter: a
+
+chd1_supplemental:
+    fig_width: 17.4
+    fig_height: 18

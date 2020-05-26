@@ -69,7 +69,9 @@ rule target:
         "panels/intron_containing_gene_heatmaps.pdf",
         "panels/elongation_spn1_depletion_westerns.pdf",
         "panels/histone_spn1_depletion_westerns.pdf",
+        "panels/h3k36me3_single_locus_datavis.pdf",
         "panels/chd1_qpcr.pdf",
+        "figures/figure_S6_chd1.pdf",
         "figures/spn1_2020_figures.pdf"
 
 rule register_fonts:
@@ -1233,6 +1235,26 @@ rule histone_spn1_depletion_westerns:
     script:
         "scripts/histone_spn1_depletion_westerns.R"
 
+rule h3k36me3_single_locus_datavis:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        data_paths = list(config["h3k36me3_single_locus_datavis"]["data"].values()),
+        transcript_annotations = config["h3k36me3_single_locus_datavis"]["transcript_annotation"],
+        orf_annotations = config["h3k36me3_single_locus_datavis"]["orf_annotation"]
+    output:
+        pdf = "panels/h3k36me3_single_locus_datavis.pdf",
+        grob = "panels/h3k36me3_single_locus_datavis.Rdata",
+    params:
+        targets = list(config["h3k36me3_single_locus_datavis"]["data"].keys()),
+        fig_height = eval(str(config["h3k36me3_single_locus_datavis"]["fig_height"])),
+        fig_width = eval(str(config["h3k36me3_single_locus_datavis"]["fig_width"])),
+        panel_letter = config["h3k36me3_single_locus_datavis"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/h3k36me3_single_locus_datavis_paper.R"
+
 rule chd1_qpcr:
     input:
         fonts = ".fonts_registered.txt",
@@ -1249,6 +1271,21 @@ rule chd1_qpcr:
         "envs/plot_figures.yaml"
     script:
         "scripts/chd1_qpcr.R"
+
+rule assemble_figure_chd1_supp:
+    input:
+        fonts = ".fonts_registered.txt",
+        h3k36me3_single_locus_datavis = "panels/h3k36me3_single_locus_datavis.Rdata",
+        chd1_qpcr = "panels/chd1_qpcr.Rdata",
+    output:
+        pdf = "figures/figure_S6_chd1.pdf"
+    params:
+        fig_width = eval(str(config["chd1_supplemental"]["fig_width"])),
+        fig_height = eval(str(config["chd1_supplemental"]["fig_height"])),
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/assemble_figure_chd1_supp.R"
 
 rule compile_figures:
     input:
