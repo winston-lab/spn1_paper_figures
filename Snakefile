@@ -69,7 +69,7 @@ rule target:
         "panels/intron_containing_gene_heatmaps.pdf",
         "panels/elongation_spn1_depletion_westerns.pdf",
         "panels/histone_spn1_depletion_westerns.pdf",
-        "spn1_2020_figures.pdf"
+        "figures/spn1_2020_figures.pdf"
 
 rule register_fonts:
     input:
@@ -1249,10 +1249,10 @@ rule compile_figures:
         "figures/figure_S6_splicing_supplemental.pdf",
         tex = "spn1_2020_figures.tex"
     output:
-        "spn1_2020_figures.pdf"
+        "figures/spn1_2020_figures.pdf"
     conda:
         "envs/tectonic.yaml"
     shell: """
-        tectonic {input.tex}
+        tectonic --outdir figures {input.tex}
         """
 
