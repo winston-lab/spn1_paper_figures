@@ -538,3 +538,9 @@ histone_spn1_depletion_westerns:
     fig_width: 6
     fig_height: 4.8
     panel_letter: a
+
+chd1_qpcr:
+    chip_data: ../spn1-small-data/chd1_h3k36me3_qpcr/h3k36me3_chipqpcr_chd1D.tsv
+    fig_width: 8.5
+    fig_height: 4.5
+    panel_letter: b

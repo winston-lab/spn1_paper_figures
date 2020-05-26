@@ -65,10 +65,11 @@ rule target:
         "panels/rpgene_datavis_supp.pdf",
         # "panels/rpgene_datavis_length_filtered.pdf",
         # "panels/rpgene_datavis_supp_length_filtered.pdf",
-        "figures/figure_S6_splicing_supplemental.pdf",
+        "figures/figure_S7_splicing_supplemental.pdf",
         "panels/intron_containing_gene_heatmaps.pdf",
         "panels/elongation_spn1_depletion_westerns.pdf",
         "panels/histone_spn1_depletion_westerns.pdf",
+        "panels/chd1_qpcr.pdf",
         "figures/spn1_2020_figures.pdf"
 
 rule register_fonts:
@@ -1160,7 +1161,7 @@ rule assemble_figure_splicing_supp:
         rpgene_datavis_supp = "panels/rpgene_datavis_supp.Rdata",
         intron_containing_gene_heatmaps = "panels/intron_containing_gene_heatmaps.Rdata",
     output:
-        pdf = "figures/figure_S6_splicing_supplemental.pdf"
+        pdf = "figures/figure_S7_splicing_supplemental.pdf"
     params:
         fig_width = eval(str(config["splicing_supplemental"]["fig_width"])),
         fig_height = eval(str(config["splicing_supplemental"]["fig_height"])),
@@ -1232,6 +1233,23 @@ rule histone_spn1_depletion_westerns:
     script:
         "scripts/histone_spn1_depletion_westerns.R"
 
+rule chd1_qpcr:
+    input:
+        fonts = ".fonts_registered.txt",
+        theme = config["theme_path"],
+        chip_data = config["chd1_qpcr"]["chip_data"],
+    output:
+        pdf = "panels/chd1_qpcr.pdf",
+        grob = "panels/chd1_qpcr.Rdata",
+    params:
+        fig_height = eval(str(config["chd1_qpcr"]["fig_height"])),
+        fig_width = eval(str(config["chd1_qpcr"]["fig_width"])),
+        panel_letter = config["chd1_qpcr"]["panel_letter"]
+    conda:
+        "envs/plot_figures.yaml"
+    script:
+        "scripts/chd1_qpcr.R"
+
 rule compile_figures:
     input:
         "figures/figure_1_spn1_depletion.pdf",
@@ -1246,7 +1264,7 @@ rule compile_figures:
         "figures/figure_S3_set2_spt6_supplemental.pdf",
         "figures/figure_S4_h3_supplemental.pdf",
         "figures/figure_S5_h3_mods_supplemental.pdf",
-        "figures/figure_S6_splicing_supplemental.pdf",
+        "figures/figure_S7_splicing_supplemental.pdf",
         tex = "spn1_2020_figures.tex"
     output:
         "figures/spn1_2020_figures.pdf"
