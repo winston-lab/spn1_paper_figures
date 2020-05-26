@@ -69,6 +69,7 @@ rule target:
         "panels/intron_containing_gene_heatmaps.pdf",
         "panels/elongation_spn1_depletion_westerns.pdf",
         "panels/histone_spn1_depletion_westerns.pdf",
+        "spn1_2020_figures.pdf"
 
 rule register_fonts:
     input:
@@ -1230,4 +1231,28 @@ rule histone_spn1_depletion_westerns:
         "envs/plot_figures.yaml"
     script:
         "scripts/histone_spn1_depletion_westerns.R"
+
+rule compile_figures:
+    input:
+        "figures/figure_1_spn1_depletion.pdf",
+        "figures/figure_2_rnaseq_rpb1.pdf",
+        "figures/figure_3_promoter_swap.pdf",
+        "figures/figure_4_set2_spt6.pdf",
+        "figures/figure_5_h3.pdf",
+        "figures/figure_6_h3_mods.pdf",
+        "figures/figure_7_splicing.pdf",
+        "figures/figure_S1_spn1_depletion_supplemental.pdf",
+        "figures/figure_S2_rnaseq_rpb1_supplemental.pdf",
+        "figures/figure_S3_set2_spt6_supplemental.pdf",
+        "figures/figure_S4_h3_supplemental.pdf",
+        "figures/figure_S5_h3_mods_supplemental.pdf",
+        "figures/figure_S6_splicing_supplemental.pdf",
+        tex = "spn1_2020_figures.tex"
+    output:
+        "spn1_2020_figures.pdf"
+    conda:
+        "envs/tectonic.yaml"
+    shell: """
+        tectonic {input.tex}
+        """
 
