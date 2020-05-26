@@ -62,8 +62,9 @@ plot_heatmap = function(df,
                       y=sorted_index),
                   size=0.3,
                   linetype="dotted",
-                  alpha=0.5) +
-        scale_fill_distiller(palette="PiYG",
+                  alpha=1,
+                  color="white") +
+        scale_fill_gradientn(colors=rev(ocean.curl(200)),
                              limits=c(-1.2,1.2),
                              oob=scales::squish,
                              name=colorbar_title,
@@ -180,6 +181,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                 fig_height=10){
     source(theme_path)
     library(cowplot)
+    library(pals)
 
     df_heatmap = tibble()
     for (path in heatmap_data_paths){

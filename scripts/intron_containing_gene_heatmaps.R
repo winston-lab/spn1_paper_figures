@@ -111,7 +111,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                    shape=16) +
         scale_fill_distiller(palette="PRGn",
                              direction=1,
-                             # limits=c(-1.5, 1.5),
+        # scale_fill_gradientn(values=rev(ocean.curl(200)),
                              limits=c(-1.7, 1.7),
                              oob=scales::squish,
                              guide=guide_colorbar(barheight=unit(0.2, "cm"),

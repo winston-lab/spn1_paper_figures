@@ -1,4 +1,4 @@
-name: plot_figures
+name: fgsea
 channels:
     - conda-forge
     - bioconda

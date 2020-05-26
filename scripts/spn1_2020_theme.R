@@ -1,7 +1,6 @@
 library(tidyverse)
 library(magrittr)
 library(extrafont)
-# library(ggthemes)
 
 theme_default = theme_light() +
     theme(text=element_text(size=8,
@@ -28,3 +27,4 @@ theme_default = theme_light() +
           strip.text=element_text(color="black"),
           plot.tag=element_text(size=9,
                                 face="bold"))
+
