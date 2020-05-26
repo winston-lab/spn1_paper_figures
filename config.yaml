@@ -30,8 +30,8 @@ spn1_depletion_metagene:
     panel_letter: b
 
 spn1_depletion_figure:
-    fig_width: 17.4
-    fig_height: 4
+    fig_width: 8.5
+    fig_height: 8
 
 spn1_depletion_viability:
     data: ../spn1-small-data/spn1_depletion_viability/viability_data.txt
