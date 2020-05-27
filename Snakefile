@@ -72,7 +72,7 @@ rule target:
         "panels/histone_spn1_depletion_westerns.pdf",
         "panels/h3k36me3_single_locus_datavis.pdf",
         "panels/chd1_qpcr.pdf",
-        "figures/figure_S6_chd1.pdf",
+        "figures/figure_S6_chd1_temp.pdf",
         "figures/spn1_2020_figures.pdf"
 
 rule register_fonts:
@@ -1279,7 +1279,7 @@ rule assemble_figure_chd1_supp:
         h3k36me3_single_locus_datavis = "panels/h3k36me3_single_locus_datavis.Rdata",
         chd1_qpcr = "panels/chd1_qpcr.Rdata",
     output:
-        pdf = "figures/figure_S6_chd1.pdf"
+        pdf = "figures/figure_S6_chd1_temp.pdf"
     params:
         fig_width = eval(str(config["chd1_supplemental"]["fig_width"])),
         fig_height = eval(str(config["chd1_supplemental"]["fig_height"])),
@@ -1290,7 +1290,7 @@ rule assemble_figure_chd1_supp:
 
 rule compile_figures:
     input:
-        "figures/figure_1_spn1_depletion.pdf",
+        "figures/figure_1_spn1_depletion_alternate.pdf",
         "figures/figure_2_rnaseq_rpb1.pdf",
         "figures/figure_3_promoter_swap.pdf",
         "figures/figure_4_set2_spt6.pdf",
