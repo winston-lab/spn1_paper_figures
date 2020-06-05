@@ -32,10 +32,17 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     antigen_labels = textGrob(x=antigen_labels_x,
                               y=antigen_labels_y,
-                              label=c("Spn1", "H3K36me2", "H3K36me3", "H3", "Pgk1"),
+                              label=c("", "H3K36me2", "H3K36me3", "H3", "Pgk1"),
                               hjust=0,
                               gp=gpar(fontsize=7,
                                       fontfamily="FreeSans"))
+    spn1_labels = textGrob(x=antigen_labels_x,
+                           y=c(antigen_labels_y[1] + 0.09,
+                               antigen_labels_y[1] - 0.09),
+                           label=c("Spn1-AID", "Spn1"),
+                           hjust=0,
+                           gp=gpar(fontsize=7,
+                                   fontfamily="FreeSans"))
     lane_centers = scales::rescale(seq(0.5/6, 5.5/6, length.out=6),
                                    from=c(0,1),
                                    to=c(0.01, 0.01 + blot_width))
@@ -124,6 +131,7 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     western = gTree(children=gList(
         antigen_labels,
+        spn1_labels,
         strain_lines,
         strain_labels,
         condition_labels,
