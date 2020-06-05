@@ -50,11 +50,19 @@ main = function(theme_path = "spn1_2020_theme.R",
                               y=antigen_labels_y,
                               label=c("Rpb3",
                                       "Spt6",
-                                      "Spn1",
+                                      "",
                                       "Set2"),
                               hjust=1,
                               gp=gpar(fontsize=7,
                                       fontfamily="FreeSans"))
+    spn1_labels = textGrob(x=antigen_label_edge + 0.015,
+                           y=c(antigen_labels_y[3]+0.09,
+                               antigen_labels_y[3]-0.075),
+                           label=c("Spn1-AID",
+                                   "Spn1"),
+                           hjust=1,
+                           gp=gpar(fontsize=7,
+                                   fontfamily="FreeSans"))
     input_ip_labels = textGrob(x=blot_centers,
                                y=1,
                                label=c("input", "IP"),
@@ -204,6 +212,7 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     coip_western = gTree(children=gList(
         antigen_labels,
+        spn1_labels,
         input_ip_labels,
         input_ip_lines,
         strain_labels,
@@ -228,7 +237,7 @@ main = function(theme_path = "spn1_2020_theme.R",
 
     coip_western = as.ggplot(coip_western) +
         labs(tag=panel_letter) +
-        theme(plot.margin=margin(0, 40, 0, 11/2, "pt"),
+        theme(plot.margin=margin(0, 30, 0, 11/2, "pt"),
               plot.tag=element_text(family="FreeSans",
                                     size=9,
                                     face="bold"))
