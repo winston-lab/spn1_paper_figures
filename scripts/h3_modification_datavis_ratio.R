@@ -110,6 +110,7 @@ plot_heatmap = function(df,
 }
 
 plot_metagene = function(df_metagene,
+                         df_quant,
                          filter_assay,
                          plot_title=expression(textstyle(frac("H3K36me3",
                                                               "H3")) ~
@@ -118,6 +119,8 @@ plot_metagene = function(df_metagene,
                          panel_letter="x",
                          leftmost=FALSE){
     df_metagene %<>%
+        filter(assay==filter_assay)
+    df_quant %<>%
         filter(assay==filter_assay)
 
     metagene = ggplot(data=df_metagene,
@@ -130,6 +133,13 @@ plot_metagene = function(df_metagene,
         geom_vline(xintercept=0,
                    size=0.2,
                    color="gray70") +
+        geom_vline(data=df_quant,
+                   aes(xintercept=position,
+                       color=group),
+                   size=0.1,
+                   alpha=0.5,
+                   linetype="dotted",
+                   show.legend=FALSE) +
         geom_ribbon(linetype="blank",
                     alpha=0.1) +
         geom_line(size=0.5,
@@ -263,16 +273,19 @@ main = function(theme_path = "spn1_2020_theme.R",
     assays = levels(df_heatmap[["assay"]])
 
     plots = list(plot_metagene(df=df_metagene,
+                               df_quant=select(df_quant, assay, group, position=position_90_increase),
                                filter_assay=assays[1],
                                plot_title="H3K36me2 / H3",
                                legend_position=c(0.90, 0.11),
                                panel_letter="a",
                                leftmost=TRUE),
                  plot_metagene(df=df_metagene,
+                               df_quant=select(df_quant, assay, group, position=position_90_increase),
                                filter_assay=assays[2],
                                plot_title="H3K36me3 / H3",
                                panel_letter="b"),
                  plot_metagene(df=df_metagene,
+                               df_quant=select(df_quant, assay, group, position=position_10_decrease),
                                filter_assay=assays[3],
                                plot_title="H3K4me3 / H3",
                                panel_letter="c"),
