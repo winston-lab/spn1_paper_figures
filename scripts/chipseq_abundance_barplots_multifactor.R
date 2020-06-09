@@ -73,6 +73,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                     aes(x=group,
                         y=scaled_abundance),
                     width=0.2,
+                    height=0,
                     shape=16,
                     size=0.7,
                     alpha=0.8) +
