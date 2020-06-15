@@ -91,7 +91,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                                                         TRUE ~ as.character(x)),
                            name=NULL) +
         scale_y_continuous(breaks=scales::pretty_breaks(3),
-                           name="standard score") +
+                           name="(IP/input) z-score") +
         scale_color_viridis_d(end=0.6) +
         scale_fill_viridis_d(end=0.6) +
         theme_default +

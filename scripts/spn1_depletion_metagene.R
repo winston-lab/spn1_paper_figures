@@ -62,7 +62,7 @@ main = function(data_path="verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.
                                                         x==3 ~ paste(x, "kb"),
                                                         TRUE ~ as.character(x))},
                            name=NULL) +
-        scale_y_continuous(name="standard score") +
+        scale_y_continuous(name="(IP/input) z-score") +
         scale_color_viridis_d(end=0.6,
                               guide=FALSE) +
         scale_fill_viridis_d(end=0.6,
