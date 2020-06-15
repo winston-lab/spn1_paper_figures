@@ -59,6 +59,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                        color=condition,
                       y=cfu_per_od_unit),
                    position=position_jitterdodge(dodge.width=0.8),
+                   height=0,
                    shape=16,
                    size=0.5,
                    alpha=0.8) +
