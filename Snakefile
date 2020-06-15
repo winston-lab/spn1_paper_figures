@@ -73,7 +73,8 @@ rule target:
         "panels/h3k36me3_single_locus_datavis.pdf",
         "panels/chd1_qpcr.pdf",
         "figures/figure_S6_chd1_temp.pdf",
-        "figures/spn1_2020_figures.pdf"
+        "figures/spn1_2020_figures.pdf",
+        "figures/spn1_2020_supp_figures.pdf"
 
 rule register_fonts:
     input:
@@ -1306,6 +1307,23 @@ rule compile_figures:
         tex = "spn1_2020_figures.tex"
     output:
         "figures/spn1_2020_figures.pdf"
+    conda:
+        "envs/tectonic.yaml"
+    shell: """
+        tectonic --outdir figures {input.tex}
+        """
+
+rule compile_supplemental_figures:
+    input:
+        "figures/figure_S1_spn1_depletion_supplemental.pdf",
+        "figures/figure_S2_rnaseq_rpb1_supplemental.pdf",
+        "figures/figure_S3_set2_spt6_supplemental.pdf",
+        "figures/figure_S4_h3_supplemental.pdf",
+        "figures/figure_S5_h3_mods_supplemental.pdf",
+        "figures/figure_S7_splicing_supplemental.pdf",
+        tex = "spn1_2020_supp_figures.tex"
+    output:
+        "figures/spn1_2020_supp_figures.pdf"
     conda:
         "envs/tectonic.yaml"
     shell: """

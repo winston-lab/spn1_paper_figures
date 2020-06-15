@@ -113,7 +113,7 @@ rnaseq_vs_rpb1:
 
 rnaseq_rpb1_figure:
     fig_width: 18
-    fig_height: 12
+    fig_height: 14
 
 differential_expression_rtqpcr:
     data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data_2.txt
