@@ -21,8 +21,10 @@ main = function(data_path="Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding
                    size=0.2) +
         geom_density(aes(y=..scaled..),
                      size=0.2,
-                     fill="#8c510a",
-                     color="#8c510a",
+                     # fill="#8c510a",
+                     # color="#8c510a",
+                     fill="gray33",
+                     color="gray33",
                      alpha=0.8) +
         scale_x_continuous(limits=range(df[["log2_foldchange"]]),
                            breaks=seq(-4,4,2)) +
