@@ -55,11 +55,10 @@ spn1_rpb1norm_v_rpb1_nondepleted:
 
 spn1_depletion_supplemental:
     fig_width: 18
-    fig_height: 8
+    fig_height: 9
 
 rnaseq_maplot:
-    # data: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
-    data: rnaseq.temp
+    data: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     fig_width: "18 * 7 / 12"
     fig_height: "12 * 4 / 12"
     panel_letter: a
@@ -111,7 +110,7 @@ rnaseq_vs_rpb1:
 
 rnaseq_rpb1_figure:
     fig_width: 18
-    fig_height: 14
+    fig_height: 14.5
 
 differential_expression_rtqpcr:
     data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data_2.txt
@@ -177,7 +176,7 @@ slow_growth_signature:
 
 rnaseq_rpb1_supplemental:
     fig_width: 18
-    fig_height: 12
+    fig_height: 15
 
 splicing:
     data: ../custom_figures/figures/intron_retention/Spn1-IAA-v-all-controls_intron_retention_results.tsv
@@ -311,7 +310,7 @@ set2_spt6_rpb1norm_v_rpb1:
 
 set2_spt6_supplemental:
     fig_width: 18
-    fig_height: 11.8
+    fig_height: 13
 
 h3_vs_rpb1_ma:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
