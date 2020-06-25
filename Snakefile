@@ -753,8 +753,10 @@ rule assemble_figure_set2_spt6:
         coip_western = "panels/coip_western.Rdata",
         set2_metagene = "panels/set2_metagene.Rdata",
         spt6_metagene = "panels/spt6_metagene.Rdata",
-        set2_maplot = "panels/Set2_chip_maplot.Rdata",
-        spt6_maplot = "panels/Spt6_chip_maplot.Rdata",
+        # set2_maplot = "panels/Set2_chip_maplot.Rdata",
+        # spt6_maplot = "panels/Spt6_chip_maplot.Rdata",
+        set2_maplot = "panels/Set2-Rpb1norm_chip_maplot.Rdata",
+        spt6_maplot = "panels/Spt6-Rpb1norm_chip_maplot.Rdata",
         set2_abundance_chipseq_barplot = "panels/set2_abundance_chipseq_barplot.Rdata",
         spt6_abundance_chipseq_barplot = "panels/spt6_abundance_chipseq_barplot.Rdata",
     output:

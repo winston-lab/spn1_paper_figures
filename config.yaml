@@ -110,7 +110,7 @@ rnaseq_vs_rpb1:
 
 rnaseq_rpb1_figure:
     fig_width: 18
-    fig_height: 14.5
+    fig_height: 14
 
 differential_expression_rtqpcr:
     data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data_2.txt
@@ -194,7 +194,7 @@ splicing_rtqpcr:
 
 splicing_figure:
     fig_width: 18
-    fig_height: 8
+    fig_height: 10
 
 promoter_swap_diagram:
     data: ../spn1-small-data/promoter_swap_rtqpcr/promoter_swap_diagram.tsv
@@ -279,14 +279,14 @@ chip_maplot:
         rpb1_norm: True
         fig_width: "18 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: x
+        panel_letter: f
     Spt6-Rpb1norm:
         factor_id: Spt6
         data: ../chipseq-spt6-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         rpb1_norm: True
         fig_width: "18 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: x
+        panel_letter: c
 
 set2_spt6_figure:
     fig_width: 18

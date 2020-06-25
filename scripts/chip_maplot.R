@@ -36,7 +36,7 @@ main = function(theme_path = "spn1_2020_theme.R",
         scale_y_continuous(name=bquote(atop(.(y_text),
                                             "log"[2] ~ textstyle(frac("Spn1-depleted",
                                                                       "non-depleted")))),
-                           breaks=scales::pretty_breaks(3)) +
+                           breaks=scales::pretty_breaks(4)) +
         labs(tag=panel_letter) +
         theme_default +
         theme(legend.position="none",
