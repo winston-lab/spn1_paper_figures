@@ -26,7 +26,7 @@ main = function(theme_path = "spn1_2020_theme.R",
                    color="gray70") +
         stat_binhex(geom="point",
                     aes(color=..count..),
-                    bins=175,
+                    bins=155,
                     shape=16,
                     size=0.3,
                     alpha=0.8) +
