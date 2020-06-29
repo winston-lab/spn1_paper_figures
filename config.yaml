@@ -371,7 +371,7 @@ reduced_h3_matched_metagenes:
 
 h3_supplemental:
     fig_width: 18
-    fig_height: 14
+    fig_height: 15
 
 h3_metagene:
     data:
