@@ -32,7 +32,9 @@
 Error bars indicate the mean $\pm$ standard deviation of the replicates shown.
 \textbf{b} Scatterplots of Spn1 enrichment versus Rpb1 enrichment for 5,091 verified coding genes in non-depleted and Spn1-depleted conditions.
 Pearson correlation coefficients are indicated.
+Enrichment values are the relative log2 enrichment of IP over input.
 \textbf{c} Scatterplot showing Rpb1-normalized Spn1 enrichment versus Rpb1 enrichment for the same genes as in (\textbf{b}) in the non-depleted condition.
+Rpb1 enrichment values are the relative log2 enrichment of IP over input.
 The Pearson correlation coefficient is indicated, and a linear regression is overlaid.
 
 \newpage
@@ -48,9 +50,9 @@ Y-axis values show the fold-change attributable to the effects of Spn1 depletion
 The line y=x is overlaid for comparison.
 Results of the simple comparison between Spn1-depleted and non-depleted conditions are used throughout this study for consistency with ChIP-seq analyses for which the multi-factor analysis was not performed.
 \textbf{b} Scatterplot comparing changes in transcript abundance upon Spn1 depletion as measured by RT-qPCR and RNA-seq. The line y=x is drawn for comparison, and error bars indicate 95\% confidence intervals.
-\textbf{c} Running GSEA enrichment score for genes up- and downregulated during the yeast environmental stress response (ESR) (Gasch et al., 2000) along genes ranked by change in transcript abundance upon Spn1 depletion as measured by RNA-seq.
+\textbf{c} Running GSEA enrichment score for genes up- and downregulated during the yeast environmental stress response (ESR)$^{43}$ along genes ranked by change in transcript abundance upon Spn1 depletion as measured by RNA-seq.
 The ranks of ESR up- and downregulated genes are marked along the top and bottom of the plot, respectively, and Benjamini-Hochberg adjusted enrichment p-values are indicated.
-\textbf{d} Scatterplot comparing changes in transcript abundance upon Spn1 depletion as measured by RNA-seq versus changes in transcript abundance expected from a slow growth signature common to many environmental and genetic perturbations as reported in (O'Duibhir et al., 2014). 
+\textbf{d} Scatterplot comparing changes in transcript abundance upon Spn1 depletion as measured by RNA-seq versus changes in transcript abundance expected from a slow growth signature common to many environmental and genetic perturbations as previously reported$^{44}$.
 \textbf{e} Spike-in normalized RNA-seq coverage over four genes with antisense transcripts that are differentially upregulated upon Spn1 depletion.
 Sense and antisense strand signal are plotted above and below the x-axis, respectively.
 Unlabeled horizontal lines indicate the boundaries of transcripts called by StringTie.
@@ -65,9 +67,10 @@ Note that we observed batch-to-batch variability in Rpb1 levels after Spn1 deple
 {\includegraphics[width=18cm]{figures/figure_S3_set2_spt6_supplemental.pdf}\par}
 
 \textbf{Supplementary Figure 3. Spt6 and Set2 ChIP-seq.}
-\textbf{a} Scatterplots showing Spt6 or Set2 enrichment versus Rpb1 enrichment for 5,091 verified coding genes in non-depleted or Spn1-depleted conditions.
+\textbf{a} Scatterplots showing Spt6 or Set2 enrichment versus Rpb1 enrichment for 5,091 verified coding genes in non-depleted and Spn1-depleted conditions.
+Enrichment values are the relative log2 enrichment of IP over input.
 Pearson correlation coefficients are indicated.
-\textbf{b} Scatterplots showing Rpb1-normalized enrichment of Spt6 or Set2 versus Rpb1 enrichment for the same genes as in (\textbf{a}) in non-depleted or Spn1-depleted conditions.
+\textbf{b} Scatterplots showing Rpb1-normalized enrichment of Spt6 or Set2 versus Rpb1 enrichment for the same genes as in (\textbf{a}) in non-depleted and Spn1-depleted conditions.
 Pearson correlation coefficients are indicated.
 \textbf{c} Representative western blots showing the levels of Spn1, Rpb1, Spt6, and Set2 in the wild type, Spn1-noAID, and Spn1-AID strains treated with DMSO or 25 $\mu$M IAA.
 The faint band co-migrating with native Spn1 in the Spn1-AID lanes of the Spn1 blot is non-specific, as it was also present in a \textit{spn1$\Delta$} strain (data not shown).
@@ -83,6 +86,7 @@ Pgk1 was used as a loading control.
 \textbf{a} Average H3 ChIP enrichment for 3,087 non-overlapping, verified coding genes aligned by TSS in non-depleted and Spn1-depleted conditions.
 The solid line and shading are the median and interquartile range of the mean enrichment over four replicates.
 \textbf{b} Scatterplot showing change in H3 enrichment upon Spn1 depletion over the first 500 bp downstream of the TSS versus non-depleted Rpb1 enrichment over the entire length of 4,924 verified coding genes at least 500 bp long.
+Rpb1 enrichment values are the relative log2 enrichment of IP over input.
 Genes with significant decreases in H3 enrichment over their first 500 bp are colored red, and a cubic regression spline is overlaid.
 \textbf{c} Scatterplots comparing Spn1-dependent changes in H3 enrichment over the entire gene to changes in Rpb1 enrichment, Spt6 enrichment, and Rpb1-normalized Spt6 enrichment.
 Values are shown for 5,091 verified coding genes, with genes for which H3 enrichment is significantly reduced upon Spn1 depletion colored red.
@@ -123,8 +127,8 @@ The solid line and shading are the median and interquartile range of the mean ra
 The solid line and shading for each assay are the median and interquartile range over the genes in each group.
 The same sense strand RNA-seq coverage panel used in Fig. 7c is shown here for reference.
 \textbf{b} Heatmaps of change upon Spn1 depletion for sense strand RNA-seq signal and H3-normalized H3K36me2 ChIP enrichment over 89 ribosomal protein (RP) genes with introns and 153 non-RP genes with introns.
-Genes are aligned by TSS, and ordered by distance from the TSS to the midpoint of the first intron.
-The 5$\prime$ and 3$\prime$ splice sites of each intron are marked with red and orange dots, respectively.
+Genes are aligned by TSS and ordered by distance from the TSS to the midpoint of the first intron.
+The 5$^\prime$ and 3$^\prime$ splice sites of each intron are marked with red and orange dots, respectively.
 
 \newpage
 
