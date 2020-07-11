@@ -9,59 +9,59 @@ spn1_depletion_western:
     quant_data: ../spn1-small-data/spn1_depletion_western/spn1_depletion_spn1_western_quantification.tsv
     fig_width: "11.4 * 2 / 12"
     fig_height: "9 / 16 * 11.4 * 8 / 12"
-    panel_letter: a
+    panel_letter: A
 
 spn1_depletion_scatter:
     data: ../chipseq-spn1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spn1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: d
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: D
 
 spn1_depletion_chipseq_barplot:
     data: ../chipseq-spn1/qual_ctrl/spikein/Spn1-chipseq_spikein-counts.tsv
     fig_width: 3.5
     fig_height: 4
-    panel_letter: c
+    panel_letter: C
 
 spn1_depletion_metagene:
     data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Spn1.tsv.gz
     fig_width: "11.4 * 8 / 12"
     fig_height: "9 / 16 * 11.4 * 8 / 12"
-    panel_letter: b
+    panel_letter: B
 
 spn1_depletion_figure:
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 8
 
 spn1_depletion_viability:
     data: ../spn1-small-data/spn1_depletion_viability/viability_data.txt
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: a
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: A
 
 spn1_v_rpb1:
     rpb1: ../chipseq-rpb1-batch2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     spn1: ../chipseq-spn1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spn1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: b
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: B
 
 spn1_rpb1norm_v_rpb1_nondepleted:
     rpb1: ../chipseq-rpb1-batch2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     spn1: ../chipseq-spn1-rpb1norm/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spn1-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: c
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: C
 
 spn1_depletion_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 9
 
 rnaseq_maplot:
     data: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
-    fig_width: "18 * 7 / 12"
+    fig_width: "17.8 * 7 / 12"
     fig_height: "12 * 4 / 12"
-    panel_letter: a
+    panel_letter: A
 
 rnaseq_single_locus_datavis:
     data:
@@ -71,9 +71,9 @@ rnaseq_single_locus_datavis:
         GCV3: ../spn1-data-integration/browser-shots/GCV3/GCV3_all-assays.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: "7 / 12 * 12"
-    panel_letter: b
+    panel_letter: B
 
 rnaseq_vs_rpb1_single_locus:
     data:
@@ -88,43 +88,43 @@ rnaseq_vs_rpb1_single_locus:
         # GTR2: ../spn1-data-integration/browser-shots/GTR2/GTR2_all-assays.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "18"
+    fig_width: "17.8"
     fig_height: "12/3"
-    panel_letter: d
+    panel_letter: D
 
 rpb1_metagenes:
     rpb1: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Rpb1-spikenorm-batchB.tsv.gz
     modifications:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Ser5P-Rpb1norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Ser2P-Rpb1norm.tsv.gz
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 8
-    panel_letter: b
+    panel_letter: B
 
 rnaseq_vs_rpb1:
     rnaseq: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: c
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: C
 
 rnaseq_rpb1_figure:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 14
 
 differential_expression_rtqpcr:
     data: ../spn1-small-data/differential_expression_rtqpcr/DE_rtqpcr_data_2.txt
     rnaseq: ../rna-seq/diff_exp/transcripts/Spn1-IAA-v-Spn1-DMSO/spikenorm/genic/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-transcripts-diffexp-results-genic-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: b
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: B
 
 rna_single_v_custom:
     single: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     custom: ../custom_differential_expression/diff_exp/verified-coding-genes/spikenorm/custom-diffexp-spikenorm-verified-coding-genes-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: a
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: A
 
 
 rnaseq_single_locus_datavis_supp:
@@ -134,9 +134,9 @@ rnaseq_single_locus_datavis_supp:
         HSP82: ../spn1-data-integration/browser-shots/HSP82/HSP82_all-assays.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: "7 / 12 * 12"
-    panel_letter: x
+    panel_letter: X
 
 antisense_single_locus_datavis:
     data:
@@ -146,71 +146,71 @@ antisense_single_locus_datavis:
         MAF1: ../spn1-data-integration/browser-shots/MAF1/MAF1_all-assays.tsv.gz
     transcript_annotation: ../custom_differential_expression/merged_transcripts/custom_diffexp_experimental-merged-transcripts-annotated.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: 9
-    panel_letter: e
+    panel_letter: E
 
 chipseq_abundance_barplots_rpb1:
     data:
         Rpb1: ../chipseq-rpb1/qual_ctrl/spikein/Rpb1-chipseq_spikein-counts.tsv
         Ser5-P: ../chipseq-ser5p/qual_ctrl/spikein/Ser5P-chipseq_spikein-counts.tsv
         Ser2-P: ../chipseq-ser2p/qual_ctrl/spikein/Ser2P-chipseq_spikein-counts.tsv
-    fig_width: "18 * 5 / 12"
+    fig_width: "17.8 * 5 / 12"
     fig_height: 5
-    panel_letter: f
+    panel_letter: F
 
 esr_fgsea:
     diffexp_path_single: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/libsizenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-libsizenorm-verified-coding-genes-diffexp-results-all.tsv
     go_mapping_path: ../genome/go_slim_mappings/spn1_go_slim_mapping.tsv
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: "4 / 11 * 12"
-    panel_letter: c
+    panel_letter: C
 
 slow_growth_signature:
     oduibhir: ../other-datasets/oduibhir2014/data/oduibhir2014_supp_data_4.txt
     rnaseq: ../rna-seq/diff_exp/verified-coding-genes/Spn1-IAA-v-Spn1-DMSO/spikenorm/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv
     sys_to_common: ../other-datasets/oduibhir2014/data/Scer-sys-to-common-name.tsv
-    fig_width: 8.8
-    fig_height: "8.8 * 9 / 16"
-    panel_letter: d
+    fig_width: 8.4
+    fig_height: "8.4 * 9 / 16"
+    panel_letter: D
 
 rnaseq_rpb1_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 15
 
 splicing:
     data: ../custom_figures/figures/intron_retention/Spn1-IAA-v-all-controls_intron_retention_results.tsv
     aliases: ../genome/Scer-sys-to-common-name.tsv
     rp_genes: ../genome/annotations/gene_lists/Scer_RPgene_transcripts.bed
-    fig_width: "18/2"
+    fig_width: "17.8/2"
     fig_height: 9
-    panel_letter: a
+    panel_letter: A
 
 splicing_rtqpcr:
     data: ../spn1-small-data/splicing_rtqpcr/IR_rtqpcr_data.txt
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: b
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: B
 
 splicing_figure:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 10
 
 promoter_swap_diagram:
     data: ../spn1-small-data/promoter_swap_rtqpcr/promoter_swap_diagram.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: a
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: A
 
 promoter_swap_rtqpcr:
     data: ../spn1-small-data/promoter_swap_rtqpcr/promoter_swap_rtqpcr_data.txt
     rnaseq: ../rna-seq/diff_exp/transcripts/Spn1-IAA-v-Spn1-DMSO/spikenorm/genic/Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-transcripts-diffexp-results-genic-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: b
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: B
 
 promoter_swap_figure:
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 8
 
 coip_western:
@@ -223,24 +223,24 @@ coip_western:
     ip_spn1_blot: ../spn1-small-data/coip_westerns/Spn1 WB Rep1 IPs_8_3.tif
     ip_set2_blot: ../spn1-small-data/coip_westerns/Set2 WB Rep2 IPs_8-7.tif
     fig_width: 11.4
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: a
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: A
 
 set2_metagene:
     # data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Set2.tsv.gz
     data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Set2-Rpb1norm-batchAB.tsv.gz
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: g
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: G
     # control_label_y: 0.8
     # condition_label_y: -0.35
 
 spt6_metagene:
     # data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6.tsv.gz
     data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-Spt6-Rpb1norm-batchAB.tsv.gz
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: d
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: D
     # control_label_y: 0.42
     # condition_label_y: -0.18
 
@@ -248,13 +248,13 @@ set2_abundance_chipseq_barplot:
     data: ../chipseq-set2/qual_ctrl/spikein/Set2-chipseq_spikein-counts.tsv
     fig_width: 3.5
     fig_height: 4
-    panel_letter: e
+    panel_letter: E
 
 spt6_abundance_chipseq_barplot:
     data: ../chipseq-spt6/qual_ctrl/spikein/Spt6-chipseq_spikein-counts.tsv
     fig_width: 3.5
     fig_height: 4
-    panel_letter: b
+    panel_letter: B
 
 chip_maplot:
     # rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_Rpb1-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
@@ -263,68 +263,68 @@ chip_maplot:
         factor_id: Set2
         data: ../chipseq-set2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         rpb1_norm: False
-        fig_width: "18 * 5 / 12"
+        fig_width: "17.8 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: f
+        panel_letter: F
     Spt6:
         factor_id: Spt6
         data: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         rpb1_norm: False
-        fig_width: "18 * 5 / 12"
+        fig_width: "17.8 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: c
+        panel_letter: C
     Set2-Rpb1norm:
         factor_id: Set2
         data: ../chipseq-set2-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         rpb1_norm: True
-        fig_width: "18 * 5 / 12"
+        fig_width: "17.8 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: f
+        panel_letter: F
     Spt6-Rpb1norm:
         factor_id: Spt6
         data: ../chipseq-spt6-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         rpb1_norm: True
-        fig_width: "18 * 5 / 12"
+        fig_width: "17.8 * 5 / 12"
         fig_height: "13 / 3"
-        panel_letter: c
+        panel_letter: C
 
 set2_spt6_figure:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 13
 
 set2_spt6_v_rpb1:
     spt6: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     set2: ../chipseq-set2/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 18/2
+    fig_width: 17.8/2
     fig_height: 7
-    panel_letter: a
+    panel_letter: A
 
 set2_spt6_rpb1norm_v_rpb1:
     spt6: ../chipseq-spt6-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     set2: ../chipseq-set2-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Set2-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 18/2
+    fig_width: 17.8/2
     fig_height: 7
-    panel_letter: b
+    panel_letter: B
 
 set2_spt6_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 13
 
 h3_vs_rpb1_ma:
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: a
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: A
 
 reduced_h3_h3_metagene:
     data:
         - ../spn1-data-integration/datavis/plmin-reduced-H3/plmin-reduced-H3_ChIPseq-H3.tsv.gz
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: b
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: B
 
 h3_single_locus_datavis:
     data:
@@ -334,20 +334,20 @@ h3_single_locus_datavis:
         CDC19: ../spn1-data-integration/browser-shots/CDC19/CDC19_all-assays.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: 8.8
-    fig_height: "9 / 16 * 8.8"
-    panel_letter: c
+    fig_width: 8.4
+    fig_height: "9 / 16 * 8.4"
+    panel_letter: C
 
 h3_figure:
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 12
 
 h3_vs_rpb1_ma_5p500bp:
     h3: ../chipseq-h3/diff_binding/5p500bp/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-5p500bp-diffbind-results-all.tsv
     rpb1: ../chipseq-rpb1/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: 5
-    panel_letter: b
+    panel_letter: B
 
 h3_plmin_reduced_lfc_scatterplots:
     data:
@@ -355,9 +355,9 @@ h3_plmin_reduced_lfc_scatterplots:
         Spt6: ../chipseq-spt6/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
         Spt6/Rpb1: ../chipseq-spt6-rpb1norm-batch12/diff_binding/verified-coding-genes/depleted-v-non-depleted/spikenorm/depleted-v-non-depleted_Spt6-over-Rpb1-chipseq-spikenorm-verified-coding-genes-diffbind-results-all.tsv
     h3: ../chipseq-h3/diff_binding/verified-coding-genes/depleted-v-non-depleted/libsizenorm/depleted-v-non-depleted_H3-chipseq-libsizenorm-verified-coding-genes-diffbind-results-all.tsv
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 5
-    panel_letter: c
+    panel_letter: C
 
 reduced_h3_matched_metagenes:
     data:
@@ -365,20 +365,20 @@ reduced_h3_matched_metagenes:
         - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Rpb1-spikenorm.tsv.gz
         -  ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6.tsv.gz
         - ../spn1-data-integration/datavis/reduced-H3-expression-length-match/reduced-H3-expression-length-match_ChIPseq-Spt6-Rpb1norm-batchAB.tsv.gz
-    fig_width: "18 * 9 / 12"
+    fig_width: "17.8 * 9 / 12"
     fig_height: 6
-    panel_letter: d
+    panel_letter: D
 
 h3_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 15
 
 h3_metagene:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3.tsv.gz
-    fig_width: "18 / 2"
-    fig_height: "18 / 2 * 9 / 16"
-    panel_letter: a
+    fig_width: "17.8 / 2"
+    fig_height: "17.8 / 2 * 9 / 16"
+    panel_letter: A
 
 h3_modification_datavis:
     metagene_data:
@@ -390,12 +390,12 @@ h3_modification_datavis:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-slopR300/verified-transcripts-nonoverlapping-TSS-slopR300_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-slopR300/verified-transcripts-nonoverlapping-TSS-slopR300_ChIPseq-H3K36me3-H3norm.tsv.gz
     annotation: /n/groups/winston/jc459/intragenic/genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping_slopR300.bed
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 12
     # panel_letter: a
 
 h3_modification_datavis_ratio:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 10
 
 h3_mods_single_locus_datavis:
@@ -406,12 +406,12 @@ h3_mods_single_locus_datavis:
         CIT2: ../spn1-data-integration/browser-shots/CIT2/CIT2_all-assays.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_polIItranscripts-adjustedTSS.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: "18"
+    fig_width: "17.8"
     fig_height: 7
-    panel_letter: x
+    panel_letter: X
 
 h3_mods_figure:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 10
 
 chipseq_abundance_barplots_h3:
@@ -420,46 +420,46 @@ chipseq_abundance_barplots_h3:
         H3K36me3: ../chipseq-h3k36me3/qual_ctrl/spikein/H3K36me3-chipseq_spikein-counts.tsv
         H3K4me3: ../chipseq-h3k4me3/qual_ctrl/spikein/H3K4me3-chipseq_spikein-counts.tsv
         H3: ../chipseq-h3/qual_ctrl/spikein/H3-chipseq_spikein-counts.tsv
-    fig_width: "18 * 5 / 12"
+    fig_width: "17.8 * 5 / 12"
     fig_height: 5
-    panel_letter: b
+    panel_letter: B
 
 h3_mods_non_h3_norm:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me2.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K36me3.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS/verified-transcripts-nonoverlapping-TSS_ChIPseq-H3K4me3.tsv.gz
-    fig_width: "18 * 7 / 12"
+    fig_width: "17.8 * 7 / 12"
     fig_height: "12 * 3 / 12"
-    panel_letter: c
+    panel_letter: C
 
 h3_mods_facet_expression_length:
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: 4
     H3K36me2:
         data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K36me2-H3norm.tsv.gz
-        panel_letter: b
+        panel_letter: B
     H3K36me3:
         data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K36me3-H3norm.tsv.gz
-        panel_letter: c
+        panel_letter: C
     H3K4me3:
         data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3K4me3-H3norm.tsv.gz
-        panel_letter: d
+        panel_letter: D
     H3:
         data: ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression-length/verified-transcripts-nonoverlapping-TSS-facet-expression-length_ChIPseq-H3.tsv.gz
-        panel_letter: x
+        panel_letter: X
 
 h3_mods_facet_expression:
     data:
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K36me3-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/verified-transcripts-nonoverlapping-TSS-facet-expression/verified-transcripts-nonoverlapping-TSS-facet-expression_ChIPseq-H3K4me3-H3norm.tsv.gz
-    fig_width: "18 * 8 / 12"
+    fig_width: "17.8 * 8 / 12"
     fig_height: 6
-    panel_letter: d
+    panel_letter: D
 
 h3_mods_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 12
 
 rpgene_datavis:
@@ -468,9 +468,9 @@ rpgene_datavis:
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_GC-pct.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
-    fig_width: "18 * 6 / 12"
+    fig_width: "17.8 * 6 / 12"
     fig_height: 8
-    panel_letter: c
+    panel_letter: C
 
 rpgene_datavis_supp:
     data:
@@ -486,12 +486,12 @@ rpgene_datavis_supp:
         - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K4me3-H3norm.tsv.gz
         # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me2-H3norm.tsv.gz
         # - ../spn1-data-integration/datavis/RP-genes-filtered-plmin-introns-TSS/RP-genes-filtered-plmin-introns-TSS_ChIPseq-H3K36me3-H3norm.tsv.gz
-    fig_width: "18 * 7 / 12"
+    fig_width: "17.8 * 7 / 12"
     fig_height: 14
-    panel_letter: a
+    panel_letter: A
 
 splicing_supplemental:
-    fig_width: 18
+    fig_width: 17.8
     fig_height: 12
 
 intron_containing_gene_heatmaps:
@@ -502,9 +502,9 @@ intron_containing_gene_heatmaps:
     nonrp_with_intron_bed: ../genome/annotations/gene_lists/Scer_nonRPgene_with_intron_transcripts_TSS_intron_dist_sort.bed
     intron_bed: ../genome/annotations/gene_lists/Scer_introns_in_coding_genes.bed
     name_lookup: ../genome/Scer-sys-to-common-name.tsv
-    fig_width: "18 / 2"
+    fig_width: "17.8 / 2"
     fig_height: 8
-    panel_letter: b
+    panel_letter: B
 
 elongation_spn1_depletion_westerns:
     spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
@@ -514,7 +514,7 @@ elongation_spn1_depletion_westerns:
     pgk1: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/Pgk1_for_Spn1_Rep3.tif
     fig_width: 6
     fig_height: 4.8
-    panel_letter: c
+    panel_letter: C
 
 histone_spn1_depletion_westerns:
     spn1: ../spn1-small-data/general_westerns/raw_western_blots/Rep1/Spn1_Rep1.tif
@@ -524,13 +524,13 @@ histone_spn1_depletion_westerns:
     h3: ../spn1-small-data/general_westerns/raw_western_blots/Rep3/H3_for_H3K36me2_Rep3.tif
     fig_width: 6
     fig_height: 4.8
-    panel_letter: a
+    panel_letter: A
 
 chd1_qpcr:
     chip_data: ../spn1-small-data/chd1_h3k36me3_qpcr/h3k36me3_chipqpcr_chd1D.tsv
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 4.5
-    panel_letter: b
+    panel_letter: B
 
 h3k36me3_single_locus_datavis:
     data:
@@ -538,10 +538,10 @@ h3k36me3_single_locus_datavis:
         RPL20A: ../spn1-data-integration/browser-shots/RPL20A/RPL20A_ChIPseq-H3K36me3.tsv.gz
     transcript_annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs.bed
     orf_annotation: ../genome/annotations/Scer_nondubious_ORFs_and_blocked_reading_frames-adjustedATG.bed
-    fig_width: 8.8
+    fig_width: 8.4
     fig_height: 4.5
-    panel_letter: a
+    panel_letter: A
 
 chd1_supplemental:
-    fig_width: 18
-    fig_height: 18
+    fig_width: 17.8
+    fig_height: 17.8
