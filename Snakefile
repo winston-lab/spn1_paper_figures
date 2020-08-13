@@ -74,7 +74,8 @@ rule target:
         "panels/chd1_qpcr.pdf",
         "figures/figure_S6_chd1_temp.pdf",
         "figures/spn1_2020_figures.pdf",
-        "figures/spn1_2020_supp_figures.pdf"
+        "figures/spn1_2020_supp_figures.pdf",
+        "Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv"
 
 rule register_fonts:
     input:
@@ -1330,5 +1331,14 @@ rule compile_supplemental_figures:
         "envs/tectonic.yaml"
     shell: """
         tectonic --outdir figures {input.tex}
+        """
+
+rule assemble_supplemental_rnaseq_table:
+    input:
+        config["supp_rnaseq_table"]
+    output:
+        "Spn1-IAA-v-Spn1-DMSO_rnaseq-spikenorm-verified-coding-genes-diffexp-results-all.tsv"
+    shell: """
+        cat <(echo "# chrom: chromosome\n# start: transcript start (0-indexed, half-open)\n# end: transcript end  (0-indexed, half-open)\n# name: transcript name\n# score: BED integer score based on log10_padj\n# strand: transcript strand\n# log2_foldchange: log2(fold-change), depleted over non-depleted\n# lfc_SE: standard error of log2_foldchange\n# stat: DESeq2 Wald test statistic\n# log10_pval: -log10(p-value)\n# log10_padj: -log10(adjusted p-value)\n# mean_expr: mean normalized counts across conditions\n# condition_expr: normalized counts in depleted condition\n# control_expr: normalized counts in non-depleted condition") {input} > {output}
         """
 
