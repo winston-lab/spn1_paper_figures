@@ -3,7 +3,7 @@
 
 ## description
 
-The code used to produce the figures [our 2020 Spn1 publication](https://doi.org/10.1093/nar/gkaa745). The final figures, unadulterated by copyeditors, are found in `figures/spn1_2020_figures.pdf`. An archive suitable for reproducing the paper's figures starting from raw data is available at [Zenodo](https://doi.org/10.5281/zenodo.3901642).
+The code used to produce the figures for [our 2020 Spn1 publication](https://doi.org/10.1093/nar/gkaa745). The final figures, unadulterated by copyeditors, are found in `figures/spn1_2020_figures.pdf`. An archive suitable for reproducing the paper's figures starting from raw data is available at [Zenodo](https://doi.org/10.5281/zenodo.3901642).
 
 ## requirements
 
